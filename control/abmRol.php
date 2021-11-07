@@ -74,10 +74,22 @@ class abmRol
     public function baja($param)
     {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)) {
+        if ($this->seteadosCamposClaves($param)){
             $elObjtRol = $this->cargarObjetoConClave($param);
-            if ($elObjtRol != null and $elObjtRol->eliminar()) {
-                $resp = true;
+            if ($elObjtRol!=null){
+                $abmMenuRol=new abmMenurol();
+                $arrayMenuRol=$abmMenuRol->buscar(['idrol'=>$param['idrol']]);
+                if (!empty($arrayMenuRol)){
+                    $abmMenuRol->baja(['idrol'=>$param['idrol']]);
+                }
+                $abmUsuarioRol=new abmUsuariorol();
+                $arrayUsuarioRol=$abmUsuarioRol->buscar(['idrol'=>$param['idrol']]);
+                if (!empty($arrayUsuarioRol)){
+                    $abmUsuarioRol->baja(['idrol'=>$param['idrol']]);
+                }
+                if ($elObjtRol->eliminar()){
+                    $resp = true;
+                }
             }
         }
         return $resp;

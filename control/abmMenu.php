@@ -73,10 +73,17 @@ class abmMenu
     public function baja($param)
     {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)) {
+        if ($this->seteadosCamposClaves($param)){
             $elObjtMenu = $this->cargarObjetoConClave($param);
-            if ($elObjtMenu != null and $elObjtMenu->eliminar()) {
-                $resp = true;
+            if ($elObjtMenu!=null){
+                $abmMenuRol=new abmMenurol();
+                $arrayMenuRol=$abmMenuRol->buscar(['idmenu'=>$param['idmenu']]);
+                if (!empty($arrayMenuRol)){
+                    $abmMenuRol->baja(['idmenu'=>$param['idmenu']]);
+                }
+                if ($elObjtMenu->eliminar()){
+                    $resp = true;
+                }
             }
         }
         return $resp;

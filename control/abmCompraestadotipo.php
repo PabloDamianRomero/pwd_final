@@ -73,10 +73,19 @@ class abmCompraestadotipo
     public function baja($param)
     {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)) {
+        if ($this->seteadosCamposClaves($param)){
             $elObjtCompraEstadoTipo = $this->cargarObjetoConClave($param);
-            if ($elObjtCompraEstadoTipo != null and $elObjtCompraEstadoTipo->eliminar()) {
-                $resp = true;
+            if ($elObjtCompraEstadoTipo!=null){
+                $abmCompraEstado=new abmCompraestado();
+                $arrayCompraEstado=$abmCompraEstado->buscar(['idcompraestadotipo'=>$param['idcompraestadotipo']]);
+                if (!empty($objCompraEstado)){
+                    foreach($arrayCompraEstado as $obj){
+                        $abmCompraEstado->baja(['idcompraestado'=>$obj->getIdcompraestado()]);
+                    }
+                }
+                if ($elObjtCompraEstadoTipo->eliminar()){
+                    $resp = true;
+                }
             }
         }
         return $resp;
