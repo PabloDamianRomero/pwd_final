@@ -62,10 +62,3 @@ if ($estructuraAMostrar == "desdeAccion") {
     </div>
   </nav>
 <main class="container mh-100" style="min-height: 100vh;">
-
-
-
-
-
-
-

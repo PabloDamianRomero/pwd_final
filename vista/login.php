@@ -16,7 +16,7 @@ include_once("estructura/cabecera.php");
 ?>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
-    <div class="bienvenida font-montserrat">
+    <div style="margin-top: 30px;">
     <h1>FACULTAD DE INFORMÁTICA</h1>
         <h2>DEPARTAMENTO DE PROGRAMACIÓN</h2>
         <h3>CÁTEDRA PROGRAMACIÓN WEB DINÁMICA</h3>
