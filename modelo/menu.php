@@ -4,7 +4,7 @@ class Menu
     private $idmenu;
     private $menombre;
     private $medescripcion;
-    private $idpadre; //referencia a menu
+    private $objMenu; //referencia a menu
     private $medeshabilitado;
     private $mensajeoperacion;
 
@@ -13,17 +13,17 @@ class Menu
         $this->idmenu = "";
         $this->menombre = "";
         $this->medescripcion = "";
-        $this->idpadre = "";
-        $this->medeshabilitado = "";
+        $this->$objMenu = null;
+        $this->medeshabilitado = null;
         $this->mensajeoperacion = "";
     }
 
-    public function setear($idmenu, $menombre, $medescripcion, $idpadre, $medeshabilitado)
+    public function setear($idmenu, $menombre, $medescripcion, $objMenu, $medeshabilitado)
     {
         $this->idmenu = $idmenu;
         $this->menombre = $menombre;
         $this->medescripcion = $medescripcion;
-        $this->idpadre = $idpadre;
+        $this->objMenu = $objMenu;
         $this->medeshabilitado = $medeshabilitado;
     }
 
@@ -37,7 +37,19 @@ class Menu
             if ($res > -1) {
                 if ($res > 0) {
                     $row = $base->Registro();
-                    $this->setear($row['idmenu'], $row['menombre'], $row['medescripcion'], $row['idpadre'], $row['medeshabilitado']);
+                    if ($row['idpadre']!=null){
+                        $abmPadre=new abmMenu();
+                        $objPadre=$abmPadre->buscar(['idpadre'=>$row['idpadre']]);
+                        if (!empty($objPadre)){
+                            $objPadre=$objPadre[0];
+                        }else{
+                            $objPadre=null;
+                        }
+                        
+                    }else{
+                        $objPadre=null;
+                    }
+                    $this->setear($row['idmenu'], $row['menombre'], $row['medescripcion'], $objPadre, $row['medeshabilitado']);
 
                 }
             }
@@ -52,7 +64,20 @@ class Menu
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO menu(menombre,medescripcion,idpadre,medeshabilitado)  VALUES('" . $this->getMenombre() . "','" . $this->getMedescripcion() . "','" . $this->getIdpadre() . "','" . $this->getMedeshabilitado() . "');";
+        $sql = "INSERT INTO menu(menombre,medescripcion,idpadre,medeshabilitado) ";
+        $sql.="VALUES('" . $this->getMenombre() . "','" . $this->getMedescripcion() . "',"; 
+        if($this->getObjMenu()!=null){
+            $sql.=$this->getObjMenu()->getIdmenu().",";
+        }else{
+            $sql.="null,";
+        }
+        if ($this->getMedeshabilitado()!=null){
+            $sql.="'".$this->getMedeshabilitado()."'";
+        }
+        else{
+            $sql.="null";
+        }
+        $sql.=");";
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)) {
                 $this->setIdmenu($elid);
@@ -70,7 +95,18 @@ class Menu
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "UPDATE menu SET menombre='" . $this->getMenombre() . "', medescripcion= '" . $this->getMedescripcion() . "', idpadre= '" . $this->getIdpadre() . "', medeshabilitado= '" . $this->getMedeshabilitado() . "' WHERE idmenu=" . $this->getIdmenu();
+        $sql = "UPDATE menu SET menombre='" . $this->getMenombre() . "', medescripcion= '" . $this->getMedescripcion()."', ";
+        if($this->getObjMenu()!=null){
+            $sql.="idpadre= ".$this->getObjMenu()->getIdmenu().", ";
+        }else{
+            $sql.="idpadre= null, ";
+        }
+        if ($this->getMedeshabilitado()!=null){
+            $sql.="medeshabilitado= '".$this->getMedeshabilitado()."' ";
+        }else{
+            $sql.="medeshabilitado= null ";
+        }
+        $sql.="WHERE idmenu=" . $this->getIdmenu();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -113,8 +149,20 @@ class Menu
             if ($res > 0) {
 
                 while ($row = $base->Registro()) {
+                    if ($row['idpadre']!=null){
+                        $abmPadre=new abmMenu();
+                        $objPadre=$abmPadre->buscar(['idpadre'=>$row['idpadre']]);
+                        if (!empty($objPadre)){
+                            $objPadre=$objPadre[0];
+                        }else{
+                            $objPadre=null;
+                        }
+                        
+                    }else{
+                        $objPadre=null;
+                    }
                     $obj = new Menu();
-                    $obj->setear($row['idmenu'], $row['menombre'], $row['medescripcion'], $row['idpadre'], $row['medeshabilitado']);
+                    $obj->setear($row['idmenu'], $row['menombre'], $row['medescripcion'], $objPadre, $row['medeshabilitado']);
                     array_push($arreglo, $obj);
                 }
 
@@ -157,16 +205,6 @@ class Menu
         $this->medescripcion = $medescripcion;
     }
 
-    public function getIdpadre()
-    {
-        return $this->idpadre;
-    }
-
-    public function setIdpadre($idpadre)
-    {
-        $this->idpadre = $idpadre;
-    }
-
     public function getMedeshabilitado()
     {
         return $this->medeshabilitado;
@@ -185,5 +223,14 @@ class Menu
     public function setMensajeoperacion($mensajeoperacion)
     {
         $this->mensajeoperacion = $mensajeoperacion;
+    }
+
+    public function getObjMenu()
+    {
+        return $this->objMenu;
+    }
+    public function setObjMenu($objMenu)
+    {
+        $this->objMenu = $objMenu;
     }
 }

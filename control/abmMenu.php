@@ -10,10 +10,23 @@ class abmMenu
     private function cargarObjeto($param)
     {
         $obj = null;
-        if (array_key_exists('idmenu', $param) and array_key_exists('menombre', $param) and array_key_exists('medescripcion', $param)
-            and array_key_exists('idpadre', $param) and array_key_exists('medeshabilitado', $param)) {
+        if (array_key_exists('idmenu', $param) and array_key_exists('menombre', $param)) {
             $obj = new Menu();
-            $obj->setear($param['idmenu'], $param['menombre'], $param['medescripcion'], $param['idpadre'], $param['medeshabilitado']);
+            $objPadre=null;
+            if (isset($param['idpadre'])){
+                $objPadre=new Menu();
+                $objPadre->setIdmenu($param['idpadre']);
+                $objPadre->cargar();
+            }
+            if (!isset($param['medeshabilitado'])){
+                $param['medeshabilitado']==null;
+            }else{
+                $param['medeshabilitado']==date("Y-m-d H:i:s");
+            }
+            if (!isset($param['medescripcion'])){
+                $param['medescripcion']=="";
+            }
+            $obj->setear($param['idmenu'], $param['menombre'], $param['medescripcion'], $objPadre, $param['medeshabilitado']);
         }
         return $obj;
     }
@@ -29,7 +42,7 @@ class abmMenu
         $obj = null;
         if (isset($param['idmenu'])) {
             $obj = new Menu();
-            $obj->setear($param['idmenu'], null, null, null, null);
+            $obj->setIdmenu($param['idmenu']);
         }
         return $obj;
     }
@@ -58,9 +71,15 @@ class abmMenu
     public function alta($param)
     {
         $resp = false;
+        $param['idmenu']==null;
+        $param['medeshabilitado']==null;
         $elObjtMenu = $this->cargarObjeto($param);
         if ($elObjtMenu != null and $elObjtMenu->insertar()) {
             $resp = true;
+        }else{
+            if ($elObjtMenu!=null){
+                $resp=$elObjtMenu->getMensajeoperacion();
+            }
         }
         return $resp;
     }
