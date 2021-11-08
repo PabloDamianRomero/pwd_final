@@ -71,10 +71,19 @@ class abmProducto
     public function baja($param)
     {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)) {
+        if ($this->seteadosCamposClaves($param)){
             $elObjtProducto = $this->cargarObjetoConClave($param);
-            if ($elObjtProducto != null and $elObjtProducto->eliminar()) {
-                $resp = true;
+            if ($elObjtProducto!=null){
+                $abmCompraItem=new abmCompraitem();
+                $array=$abmCompraItem->buscar(['idproducto'=>$param['idproducto']]);
+                if (!empty($array)){
+                    foreach($array as $obj){
+                        $abmCompraItem->baja(['idcompraitem'=>$obj->getIdcompraitem()]);
+                    }
+                }
+                if ($elObjtProducto->eliminar()){
+                    $resp = true;
+                }
             }
         }
         return $resp;

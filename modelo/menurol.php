@@ -76,7 +76,7 @@ class MenuRol
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "DELETE FROM menurol WHERE idmenu=" . $this->getObjMenu()->getIdmenu();
+        $sql = "DELETE FROM menurol WHERE idmenu=" . $this->getObjMenu()->getIdmenu()." and idrol=".$this->getObjRol()->getIdrol();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 return true;

@@ -82,10 +82,26 @@ class abmCompra
     public function baja($param)
     {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)) {
-            $elObjtArchivoE = $this->cargarObjetoConClave($param);
-            if ($elObjtArchivoE != null and $elObjtArchivoE->eliminar()) {
-                $resp = true;
+        if ($this->seteadosCamposClaves($param)){
+            $elObjtCompra = $this->cargarObjetoConClave($param);
+            if ($elObjtCompra!=null){
+                $abmCompraitem=new abmCompraitem();
+                $arrayCompraitem=$abmCompraitem->buscar(['idcompra'=>$param['idcompra']]);
+                if (!empty($arrayCompraitem)){
+                    foreach($arrayCompraitem as $obj){
+                        $abmCompraitem->baja(['idcompraitem'=>$obj->getIdcompraitem()]);
+                    }
+                }
+                $abmCompraEstado=new abmCompraestado();
+                $arrayCompraEstado=$abmCompraEstado->buscar(['idcompra'=>$param['idcompra']]);
+                if (!empty($arrayCompraEstado)){
+                    foreach($arrayCompraEstado as $obj){
+                        $abmCompraEstado->baja(['idcompraestado'=>$obj->getIdcompraestado()]);
+                    }
+                }
+                if ($elObjtCompra->eliminar()){
+                    $resp = true;
+                }
             }
         }
         return $resp;

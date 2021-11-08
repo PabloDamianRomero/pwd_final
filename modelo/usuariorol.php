@@ -22,7 +22,7 @@ class UsuarioRol
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "SELECT * FROM usuariorol WHERE idusuario = " . $this->getObjUsuario()->getIdmenu();
+        $sql = "SELECT * FROM usuariorol WHERE idusuario = " . $this->getObjUsuario()->getIdUsuario();
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);
             if ($res > -1) {
@@ -41,7 +41,7 @@ class UsuarioRol
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO usuariorol(idmenu,idrol)  VALUES('" . $this->getObjUsuario()->getIdusuario() . "','" . $this->getObjRol()->getIdrol() . "');";
+        $sql = "INSERT INTO usuariorol(idusuario,idrol)  VALUES('" . $this->getObjUsuario()->getIdusuario() . "','" . $this->getObjRol()->getIdrol() . "');";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
