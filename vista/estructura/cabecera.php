@@ -23,7 +23,7 @@ if ($estructuraAMostrar == "desdeAccion") {
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.php">Index</a>
+      <a class="navbar-brand" href="index.php">Inicio</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -33,26 +33,26 @@ if ($estructuraAMostrar == "desdeAccion") {
     <?php
     if ($estructuraAMostrar=="desdeVista"){?>
         <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="indexFb.php">Facebook</a>
+                <a class="nav-link active" aria-current="page" href="indexFb.php">Enlace_vista_1</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="loginGmail.php">Gmail</a>
+                <a class="nav-link active" aria-current="page" href="loginGmail.php">Enlace_vista_2</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="listaUs.php">Lista</a>
+            <a class="nav-link active" aria-current="page" href="listaUs.php">Enlace_vista_3</a>
           </li>
             <?php
     }
 
     if ($estructuraAMostrar=="desdeAccion"){?>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../indexFb.php">Facebook</a>
+          <a class="nav-link active" aria-current="page" href="../indexFb.php">Enlace_accion_1</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../loginGmail.php">Gmail</a>
+          <a class="nav-link active" aria-current="page" href="../loginGmail.php">Enlace_accion_2</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../listaUs.php">Lista</a>
+          <a class="nav-link active" aria-current="page" href="../listaUs.php">Enlace_accion_3</a>
         </li>
           <?php
     }?>
