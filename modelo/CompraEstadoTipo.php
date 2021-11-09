@@ -104,7 +104,7 @@ class CompraEstadoTipo
         if ($res > -1) {
             if ($res > 0) {
                 while ($row = $base->Registro()) {
-                    $obj = new Compraestadotipo();
+                    $obj = new CompraEstadoTipo();
                     $obj->setear($row['idcompraestadotipo'], $row['cetdescripcion'], $row['cetdetalle']);
                     array_push($arreglo, $obj);
                 }
