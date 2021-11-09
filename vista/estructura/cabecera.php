@@ -75,6 +75,14 @@ if ($estructuraAMostrar == "desdeAccion") {
               </li>
               </ul>
             </div> <!-- cierre collapse navbar-collapse -->
+            <!-- USUARIO Y ROL -->
+            <div style="margin: 0 25px; padding: 0 10px; background: #ffffff87;">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                   Usuario: <span style="font-family: monospace; color: #ff5504; font-weight: 700;"><?php echo $sesion->getUsuarioActual(); ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rol: <span style="font-family: monospace; color: #0451ff; font-weight: 700;"><?php echo $rolDesc; ?></span>
+                </li>
+              </ul>
+            </div>
             <!-- ENLACE CERRAR SESION -->
             <div>
                 <a class="navbar-brand" href="accion/cerrarSesion.php">
@@ -99,6 +107,14 @@ if ($estructuraAMostrar == "desdeAccion") {
             </li>
             </ul>
             </div><!-- cierre collapse navbar-collapse -->
+            <!-- USUARIO Y ROL -->
+            <div style="margin: 0 25px; padding: 0 10px; background: #ffffff87;">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                   Usuario: <span style="font-family: monospace; color: #ff5504; font-weight: 700;"><?php echo $sesion->getUsuarioActual(); ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rol: <span style="font-family: monospace; color: #0451ff; font-weight: 700;"><?php echo $rolDesc; ?></span>
+                </li>
+              </ul>
+            </div>
             <!-- ENLACE CERRAR SESION -->
             <div>
                 <a class="navbar-brand" href="cerrarSesion.php">

@@ -23,6 +23,7 @@ class Session{
         $objAbm = new abmUsuario();
         $arreglo = $objAbm->buscar(['usnombre'=>$nombre,'uspass'=>$pass]);
         if (count($arreglo) == 1){ // Si el usuario existe en bd (tabla usuario)
+            $this->setUsuarioActual($arreglo[0]->getUsnombre()); // Mantener formato (mayus/minus) en usuario segun bd
             //Chequeo que no haya sido dado de baja
             if ($arreglo[0]->getUsdeshabilitado() == "0000-00-00 00:00:00"){
                 $valido = true;

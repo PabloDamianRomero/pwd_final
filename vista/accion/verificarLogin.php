@@ -2,8 +2,7 @@
     include_once("../../configuracion.php");
     $datos = data_submitted();
     $objSesion = new Session();
-    // $objSesion->iniciar($datos['usnombre'],md5($datos['uspass']));
-    $objSesion->iniciar($datos['usnombre'], $datos['uspass']);
+    $objSesion->iniciar($datos['usnombre'],md5($datos['uspass']));
     $valido = $objSesion->validar();
     if ($valido){
         header("Location:../index.php");
