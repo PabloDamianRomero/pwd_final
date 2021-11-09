@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 15-10-2018 a las 23:12:45
--- Versión del servidor: 10.1.34-MariaDB
--- Versión de PHP: 7.2.7
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 09-11-2021 a las 22:00:29
+-- Versión del servidor: 10.4.19-MariaDB
+-- Versión de PHP: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `compra` (
   `idcompra` bigint(20) NOT NULL,
-  `cofecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `cofecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `idusuario` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -44,7 +43,7 @@ CREATE TABLE `compraestado` (
   `idcompraestado` bigint(20) UNSIGNED NOT NULL,
   `idcompra` bigint(11) NOT NULL,
   `idcompraestadotipo` int(11) NOT NULL,
-  `cefechaini` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `cefechaini` timestamp NOT NULL DEFAULT current_timestamp(),
   `cefechafin` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -94,7 +93,7 @@ CREATE TABLE `menu` (
   `menombre` varchar(50) NOT NULL COMMENT 'Nombre del item del menu',
   `medescripcion` varchar(124) NOT NULL COMMENT 'Descripcion mas detallada del item del menu',
   `idpadre` bigint(20) DEFAULT NULL COMMENT 'Referencia al id del menu que es subitem',
-  `medeshabilitado` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha en la que el menu fue deshabilitado por ultima vez'
+  `medeshabilitado` timestamp NULL DEFAULT current_timestamp() COMMENT 'Fecha en la que el menu fue deshabilitado por ultima vez'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -143,6 +142,13 @@ CREATE TABLE `rol` (
   `rodescripcion` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`idrol`, `rodescripcion`) VALUES
+(1, 'Administrador');
+
 -- --------------------------------------------------------
 
 --
@@ -152,10 +158,17 @@ CREATE TABLE `rol` (
 CREATE TABLE `usuario` (
   `idusuario` bigint(20) NOT NULL,
   `usnombre` varchar(50) NOT NULL,
-  `uspass` int(11) NOT NULL,
+  `uspass` varchar(32) NOT NULL,
   `usmail` varchar(50) NOT NULL,
   `usdeshabilitado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
+(1, 'PabloR', '0192023a7bbd73250516f069df18b500', 'admin@gmail.com', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -167,6 +180,13 @@ CREATE TABLE `usuariorol` (
   `idusuario` bigint(20) NOT NULL,
   `idrol` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuariorol`
+--
+
+INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
+(1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -286,13 +306,13 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
