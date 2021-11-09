@@ -17,6 +17,18 @@ if ($estructuraAMostrar == "desdeAccion") {
 }
 ?>
 
+<style>
+  nav.navbar.navbar-expand-lg a {
+    color: #000;
+    font-family: monospace;
+  }
+
+  nav.navbar.navbar-expand-lg a:hover {
+    color: white;
+    text-shadow: 1px 1px 2px #0000009e;
+  }
+</style>
+
 <title><?php echo $titulo; ?></title>
 </head>
 <body>
@@ -34,47 +46,76 @@ if ($estructuraAMostrar == "desdeAccion") {
     }else{
       header("Location:accion/cerrarSesion.php");
       exit();
-    }
-  }?>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">Inicio</a>
+    }?>
+  
+    <nav class="navbar navbar-expand-lg" style="background-color: #93d7e7;">
+      <div class="container-fluid"> 
+        <a class="navbar-brand" href="index.php">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+            <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+          </svg>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         
-      <?php
-      if ($estructuraAMostrar=="desdeVista"){?>
-          <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="indexFb.php">Enlace_vista_1</a>
+        <?php
+        if ($estructuraAMostrar=="desdeVista"){?>
+            <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="enlace.php">Enlace_vista_1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="enlace.php">Enlace_vista_2</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="enlace.php">Enlace_vista_3</a>
               </li>
-              <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="loginGmail.php">Enlace_vista_2</a>
-              </li>
-              <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="listaUs.php">Enlace_vista_3</a>
-            </li>
-              <?php
-      }
+              </ul>
+            </div> <!-- cierre collapse navbar-collapse -->
+            <!-- ENLACE CERRAR SESION -->
+            <div>
+                <a class="navbar-brand" href="accion/cerrarSesion.php">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                  </svg>
+                </a>
+            </div>
+        <?php
+        }
 
-      if ($estructuraAMostrar=="desdeAccion"){?>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../indexFb.php">Enlace_accion_1</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../loginGmail.php">Enlace_accion_2</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../listaUs.php">Enlace_accion_3</a>
-          </li>
+        if ($estructuraAMostrar=="desdeAccion"){?>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../enlace.php">Enlace_accion_1</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../enlace.php">Enlace_accion_2</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../enlace.php">Enlace_accion_3</a>
+            </li>
+            </ul>
+            </div><!-- cierre collapse navbar-collapse -->
+            <!-- ENLACE CERRAR SESION -->
+            <div>
+                <a class="navbar-brand" href="cerrarSesion.php">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                  </svg>
+                </a>
+            </div>
             <?php
-      }?>
-      
-        </ul>
-      </div>
-    </div>
+        }?>
+
+    </div> <!-- cierre container-fluid -->
   </nav>
+
+  <?php
+  }?>
+
+  
 <main class="container mh-100" style="min-height: 100vh;">
