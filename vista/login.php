@@ -1,18 +1,19 @@
 <?php
-$titulo="Login";
+$titulo = "Login";
 $estructuraAMostrar = "desdeVista";
+$seguro = false;
 include_once("estructura/cabecera.php");
-// $objLogin = new Session();
-// if ($objLogin->activa()) {
-//      header('location:paginaSegura.php');
-//      exit();
-// }
+$objLogin = new Session();
+if ($objLogin->activa()) {
+     header('location:index.php');
+     exit();
+}
 
-// $datos = data_submitted();
-// $mensaje = "";
-// if (isset($datos['error'])){
-//         $mensaje = $datos['error'];
-// }
+$datos = data_submitted();
+$mensaje = "";
+if (isset($datos['error'])){
+    $mensaje = $datos['error'];
+}
 ?>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
@@ -24,7 +25,7 @@ include_once("estructura/cabecera.php");
     </div>
 
     <div class="text-center mt-5 mb-5">
-        <form class="card needs-validation" method="post" action="accion/verificarLogin.php" onSubmit="return validar();" style="max-width: 300px;margin:auto; padding:20px" novalidate>
+        <form class="card needs-validation" method="post" action="accion/verificarLogin.php" style="max-width: 300px;margin:auto; padding:20px" novalidate>
                     <div class="mt-3">
                         <div id="invalid" style="color:red">
                             <?php if (!$mensaje==""){
