@@ -117,7 +117,7 @@ class CompraItem
         if ($res > -1) {
             if ($res > 0) {
                 while ($row = $base->Registro()) {
-                    $obj = new Compraitem();
+                    $obj = new CompraItem();
                     $abmProducto = new abmProducto();
                     $objProducto = $abmProducto->buscar(['idproducto' => $row['idproducto']]);
                     if (!empty($objProducto)) {
