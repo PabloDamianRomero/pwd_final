@@ -1,5 +1,5 @@
 <?php
-$titulo = "Pagina Segura";
+$titulo = "Index";
 $estructuraAMostrar = "desdeVista";
 $seguro = true;
 include_once "estructura/cabecera.php";
