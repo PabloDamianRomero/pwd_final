@@ -71,8 +71,8 @@ class abmMenu
     public function alta($param)
     {
         $resp = false;
-        $param['idmenu']==null;
-        $param['medeshabilitado']==null;
+        $param['idmenu']=null;
+        $param['medeshabilitado']=null;
         $elObjtMenu = $this->cargarObjeto($param);
         if ($elObjtMenu != null and $elObjtMenu->insertar()) {
             $resp = true;
