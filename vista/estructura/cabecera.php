@@ -21,6 +21,24 @@ if ($estructuraAMostrar == "desdeAccion") {
     <title><?php echo $titulo ?></title>
 </head>
 <body>
+  <?php
+  if ($seguro) {
+    $sesion = new Session();
+    if (!$sesion->activa()) {
+        header("Location:login.php");
+        exit();
+    }
+    $roles = $sesion->getRol();
+    $rolDesc = "";
+    if(count($roles) > 0){
+      $rolDesc = $roles[0]->getObjRol()->getRodescripcion();
+    }else{
+      header("Location:accion/cerrarSesion.php");
+      exit();
+    }
+  }
+  
+  ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">Inicio</a>

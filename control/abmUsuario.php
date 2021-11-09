@@ -137,7 +137,7 @@ class abmUsuario
             }
 
             if (isset($param['uspass'])) {
-                $where .= " and uspass ='" . $param['uspass'] . "'";
+                $where .= " and uspass =" . $param['uspass'];
             }
 
             if (isset($param['usmail'])) {
