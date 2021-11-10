@@ -19,12 +19,12 @@ class abmMenu
                 $objPadre->cargar();
             }
             if (!isset($param['medeshabilitado'])){
-                $param['medeshabilitado']==null;
+                $param['medeshabilitado']=null;
             }else{
-                $param['medeshabilitado']==date("Y-m-d H:i:s");
+                $param['medeshabilitado']=date("Y-m-d H:i:s");
             }
             if (!isset($param['medescripcion'])){
-                $param['medescripcion']=="";
+                $param['medescripcion']="";
             }
             $obj->setear($param['idmenu'], $param['menombre'], $param['medescripcion'], $objPadre, $param['medeshabilitado']);
         }
