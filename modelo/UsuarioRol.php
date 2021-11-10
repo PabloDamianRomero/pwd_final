@@ -101,11 +101,13 @@ class UsuarioRol
             if ($res > 0) {
                 while ($row = $base->Registro()) {
                     $objRel = new Usuariorol();
-                    $abmUs = new abmUsuario();
-                    $arrayUs = $abmUs->buscar(['idusuario' => $row['idusuario']]);
-                    $abmRol = new abmRol();
-                    $objRol = $abmRol->buscar($row['idrol']);
-                    $objRel->setear($arrayUs[0], $objRol[0]);
+                    $objUs=new Usuario();
+                    $objUs->setIdusuario($row['idusuario']);
+                    $objUs->cargar();
+                    $objRol=new Rol();
+                    $objRol->setIdrol($row['idrol']);
+                    $objRol->cargar();
+                    $objRel->setear($objUs,$objRol);
                     array_push($arreglo, $objRel);
                 }
             }
