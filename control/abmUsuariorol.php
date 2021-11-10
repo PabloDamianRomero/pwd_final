@@ -9,12 +9,14 @@ class abmUsuariorol{
         $obj = null;
            
         if( array_key_exists('idusuario',$param) and array_key_exists('idrol',$param)){
-            $abmUsuario=new abmUsuario();
-            $objUsuario=$abmUsuario->buscar(['idusuario'=>$param['idusuario']]);
-            $abmRol=new abmRol();
-            $objRol=$abmRol->buscar(['idrol'=>$param['idrol']]);
+            $objUsuario=new Usuario();
+            $objUsuario->setIdusuario($param['idusuario']);
+            $objUsuario->cargar();
+            $objRol=new Rol();
+            $objRol->setIdrol($param['idrol']);
+            $objRol->cargar();
             $obj = new UsuarioRol();
-            $obj->setear($objUsuario[0],$objRol[0]);
+            $obj->setear($objUsuario,$objRol);
         }
         return $obj;
     }
@@ -24,19 +26,16 @@ class abmUsuariorol{
      * @param array $param
      * @return Usuariorol
      */
-    private function cargarObjetoConClave($param){
-        $obj = null;
+    // private function cargarObjetoConClave($param){
+    //     $obj = null;
         
-        if( isset($param['idusuario']) && isset($param['idrol']) ){
-            $abmUsuario=new abmUsuario();
-            $objUsuario=$abmUsuario->buscar(['idusuario'=>$param['idusuario']]);
-            $abmRol=new abmRol();
-            $objRol=$abmRol->buscar(['idrol'=>$param['idrol']]);
-            $obj = new UsuarioRol();
-            $obj->setear($objUsuario[0],$objRol[0]);
-        }
-        return $obj;
-    }
+    //     if( isset($param['idusuario']) && isset($param['idrol']) ){
+    //         //         $obj = new UsuarioRol();
+    //         //         $obj->setIdRol($param['idrol']);
+    //         //         $obj->setIdUsuario($param['idusuario']);
+    //         //     }
+    //     return $obj;
+    // }
     
     
     /**
@@ -58,7 +57,6 @@ class abmUsuariorol{
      */
     public function alta($param){
         $resp = false;
-        //$param['idusuario'] =null;
         $elObjtUsuariorol = $this->cargarObjeto($param);
         if ($elObjtUsuariorol!=null and $elObjtUsuariorol->insertar()){
             $resp = true;
@@ -74,7 +72,7 @@ class abmUsuariorol{
     public function baja($param){
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
-            $elObjtUsuariorol = $this->cargarObjetoConClave($param);
+            $elObjtUsuariorol = $this->cargarObjeto($param);
             if ($elObjtUsuariorol!=null and $elObjtUsuariorol->eliminar()){
                 $resp = true;
             }
@@ -89,7 +87,6 @@ class abmUsuariorol{
      * @return boolean
      */
     public function modificacion($param){
-        //echo "Estoy en modificacion";
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $elObjtUsuariorol = $this->cargarObjeto($param);
