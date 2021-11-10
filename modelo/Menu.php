@@ -13,7 +13,7 @@ class Menu
         $this->idmenu = "";
         $this->menombre = "";
         $this->medescripcion = "";
-        $this->$objMenu = null;
+        $this->objMenu = null;
         $this->medeshabilitado = null;
         $this->mensajeoperacion = "";
     }
@@ -38,14 +38,9 @@ class Menu
                 if ($res > 0) {
                     $row = $base->Registro();
                     if ($row['idpadre']!=null){
-                        $abmPadre=new abmMenu();
-                        $objPadre=$abmPadre->buscar(['idpadre'=>$row['idpadre']]);
-                        if (!empty($objPadre)){
-                            $objPadre=$objPadre[0];
-                        }else{
-                            $objPadre=null;
-                        }
-                        
+                        $objPadre=new Menu();
+                        $objPadre->setIdmenu($row['idpadre']);
+                        $objPadre->cargar();                        
                     }else{
                         $objPadre=null;
                     }
@@ -150,13 +145,9 @@ class Menu
 
                 while ($row = $base->Registro()) {
                     if ($row['idpadre']!=null){
-                        $abmPadre=new abmMenu();
-                        $objPadre=$abmPadre->buscar(['idpadre'=>$row['idpadre']]);
-                        if (!empty($objPadre)){
-                            $objPadre=$objPadre[0];
-                        }else{
-                            $objPadre=null;
-                        }
+                        $objPadre=new Menu();
+                        $objPadre->setIdmenu($row['idpadre']);
+                        $objPadre->cargar();
                         
                     }else{
                         $objPadre=null;

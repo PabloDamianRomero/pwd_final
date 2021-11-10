@@ -10,8 +10,15 @@ class abmUsuario
     {
         $obj = null;
         if (array_key_exists('idusuario', $param) and array_key_exists('usnombre', $param)
-            and array_key_exists('uspass', $param) and array_key_exists('usmail', $param)
-            and array_key_exists('usdeshabilitado', $param)) {
+            and array_key_exists('uspass', $param)) {
+            if (!isset($param['usmail'])){
+                $param['usmail']="";
+            }
+            if (!isset($param['usdeshabilitado'])){
+                $param['usdeshabilitado']=null;
+            }else{
+                $param['usdeshabilitado']=date("Y-m-d H:i:s");
+            }
             $obj = new Usuario();
             $obj->setear(
                 $param['idusuario'],
@@ -64,6 +71,7 @@ class abmUsuario
     {
         $resp = false;
         $param['idusuario'] = null;
+        $param['usdeshabilitado']=null;
         $elObjtUsuario = $this->cargarObjeto($param);
         if ($elObjtUsuario != null and $elObjtUsuario->insertar()) {
             $resp = true;
