@@ -77,6 +77,28 @@ class Session{
         }
         return $roles;
     }
+
+     /**
+     * Devuelve el rol activo del usuario logueado como arreglo
+     */
+    public function getRolActivo(){
+        $abmRol = new AbmRol();
+        $rol = $abmRol->buscar(["idrol"=>$_SESSION['rolactivo']]);
+        return $rol[0];
+    }
+
+    public function setRolActivo($idrol){
+        $ret = false;
+        $roles = $this->getRol();
+        $i = 0;
+        while($i<count($roles) && !$ret){
+            if($roles[$i]->getObjRol()->getIdrol() == $idrol){
+                $_SESSION['rolactivo'] = $idrol;
+                $ret = true;
+            }
+            $i++;
+        }
+    }
    
     // Cierra la sesion actual
     public function cerrar(){
