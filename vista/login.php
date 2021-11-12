@@ -5,7 +5,7 @@ $seguro = false;
 include_once("estructura/cabecera.php");
 $objLogin = new Session();
 if ($objLogin->activa()) {
-     header('location:index.php');
+     header('location:paginaSegura.php');
      exit();
 }
 
@@ -18,10 +18,10 @@ if (isset($datos['error'])){
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
     <div style="margin-top: 30px;">
-    <h1>FACULTAD DE INFORMÁTICA</h1>
-        <h2>DEPARTAMENTO DE PROGRAMACIÓN</h2>
+    <h1>Inicio de sesión</h1>
+        <!-- <h2>DEPARTAMENTO DE PROGRAMACIÓN</h2>
         <h3>CÁTEDRA PROGRAMACIÓN WEB DINÁMICA</h3>
-        <h3 class="m-5">Trabajo Practico Final</h3>
+        <h3 class="m-5">Trabajo Practico Final</h3> -->
     </div>
 
     <div class="text-center mt-5 mb-5">
@@ -50,6 +50,9 @@ if (isset($datos['error'])){
                     </div>
                 <div class="mt-3 d-grid">
                     <button type="submit" class="btn btn-lg btn-success">Ingresar</button>
+                </div>
+                <div class="mt-3 d-grid">
+                    <a href="index.php">Volver a inicio</a>
                 </div>
         </form>
     </div>
