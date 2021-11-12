@@ -65,6 +65,17 @@ if ($estructuraAMostrar == "desdeAccion") {
         $sesion->setRolActivo($roles[0]->getObjRol()->getIdrol());
         $rolActivo = $sesion->getRolActivo();
       }
+
+      $abmMenuRol = new AbmMenurol();
+      $arrMenu = $abmMenuRol->buscar(['idrol'=>$rolActivo->getIdrol()]);
+      if(count($arrMenu) > 0){
+        $abmMenu = new abmMenu();
+        $arrMenuPadre = $abmMenu->buscar(['idmenu'=>$rolActivo->getIdrol()]);
+        if(count($arrMenuPadre) > 0){
+          $idMenuPadre = $arrMenuPadre[0]->getIdmenu();
+          $arrSubMenu = $abmMenu->buscar(['idpadre'=>$idMenuPadre]);
+        }
+      }
       
     }else{
       header("Location:accion/cerrarSesion.php");
