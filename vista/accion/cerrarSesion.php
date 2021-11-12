@@ -2,5 +2,5 @@
     include_once("../../configuracion.php");
     $sesion = new Session();
     $sesion->cerrar();
-    header('Location:../login.php');
+    header('Location:../index.php');
 ?>
