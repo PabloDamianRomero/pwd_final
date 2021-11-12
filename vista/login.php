@@ -5,7 +5,8 @@ $seguro = false;
 include_once("estructura/cabecera.php");
 $objLogin = new Session();
 if ($objLogin->activa()) {
-     header('location:paginaSegura.php');
+    $idRol = $objLogin->getRolActivo()->getIdrol();
+    header("Location:paginaSegura.php?idrol=".$idRol."");
      exit();
 }
 
