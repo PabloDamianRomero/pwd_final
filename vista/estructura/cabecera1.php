@@ -18,9 +18,14 @@ if ($estructuraAMostrar == "desdeAccion") {
 ?>
 
 <style>
+  button.dropdown-item.text-center {
+    padding: 4px 0;
+  }
+
   nav.navbar.navbar-expand-lg a {
     color: #000;
     text-decoration: none;
+    display: block;
   }
 </style>
 
