@@ -147,7 +147,7 @@ class abmMenu
             }
 
             if (isset($param['idpadre'])) {
-                $where .= " and idpadre ='" . $param['idpadre'] . "'";
+                $where .= " and idpadre =" . $param['idpadre'];
             }
 
             if (isset($param['medeshabilitado'])) {
