@@ -12,19 +12,6 @@ include_once "estructura/cabecera.php";
             <p class="lead">La tienda online de componentes de PC que estabas buscando.</p>
         </div>
     </div>
-    <pre>
-        <?php
-        print_r($arrMenuPadre[0]); ?>
-    </pre>
-    <p><?php echo $arrMenuPadre[0]->getMenombre();?></p>
-    <p>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p>
-    <pre>
-        <?php
-        foreach ($arrSubMenu as $subMenu) {
-            echo "<p>".$subMenu->getMenombre()."</p>";
-        }
-         ?>
-    </pre>
 <div>
 
 <?php
