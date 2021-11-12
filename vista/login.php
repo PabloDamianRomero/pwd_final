@@ -18,11 +18,12 @@ if (isset($datos['error'])){
 ?>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
-    <div style="margin-top: 30px;">
-    <h1>Inicio de sesión</h1>
-        <!-- <h2>DEPARTAMENTO DE PROGRAMACIÓN</h2>
-        <h3>CÁTEDRA PROGRAMACIÓN WEB DINÁMICA</h3>
-        <h3 class="m-5">Trabajo Practico Final</h3> -->
+<div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
+        <div class="container">
+            <h1 class="display-4">Compupartes</h1>
+            <p class="lead">La tienda online de componentes de PC que estabas buscando.</p>
+        </div>
+        <h2 class="display-5" style="margin-top:50px;">Inicio de sesión</h2>
     </div>
 
     <div class="text-center mt-5 mb-5">
