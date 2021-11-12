@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2021 a las 22:00:29
+-- Tiempo de generación: 12-11-2021 a las 22:47:18
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -101,11 +101,18 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
-(7, 'nuevo', 'kkkkk', NULL, NULL),
-(8, 'nuevo', 'kkkkk', NULL, NULL),
-(9, 'nuevo', 'kkkkk', 7, NULL),
-(10, 'nuevo', 'kkkkk', NULL, NULL),
-(11, 'nuevo', 'kkkkk', NULL, NULL);
+(1, 'Opciones Administrador', 'desc', NULL, '0000-00-00 00:00:00'),
+(2, 'Opciones de Deposito', 'desc', NULL, '0000-00-00 00:00:00'),
+(3, 'Opciones de Cliente', 'desc', NULL, '0000-00-00 00:00:00'),
+(4, 'Crear usuario', 'desc', 1, '0000-00-00 00:00:00'),
+(5, 'Gestionar usuario', 'desc', 1, '0000-00-00 00:00:00'),
+(6, 'Crear rol', 'desc', 1, '0000-00-00 00:00:00'),
+(7, 'Crear productos', 'desc', 2, '0000-00-00 00:00:00'),
+(8, 'Administrar productos existentes', 'desc', 2, '0000-00-00 00:00:00'),
+(9, 'Cambiar estado de producto', 'desc', 2, '0000-00-00 00:00:00'),
+(10, 'Modificar stock de producto', 'desc', 2, '0000-00-00 00:00:00'),
+(11, 'Actualizar información', 'desc', 3, '0000-00-00 00:00:00'),
+(12, 'Realizar compra', 'desc', 3, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -117,6 +124,15 @@ CREATE TABLE `menurol` (
   `idmenu` bigint(20) NOT NULL,
   `idrol` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `menurol`
+--
+
+INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
 
 -- --------------------------------------------------------
 
@@ -147,7 +163,9 @@ CREATE TABLE `rol` (
 --
 
 INSERT INTO `rol` (`idrol`, `rodescripcion`) VALUES
-(1, 'Administrador');
+(1, 'Administrador'),
+(2, 'Deposito'),
+(3, 'Cliente');
 
 -- --------------------------------------------------------
 
@@ -168,7 +186,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
-(1, 'PabloR', '0192023a7bbd73250516f069df18b500', 'admin@gmail.com', '0000-00-00 00:00:00');
+(1, 'PabloR', '0192023a7bbd73250516f069df18b500', 'admin@gmail.com', '0000-00-00 00:00:00'),
+(3, 'NicoS', '4118af4d1a8ac07d93f11ce4f3bf1f58', 'nico@gmail.com', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -186,7 +205,10 @@ CREATE TABLE `usuariorol` (
 --
 
 INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
-(1, 1);
+(1, 1),
+(1, 2),
+(1, 3),
+(3, 3);
 
 --
 -- Índices para tablas volcadas
@@ -294,7 +316,7 @@ ALTER TABLE `compraitem`
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -306,13 +328,13 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
