@@ -2,6 +2,7 @@
     include_once("../../configuracion.php");
     $datos=data_submitted();
     if (isset($datos['usnombre']) && isset($datos['uspass'])){
+        $datos['uspass'] = md5($datos['uspass']);
         $abmUs=new abmUsuario();
         $resp=$abmUs->alta($datos);
     }else{
