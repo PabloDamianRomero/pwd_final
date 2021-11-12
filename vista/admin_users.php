@@ -145,12 +145,11 @@
         }
         function destroyUser(){
             var row = $('#dg').datagrid('getSelected');
-            console.log(row);
             if (row){
                 $.messager.confirm('Confirm','Esta seguro de borrar el usuario?',function(r){
                     if (r){
-                        $.post('accion/baja_usuario.php',{id:row.id,idusuario:row.idusuario},function(result){
-                            if (result.success){
+                        $.post('accion/baja_usuario.php',{idusuario:row.idusuario},function(result){
+                            if (result.respuesta){
                                 $('#dg').datagrid('reload');    // reload the user data
                             } else {
                                 $.messager.show({    // show error message
@@ -199,8 +198,8 @@
             if (row){
                 $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
                     if (r){
-                        $.post('accion/baja_usuarioRol.php',{id:row.id,idusuario:row.idusuario,idrol:row.idrol},function(result){
-                            if (result.success){
+                        $.post('accion/baja_usuarioRol.php',{idusuario:row.idusuario,idrol:row.idrol},function(result){
+                            if (result.respuesta){
                                 $('#dgRol').datagrid('reload');    // reload the user data
                             } else {
                                 $.messager.show({    // show error message
