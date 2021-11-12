@@ -18,6 +18,10 @@ if ($estructuraAMostrar == "desdeAccion") {
 ?>
 
 <style>
+  button.dropdown-item.text-center {
+    padding: 4px 0;
+  }
+
    a.enlaces-menu {
     color: #000;
     font-family: monospace;
@@ -31,7 +35,9 @@ if ($estructuraAMostrar == "desdeAccion") {
   a.enlaceSinEstilo{
     color: #000;
     text-decoration: none;
+    display: block;
   }
+  
 </style>
 
 <title><?php echo $titulo; ?></title>
