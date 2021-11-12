@@ -5,7 +5,7 @@
     $objSesion->iniciar($datos['usnombre'],md5($datos['uspass']));
     $valido = $objSesion->validar();
     if ($valido){
-        header("Location:../index.php");
+        header("Location:../paginaSegura.php");
         exit();
     }else{
         $msj = $objSesion->getMensajeError();
