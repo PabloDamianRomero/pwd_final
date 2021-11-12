@@ -37,6 +37,13 @@ if ($estructuraAMostrar == "desdeAccion") {
     text-decoration: none;
     display: block;
   }
+
+  a.enlaceSinEstiloYPadding{
+    color: #000;
+    text-decoration: none;
+    display: block;
+    padding: 0 10px;
+  }
   
 </style>
 
@@ -94,20 +101,28 @@ if ($estructuraAMostrar == "desdeAccion") {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 20px;">
         
         <?php
         if ($estructuraAMostrar=="desdeVista"){?>
-            <li class="nav-item">
-                    <a class="nav-link active enlaces-menu" aria-current="page" href="enlace.php">Enlace_vista_1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active enlaces-menu" aria-current="page" href="enlace.php">Enlace_vista_2</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link active enlaces-menu" aria-current="page" href="enlace.php">Enlace_vista_3</a>
-              </li>
-              </ul>
+          <!-- ICONO MENU-ROL -->
+          <div class="btn-group" style="margin-right:10px;">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
+              <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
+              <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
+            </svg>
+            <?php echo $arrMenuPadre[0]->getMenombre();?>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-lg-end">
+              <?php 
+                foreach ($arrSubMenu as $subMenu) {
+                  echo "<li><button class='dropdown-item text-center' type='button'><a href='#' class='enlaceSinEstiloYPadding'>".$subMenu->getMenombre()."</a></button></li>";
+                }
+              ?>           
+            </ul>
+          </div>
             </div> <!-- cierre collapse navbar-collapse -->
             <!-- USUARIO Y ROL -->
             <div style="margin: 0 25px; padding: 0 10px; background: #ffffff87;">
