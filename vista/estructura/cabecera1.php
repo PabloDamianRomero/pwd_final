@@ -30,7 +30,8 @@ if ($estructuraAMostrar == "desdeAccion") {
   <?php 
   $sesion = new Session();
   if ($sesion->activa()) {
-      header("Location:paginaSegura.php");
+      $idRol = $sesion->getRolActivo()->getIdrol();
+      header("Location:paginaSegura.php?idrol=".$idRol."");
       exit();
   }
   ?>
