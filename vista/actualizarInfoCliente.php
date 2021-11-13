@@ -15,11 +15,7 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
     </div>
 <?php
 }else{
-    $abmUsuario = new abmUsuario();
-    $arrUsuario = $abmUsuario->buscar(["usnombre" => $sesion->getUsuarioActual()], ["uspass"=>$sesion->getPass()]);
-    if(count($arrUsuario) > 0){
-        $objUsuario = $arrUsuario[0];
-    }
+    
 ?>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
@@ -27,18 +23,12 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
         <div class="container">
             <h1 class="display-4">Actualizar información de usuario (Cliente)</h1>
         </div>
-        <pre>
-        <?php print_r($objUsuario);?>
-        </pre>
     </div>
 
     <!-- ---TABLA USUARIO--- -->
 
-    <!-- NO FUNNCIONA. La idea es pasar el idusuario actual (que ya lo tengo) al script listarUsuarioActual. Para
-    que la tabla no me muestre todos los usuarios, solo el activo -->
-
     <table id="dg" title="Usuarios" class="easyui-datagrid" style="width:700px;height:250px;"
-        url="accion/listarUsuarioActual.php?idu=<?php echo $objUsuario->getIdusuario();?>"
+        url="accion/cliente/listarUsuarioActual.php"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
@@ -83,7 +73,7 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
             if (row){
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Usuario');
                 $('#fm').form('load',row);
-                url = 'accion/admin/mod_usuario.php?id='+row.id;
+                url = 'accion/cliente/mod_usuarioCliente.php?id='+row.id;
             }
         }
         function saveUser(){
