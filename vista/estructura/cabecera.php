@@ -62,6 +62,11 @@ if ($estructuraAMostrar == "desdeAccion") {
   body{
     padding: 0;
   }
+
+  .panel.datagrid.panel-htop {
+    margin-left: auto;
+    margin-right: auto;
+}
   
 </style>
 
