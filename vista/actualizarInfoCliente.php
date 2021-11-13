@@ -19,7 +19,7 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
 ?>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
-    <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
+    <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;margin-bottom: 50px;">
         <div class="container">
             <h1 class="display-4">Actualizar información de usuario (Cliente)</h1>
         </div>
@@ -27,7 +27,7 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
 
     <!-- ---TABLA USUARIO--- -->
 
-    <table id="dg" title="Usuarios" class="easyui-datagrid" style="width:700px;height:250px;"
+    <table id="dg" title="Usuario" class="easyui-datagrid" style="width:700px;height:250px;"
         url="accion/cliente/listarUsuarioActual.php"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
@@ -43,7 +43,7 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Editar Usuario</a>
     </div>
     
-    <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
+    <div id="dlg" class="easyui-dialog" style="width:400px;" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
         <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
             <h3>Informacion Usuario</h3>
             <div style="margin-bottom:10px">
