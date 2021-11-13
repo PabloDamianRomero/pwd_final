@@ -1,5 +1,6 @@
 <?php
 include_once("../../configuracion.php");
+
 $data = data_submitted();
 if(isset($data["idu"])){
     $objControl=new abmUsuario();
@@ -15,6 +16,4 @@ if(isset($data["idu"])){
     }
     echo json_encode($arreglo_salida);
 }
-// echo $objUsuario->getIdusuario()
-
 ?>
