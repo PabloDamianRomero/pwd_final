@@ -6,6 +6,13 @@ if ($estructuraAMostrar == "desdeVista") {
     include_once("../configuracion.php");?>
     <link rel='stylesheet' href='css/bootstrap/bootstrap.css'>
     <link rel='stylesheet' href='css/bootstrap/bootstrap.min.css'>
+    <!-- Enlaces jQuery-Easyui -->
+    <link rel="stylesheet" type="text/css" href="../util/jquery-easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../util/jquery-easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../util/jquery-easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="../util/jquery-easyui/demo/demo.css">
+    <script type="text/javascript" src="../util/jquery-easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../util/jquery-easyui/jquery.easyui.min.js"></script>
     <?php
 }
 
@@ -13,6 +20,13 @@ if ($estructuraAMostrar == "desdeAccion") {
     include_once("../../configuracion.php");?>
     <link rel='stylesheet' href='../css/bootstrap/bootstrap.css'>
     <link rel='stylesheet' href='../css/bootstrap/bootstrap.min.css'>
+    <!-- Enlaces jQuery-Easyui -->
+    <link rel="stylesheet" type="text/css" href="../../util/jquery-easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../util/jquery-easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../util/jquery-easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="../../util/jquery-easyui/demo/demo.css">
+    <script type="text/javascript" src="../../util/jquery-easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../util/jquery-easyui/jquery.easyui.min.js"></script>
     <?php
 }
 ?>
@@ -43,6 +57,10 @@ if ($estructuraAMostrar == "desdeAccion") {
     text-decoration: none;
     display: block;
     padding: 0 10px;
+  }
+
+  body{
+    padding: 0;
   }
   
 </style>
@@ -118,7 +136,13 @@ if ($estructuraAMostrar == "desdeAccion") {
             <ul class="dropdown-menu dropdown-menu-lg-end">
               <?php 
                 foreach ($arrSubMenu as $subMenu) {
-                  echo "<li><button class='dropdown-item text-center' type='button'><a href='#' class='enlaceSinEstiloYPadding'>".$subMenu->getMenombre()."</a></button></li>";
+                  if($subMenu->getMedeshabilitado() == "0000-00-00 00:00:00"){
+                    if($subMenu->getMedescripcion() != ""){
+                      $enlace = $subMenu->getMedescripcion().".php";
+                      echo "<li><button class='dropdown-item text-center' type='button'><a href='".$enlace."?idrol=".$rolActivo->getIdrol()."' class='enlaceSinEstiloYPadding'>".$subMenu->getMenombre()."</a></button></li>";
+                    }
+                    
+                  }
                 }
               ?>           
             </ul>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2021 a las 22:47:18
+-- Tiempo de generación: 13-11-2021 a las 08:29:35
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -111,7 +111,7 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (8, 'Administrar productos existentes', 'desc', 2, '0000-00-00 00:00:00'),
 (9, 'Cambiar estado de producto', 'desc', 2, '0000-00-00 00:00:00'),
 (10, 'Modificar stock de producto', 'desc', 2, '0000-00-00 00:00:00'),
-(11, 'Actualizar información', 'desc', 3, '0000-00-00 00:00:00'),
+(11, 'Actualizar información', 'actualizarInfoCliente', 3, '0000-00-00 00:00:00'),
 (12, 'Realizar compra', 'desc', 3, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
