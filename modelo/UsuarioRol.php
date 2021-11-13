@@ -75,7 +75,7 @@ class UsuarioRol
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "DELETE FROM usuariorol WHERE idusuario=" . $this->getObjUsuario()->getIdUsuario();
+        $sql = "DELETE FROM usuariorol WHERE idusuario=" . $this->getObjUsuario()->getIdUsuario()." and idrol=".$this->getObjRol()->getIdrol();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 return true;

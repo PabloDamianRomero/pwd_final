@@ -9,12 +9,14 @@ class abmMenurol{
         $obj = null;
            
         if( array_key_exists('idmenu',$param) and array_key_exists('idrol',$param)){
-            $abmMenu=new abmMenu();
-            $objMenu=$abmMenu->buscar(['idmenu'=>$param['idmenu']]);
-            $abmRol=new abmRol();
-            $objRol=$abmRol->buscar(['idrol'=>$param['idrol']]);
+            $objMenu=new Menu();
+            $objMenu->setIdmenu($param['idmenu']);
+            $objMenu->cargar();
+            $objRol=new Rol();
+            $objRol->setIdrol($param['idrol']);
+            $objRol->cargar();
             $obj = new MenuRol();
-            $obj->setear($objMenu[0],$objRol[0]);
+            $obj->setear($objMenu,$objRol);
         }
         return $obj;
     }
