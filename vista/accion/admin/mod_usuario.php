@@ -1,5 +1,5 @@
 <?php
-include_once("../../configuracion.php");
+include_once("../../../configuracion.php");
 $datos=data_submitted();
 
 if (isset($datos['idusuario']) && isset($datos['usnombre']) && isset($datos['uspass']) && isset($datos['usmail'])){

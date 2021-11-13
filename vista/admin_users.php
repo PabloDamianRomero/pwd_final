@@ -20,7 +20,7 @@
     <!-- ---TABLA USUARIOS--- -->
 
     <table id="dg" title="Usuarios" class="easyui-datagrid" style="width:700px;height:250px"
-            url="accion/listar_usuarios.php"
+            url="accion/admin/listar_usuarios.php"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
@@ -70,7 +70,7 @@
     </br>
 
     <table id="dgRol" title="UsuarioRol" class="easyui-datagrid" style="width:700px;height:250px"
-            url="accion/listar_usuariosRol.php"
+            url="accion/admin/listar_usuariosRol.php"
             toolbar="#toolbar2" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
@@ -105,6 +105,51 @@
     </div>
 
 
+<!-- ---TABLA ROLES--- -->
+    </br>
+    </br>
+
+    <table id="dgRoll" title="Rol" class="easyui-datagrid" style="width:700px;height:250px"
+            url="accion/admin/listar_roles.php"
+            toolbar="#toolbar3" pagination="true"
+            rownumbers="true" fitColumns="true" singleSelect="true">
+        <thead>
+            <tr>
+                <th field="idrol" width="50">ID</th>
+                <th field="rodescripcion" width="50">Descripcion</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div id="toolbar3">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newRol()">Nuevo Rol</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editRol()">Editar Rol</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyRol()">Eliminar Rol</a>
+    </div>
+    
+    <div id="dlgRoll" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlgRoll-buttons'">
+        <form id="fmRoll" method="post" novalidate style="margin:0;padding:20px 50px">
+            <h3>Informacion Rol</h3>
+            <div style="margin-bottom:10px">
+                <input name="rodescripcion" class="easyui-textbox" required="true" label="Descripcion:" style="width:100%">
+            </div>
+            <div>
+                <input name="idrol" value="idrol" type="hidden">
+            </div>
+        </form>
+    </div>
+    <div id="dlgRoll-buttons">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRol()" style="width:90px">Aceptar</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgRoll').dialog('close')" style="width:90px">Cancelar</a>
+    </div>
+
+
+
+
+
+
+
+
 
 
     <script type="text/javascript">
@@ -112,14 +157,14 @@
         function newUser(){
             $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Usuario');
             $('#fm').form('clear');
-            url = 'accion/alta_usuario.php';
+            url = 'accion/admin/alta_usuario.php';
         }
         function editUser(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Usuario');
                 $('#fm').form('load',row);
-                url = 'accion/mod_usuario.php?id='+row.id;
+                url = 'accion/admin/mod_usuario.php';
             }
         }
         function saveUser(){
@@ -145,10 +190,11 @@
         }
         function destroyUser(){
             var row = $('#dg').datagrid('getSelected');
+            //console.log(row);
             if (row){
                 $.messager.confirm('Confirm','Esta seguro de borrar el usuario?',function(r){
                     if (r){
-                        $.post('accion/baja_usuario.php',{idusuario:row.idusuario},function(result){
+                        $.post('accion/admin/baja_usuario.php',{idusuario:row.idusuario},function(result){
                             if (result.respuesta){
                                 $('#dg').datagrid('reload');    // reload the user data
                             } else {
@@ -170,7 +216,7 @@
         function newUsRol(){
             $('#dlgRol').dialog('open').dialog('center').dialog('setTitle','Nuevo Usuario');
             $('#fmRol').form('clear');
-            url = 'accion/alta_usuarioRol.php';
+            url = 'accion/admin/alta_usuarioRol.php';
         }
         function saveUsRol(){
             $('#fmRol').form('submit',{
@@ -198,9 +244,68 @@
             if (row){
                 $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
                     if (r){
-                        $.post('accion/baja_usuarioRol.php',{idusuario:row.idusuario,idrol:row.idrol},function(result){
+                        $.post('accion/admin/baja_usuarioRol.php',{idusuario:row.idusuario,idrol:row.idrol},function(result){
                             if (result.respuesta){
                                 $('#dgRol').datagrid('reload');    // reload the user data
+                            } else {
+                                $.messager.show({    // show error message
+                                    title: 'Error',
+                                    msg: result.errorMsg
+                                });
+                            }
+                        },'json');
+                    }
+                });
+            }
+        }
+
+        //
+        // ---TABLA ROLES---
+        //
+
+        function newRol(){
+            $('#dlgRoll').dialog('open').dialog('center').dialog('setTitle','Nuevo Rol');
+            $('#fmRoll').form('clear');
+            url = 'accion/admin/alta_rol.php';
+        }
+        function editRol(){
+            var row = $('#dgRoll').datagrid('getSelected');
+            if (row){
+                $('#dlgRoll').dialog('open').dialog('center').dialog('setTitle','Editar Rol');
+                $('#fmRoll').form('load',row);
+                url = 'accion/admin/mod_rol.php?id='+row.id;
+            }
+        }
+        function saveRol(){
+            $('#fmRoll').form('submit',{
+                url: url,                
+                iframe: false,
+                onSubmit: function(){
+                    return $(this).form('validate');
+                },
+                success: function(result){
+                    var result = eval('('+result+')');
+                    if (result.errorMsg){
+                        $.messager.show({
+                            title: 'Error',
+                            msg: result.errorMsg
+                        });
+                    } else {
+                        $('#dlgRoll').dialog('close');        // close the dialog
+                        $('#dgRoll').datagrid('reload');    // reload the user data
+                    }
+                }
+            });
+        }
+        function destroyRol(){
+            var row = $('#dgRoll').datagrid('getSelected');
+            if (row){
+                $.messager.confirm('Confirmar','Esta seguro de borrar el Rol?',function(r){
+                    if (r){
+                        $.post('accion/admin/baja_rol.php',{idrol:row.idrol},function(result){
+                            console.log(result);
+                            if (result.respuesta){
+                                $('#dgRoll').datagrid('reload');    // reload the user data
                             } else {
                                 $.messager.show({    // show error message
                                     title: 'Error',

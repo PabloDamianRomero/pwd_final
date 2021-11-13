@@ -1,5 +1,5 @@
 <?php
-include_once("../../configuracion.php");
+include_once("../../../configuracion.php");
 $datos=data_submitted();
 $resp=false;
 if (isset($datos['idusuario']) && isset($datos['idrol'])){
