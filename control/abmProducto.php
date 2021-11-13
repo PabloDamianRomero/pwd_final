@@ -74,13 +74,13 @@ class abmProducto
         if ($this->seteadosCamposClaves($param)){
             $elObjtProducto = $this->cargarObjetoConClave($param);
             if ($elObjtProducto!=null){
-                $abmCompraItem=new abmCompraitem();
-                $array=$abmCompraItem->buscar(['idproducto'=>$param['idproducto']]);
-                if (!empty($array)){
-                    foreach($array as $obj){
-                        $abmCompraItem->baja(['idcompraitem'=>$obj->getIdcompraitem()]);
-                    }
-                }
+                // $abmCompraItem=new abmCompraitem();
+                // $array=$abmCompraItem->buscar(['idproducto'=>$param['idproducto']]);
+                // if (!empty($array)){
+                //     foreach($array as $obj){
+                //         $obj->eliminar();
+                //     }
+                // }
                 if ($elObjtProducto->eliminar()){
                     $resp = true;
                 }

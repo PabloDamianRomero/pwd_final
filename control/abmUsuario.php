@@ -90,18 +90,6 @@ class abmUsuario
         if ($this->seteadosCamposClaves($param)){
             $elObjtUsuario = $this->cargarObjetoConClave($param);
             if ($elObjtUsuario!=null){
-                $abmCompra=new abmCompra();
-                $arrayCompra=$abmCompra->buscar(['idusuario'=>$param['idusuario']]);
-                if (!empty($arrayCompra)){
-                    foreach($arrayCompra as $obj){
-                        $abmCompra->baja(['idcompra'=>$obj->getIdcompra()]);
-                    }
-                }
-                $abmUsuarioRol=new abmUsuariorol();
-                $arrayUsuarioRol=$abmUsuarioRol->buscar(['idusuario'=>$param['idusuario']]);
-                if (!empty($arrayUsuarioRol)){
-                    $abmUsuarioRol->baja(['idusuario'=>$param['idusuario']]);
-                }
                 if ($elObjtUsuario->eliminar()){
                     $resp = true;
                 }

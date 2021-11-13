@@ -95,11 +95,13 @@ class abmMenu
         if ($this->seteadosCamposClaves($param)){
             $elObjtMenu = $this->cargarObjetoConClave($param);
             if ($elObjtMenu!=null){
-                $abmMenuRol=new abmMenurol();
-                $arrayMenuRol=$abmMenuRol->buscar(['idmenu'=>$param['idmenu']]);
-                if (!empty($arrayMenuRol)){
-                    $abmMenuRol->baja(['idmenu'=>$param['idmenu']]);
-                }
+                // $abmMenuRol=new abmMenurol();
+                // $arrayMenuRol=$abmMenuRol->buscar(['idmenu'=>$param['idmenu']]);
+                // if (!empty($arrayMenuRol)){
+                //     foreach ($arrayMenuRol as $obj){
+                //         $obj->eliminar();
+                //     }
+                // }
                 if ($elObjtMenu->eliminar()){
                     $resp = true;
                 }
