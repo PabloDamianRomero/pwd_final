@@ -26,30 +26,31 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
     <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
         <div class="container">
             <h1 class="display-4">Actualizar información de usuario (Cliente)</h1>
-            <!-- <p class="lead">La tienda online de componentes de PC que estabas buscando.</p> -->
         </div>
+        <pre>
+        <?php print_r($objUsuario);?>
+        </pre>
     </div>
 
     <!-- ---TABLA USUARIO--- -->
 
+    <!-- NO FUNNCIONA. La idea es pasar el idusuario actual (que ya lo tengo) al script listarUsuarioActual. Para
+    que la tabla no me muestre todos los usuarios, solo el activo -->
+
     <table id="dg" title="Usuarios" class="easyui-datagrid" style="width:700px;height:250px;"
-            url="accion/listarUsuarioActual.php?idu=1"
+        url="accion/listarUsuarioActual.php?idu=<?php echo $objUsuario->getIdusuario();?>"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
             <tr>
-                <!-- <th field="idusuario" width="30">ID</th> -->
                 <th field="usnombre" width="50">Nombre</th>
                 <th field="uspass" width="50">Contraseña</th>
                 <th field="usmail" width="50">Email</th>
-                <!-- <th field="usdeshabilitado" width="70">Deshabilitado</th> -->
             </tr>
         </thead>
     </table>
     <div id="toolbar">
-        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">Nuevo Usuario</a> -->
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Editar Usuario</a>
-        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Eliminar Usuario</a> -->
     </div>
     
     <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
@@ -64,9 +65,6 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
             <div style="margin-bottom:10px">
                 <input name="usmail" class="easyui-textbox" required="true" label="Mail:" style="width:100%">
             </div>
-            <!-- <div style="margin-bottom:10px">
-                <input name="usdeshabilitado" value="usdeshabilitado" class="easyui-checkbox" label="Des-habilitar:">
-            </div> -->
             <div>
                 <input name="idusuario" value="idusuario" type="hidden">
             </div>
@@ -85,7 +83,7 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
             if (row){
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Usuario');
                 $('#fm').form('load',row);
-                url = 'accion/mod_usuario.php?id='+row.id;
+                url = 'accion/admin/mod_usuario.php?id='+row.id;
             }
         }
         function saveUser(){
