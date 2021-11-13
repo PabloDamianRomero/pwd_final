@@ -1,5 +1,5 @@
 <?php
-$titulo = "Actualizar información";
+$titulo = "Actualizar información del cliente";
 $estructuraAMostrar = "desdeVista";
 $seguro = true;
 include_once "estructura/cabecera.php";
@@ -21,7 +21,8 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
 <div style="margin-bottom: 20%" class="container-fluid text-center">
     <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;margin-bottom: 50px;">
         <div class="container">
-            <h1 class="display-4">Actualizar información de usuario (Cliente)</h1>
+            <h1 class="display-5">Actualizar información del cliente</h1>
+            <p class="lead">Seleccione la fila de su usuario y luego presione en <span style="color: green;">Editar Usuario</span>.</p>
         </div>
     </div>
 
