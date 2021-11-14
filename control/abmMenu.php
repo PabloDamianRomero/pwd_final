@@ -10,18 +10,13 @@ class abmMenu
     private function cargarObjeto($param)
     {
         $obj = null;
-        if (array_key_exists('idmenu', $param) and array_key_exists('menombre', $param)) {
+        if (array_key_exists('idmenu', $param) and array_key_exists('menombre', $param) and array_key_exists('medeshabilitado', $param)) {
             $obj = new Menu();
             $objPadre=null;
             if (isset($param['idpadre'])){
                 $objPadre=new Menu();
                 $objPadre->setIdmenu($param['idpadre']);
                 $objPadre->cargar();
-            }
-            if (!isset($param['medeshabilitado'])){
-                $param['medeshabilitado']=null;
-            }else{
-                $param['medeshabilitado']=date("Y-m-d H:i:s");
             }
             if (!isset($param['medescripcion'])){
                 $param['medescripcion']="";
@@ -95,13 +90,6 @@ class abmMenu
         if ($this->seteadosCamposClaves($param)){
             $elObjtMenu = $this->cargarObjetoConClave($param);
             if ($elObjtMenu!=null){
-                // $abmMenuRol=new abmMenurol();
-                // $arrayMenuRol=$abmMenuRol->buscar(['idmenu'=>$param['idmenu']]);
-                // if (!empty($arrayMenuRol)){
-                //     foreach ($arrayMenuRol as $obj){
-                //         $obj->eliminar();
-                //     }
-                // }
                 if ($elObjtMenu->eliminar()){
                     $resp = true;
                 }
