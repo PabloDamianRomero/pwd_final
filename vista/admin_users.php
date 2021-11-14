@@ -14,21 +14,21 @@
     <script type="text/javascript" src="../util/jquery-easyui/jquery.easyui.min.js"></script>
 </head>
 <body>
-<h2>Basic CRUD Application</h2>
-    <p>Click the buttons on datagrid toolbar to do crud actions.</p>
+    <h2>USUARIO - ROL</h2>
+    <p>En esta pagina el admin puede gestionar los usuarios y sus roles.</p>
     
     <!-- ---TABLA USUARIOS--- -->
 
-    <table id="dg" title="Usuarios" class="easyui-datagrid" style="width:700px;height:250px"
+    <table id="dg" title="Usuarios" class="easyui-datagrid" style="width:950px;height:250px"
             url="accion/admin/listar_usuarios.php"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
             <tr>
-                <th field="idusuario" width="30">ID</th>
+                <th field="idusuario" width="20">ID</th>
                 <th field="usnombre" width="50">Nombre</th>
-                <th field="uspass" width="50">Contraseña</th>
-                <th field="usmail" width="50">Email</th>
+                <th field="uspass" width="120">Contraseña</th>
+                <th field="usmail" width="60">Email</th>
                 <th field="usdeshabilitado" width="70">Deshabilitado</th>
             </tr>
         </thead>
@@ -36,7 +36,7 @@
     <div id="toolbar">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">Nuevo Usuario</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Editar Usuario</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Eliminar Usuario</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Baja/Alta</a>
     </div>
     
     <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
@@ -51,8 +51,8 @@
             <div style="margin-bottom:10px">
                 <input name="usmail" class="easyui-textbox" required="true" label="Mail:" style="width:100%">
             </div>
-            <div style="margin-bottom:10px">
-                <input name="usdeshabilitado" value="usdeshabilitado" class="easyui-checkbox" label="Des-habilitar:">
+            <div>
+                <input name="usdeshabilitado" value="usdeshabilitado" type="hidden">
             </div>
             <div>
                 <input name="idusuario" value="idusuario" type="hidden">
@@ -190,20 +190,29 @@
         }
         function destroyUser(){
             var row = $('#dg').datagrid('getSelected');
-            //console.log(row);
             if (row){
-                $.messager.confirm('Confirm','Esta seguro de borrar el usuario?',function(r){
+                $.messager.confirm('Confirmar','Cambiar el estado del Usuario?',function(r){
                     if (r){
-                        $.post('accion/admin/baja_usuario.php',{idusuario:row.idusuario},function(result){
-                            if (result.respuesta){
-                                $('#dg').datagrid('reload');    // reload the user data
-                            } else {
-                                $.messager.show({    // show error message
-                                    title: 'Error',
-                                    msg: result.errorMsg
-                                });
+                        $('#fm').form('load',row);
+                        url = 'accion/admin/baja_usuario.php';
+                        $('#fm').form('submit',{
+                            url: url,
+                            iframe: false,
+                            onSubmit: function(){
+                                return $(this).form('validate');
+                            },
+                            success: function(result){
+                                var result = eval('('+result+')');
+                                if (result.errorMsg){
+                                    $.messager.show({
+                                        title: 'Error',
+                                        msg: result.errorMsg
+                                    });
+                                } else {
+                                    $('#dg').datagrid('reload');    // reload the menu data
+                                }
                             }
-                        },'json');
+                        });
                     }
                 });
             }
