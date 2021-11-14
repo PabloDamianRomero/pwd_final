@@ -1,25 +1,29 @@
 <?php
-    include_once("../configuracion.php");
+    $titulo = "Gestionar Menus";
+    $estructuraAMostrar = "desdeVista";
+    $seguro = true;
+    include_once "estructura/cabecera.php";
+    if($rolActivo->getIdrol() != 1){ // si no es admin
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Administrador - Menu</title>
-    <link rel="stylesheet" type="text/css" href="../util/jquery-easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="../util/jquery-easyui/themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="../util/jquery-easyui/themes/color.css">
-    <link rel="stylesheet" type="text/css" href="../util/jquery-easyui/demo/demo.css">
-    <script type="text/javascript" src="../util/jquery-easyui/jquery.min.js"></script>
-    <script type="text/javascript" src="../util/jquery-easyui/jquery.easyui.min.js"></script>
-</head>
-<body>
+    <div style="margin-bottom: 20%" class="container-fluid text-center">
+        <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
+            <div class="container">
+                <div class="alert alert-danger" role="alert">
+                    No puede modificar información de usuario-admin (No está con el rol Administrador).
+            </div>
+        </div>
+    </div>
+<?php
+}else{
+    
+?>
+
     <h2>MENU - ROL</h2>
     <p>En esta pagina el admin puede gestionar los menus y sus roles.</p>
 
     <!-- ---TABLA MENU--- -->
 
-    <table id="dg" title="Menu" class="easyui-datagrid" style="width:800px;height:250px"
+    <table id="dg" title="Menu" class="easyui-datagrid" style="width:800px;height:400px"
             url="accion/admin/listar_menu.php"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
@@ -325,6 +329,10 @@
             }
         }
     </script>
+<?php
+}
+?>
 
-</body>
-</html>
+<?php
+include_once "estructura/pie.php";
+?>

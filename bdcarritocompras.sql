@@ -104,9 +104,8 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (1, 'Opciones Administrador', 'desc', NULL, '0000-00-00 00:00:00'),
 (2, 'Opciones de Deposito', 'desc', NULL, '0000-00-00 00:00:00'),
 (3, 'Opciones de Cliente', 'desc', NULL, '0000-00-00 00:00:00'),
-(4, 'Crear usuario', 'desc', 1, '0000-00-00 00:00:00'),
-(5, 'Gestionar usuario', 'desc', 1, '0000-00-00 00:00:00'),
-(6, 'Crear rol', 'desc', 1, '0000-00-00 00:00:00'),
+(4, 'Gestionar usuario', 'admin_users', 1, '0000-00-00 00:00:00'),
+(5, 'Gestionar menu', 'admin_menu', 1, '0000-00-00 00:00:00'),
 (7, 'Crear productos', 'desc', 2, '0000-00-00 00:00:00'),
 (8, 'Administrar productos existentes', 'desc', 2, '0000-00-00 00:00:00'),
 (9, 'Cambiar estado de producto', 'desc', 2, '0000-00-00 00:00:00'),
@@ -187,7 +186,9 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
 (1, 'PabloR', '0192023a7bbd73250516f069df18b500', 'admin@gmail.com', '0000-00-00 00:00:00'),
+(2, 'MatiasP', '81dc9bdb52d04dc20036dbd8313ed055', 'gmail@gmail.com', '0000-00-00 00:00:00'),
 (3, 'NicoS', '4118af4d1a8ac07d93f11ce4f3bf1f58', 'nico@gmail.com', '0000-00-00 00:00:00');
+
 
 -- --------------------------------------------------------
 
@@ -208,6 +209,9 @@ INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
+(2, 1),
+(2, 2),
+(2, 3),
 (3, 3);
 
 --
