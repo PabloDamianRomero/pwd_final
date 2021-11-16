@@ -1,0 +1,5 @@
+Util para guardar programas y documentos con su capacidad de 1 TB.
+Tamaño de 3.5 ".
+Interfaz de conexión: SATA III.
+Apto para PC, Servidor y DAS.
+Incrementa el rendimiento de tu equipo.

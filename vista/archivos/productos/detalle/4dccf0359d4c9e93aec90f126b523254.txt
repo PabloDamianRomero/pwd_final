@@ -1,0 +1,19 @@
+Caracteristicas generales:
+
+Fabricante
+Nvidia
+
+Marca
+MSI
+
+Serie
+GeForce 10 Series
+
+Modelo
+GT 1030
+
+Version
+GEFORCE GT 1030 2GD4 LP OC
+
+Edicion
+OC Edition

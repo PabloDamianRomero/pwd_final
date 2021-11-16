@@ -106,10 +106,9 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (3, 'Opciones de Cliente', 'desc', NULL, '0000-00-00 00:00:00'),
 (4, 'Gestionar usuario', 'admin_users', 1, '0000-00-00 00:00:00'),
 (5, 'Gestionar menu', 'admin_menu', 1, '0000-00-00 00:00:00'),
-(7, 'Crear productos', 'desc', 2, '0000-00-00 00:00:00'),
-(8, 'Administrar productos existentes', 'desc', 2, '0000-00-00 00:00:00'),
-(9, 'Cambiar estado de producto', 'desc', 2, '0000-00-00 00:00:00'),
-(10, 'Modificar stock de producto', 'desc', 2, '0000-00-00 00:00:00'),
+(7, 'Gestionar productos', 'deposito_nuevo', 2, '0000-00-00 00:00:00'),
+(9, 'Cambiar estado de producto', 'deposito_baja', 2, '0000-00-00 00:00:00'),
+(10, 'Modificar stock de producto', 'deposito_stock', 2, '0000-00-00 00:00:00'),
 (11, 'Actualizar información', 'actualizarInfoCliente', 3, '0000-00-00 00:00:00'),
 (12, 'Realizar compra', 'desc', 3, '0000-00-00 00:00:00');
 
@@ -141,10 +140,22 @@ INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 
 CREATE TABLE `producto` (
   `idproducto` bigint(20) NOT NULL,
-  `pronombre` int(11) NOT NULL,
-  `prodetalle` varchar(512) NOT NULL,
+  `pronombre` varchar(100) NOT NULL,
+  `prodetalle` varchar(50) NOT NULL,
+  `proprecio` varchar(11)NOT NULL,
+  `prodeshabilitado` timestamp NULL DEFAULT current_timestamp(),
   `procantstock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`idproducto`, `pronombre`, `prodetalle`, `proprecio`, `prodeshabilitado`, `procantstock`) VALUES
+(1, 'Memoria RAM Fury DDR4 8GB 1 HyperX HX426C16FB3/8', '8fc397f687757f39b33d16ed61af4bbd', '5.632', '0000-00-00 00:00:00', 97),
+(2, 'Placa de video Nvidia MSI GeForce 10 Series GT 1030 GEFORCE GT 1030 2GD4 LP OC OC Edition 2GB', '4dccf0359d4c9e93aec90f126b523254', '23.479', '0000-00-00 00:00:00', 32),
+(3, 'Mother Asus Prime A320m-k Am4 Ddr4 A320 Hdmi M2', 'd9e9c65d547bbab494d4531cc6a34fa9', '8.279', '0000-00-00 00:00:00', 45),
+(4, 'Disco duro interno Seagate SkyHawk 1TB', 'f03479e67573edbc044a68c24c8d5106', '6.799', '0000-00-00 00:00:00', 22);
 
 -- --------------------------------------------------------
 
