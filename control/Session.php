@@ -28,14 +28,16 @@ class Session{
             if ($arreglo[0]->getUsdeshabilitado() == "0000-00-00 00:00:00"){
                 $valido = true;
             }else{
-                $this->setMensajeError("El usuario no está habilitado en la base.");
+                $this->cerrar(); // borra los valores de $_SESSION y destruye sesión
+                $this->setMensajeError("El usuario no está habilitado en la bd.");
             }
             //Chequeo que tenga un rol asignado
             $abmUsuarioRol = new abmUsuariorol();
             $arrayRel = $abmUsuarioRol->buscar(['idusuario'=>$arreglo[0]->getIdusuario()]);
             if (count($arrayRel) < 1){ // si no se encuentra el usuario en usuarioRol
                 $valido = false;
-                $this->setMensajeError("El usuario no posee ningun rol en la base.");
+                $this->cerrar(); // borra los valores de $_SESSION y destruye sesión
+                $this->setMensajeError("El usuario no posee ningún rol en la bd.");
             }
         }else{
             $this->cerrar(); // borra los valores de $_SESSION y destruye sesión
