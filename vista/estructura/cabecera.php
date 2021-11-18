@@ -50,6 +50,7 @@ if ($estructuraAMostrar == "desdeAccion") {
     color: #000;
     text-decoration: none;
     display: block;
+    font-size: 12px;
   }
 
   a.enlaceSinEstiloYPadding{
@@ -57,6 +58,7 @@ if ($estructuraAMostrar == "desdeAccion") {
     text-decoration: none;
     display: block;
     padding: 0 10px;
+    font-size: 12px;
   }
 
   body{
@@ -145,7 +147,10 @@ if ($estructuraAMostrar == "desdeAccion") {
               <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
               <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
             </svg>
-            <?php echo $arrMenuPadre[0]->getMenombre();?>
+            <?php 
+                if(isset($arrMenuPadre)){
+                  echo $arrMenuPadre[0]->getMenombre();
+                ?>
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end">
               <?php 
@@ -158,6 +163,9 @@ if ($estructuraAMostrar == "desdeAccion") {
                     
                   }
                 }
+              }else{ // isset($arrMenuPadre
+                echo "Sin opciones actualmente";
+              } 
               ?>           
             </ul>
           </div>
