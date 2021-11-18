@@ -17,9 +17,13 @@
 }else{
     
 ?>
-
-    <h2>USUARIO - ROL</h2>
-    <p>En esta pagina el admin puede gestionar los usuarios y sus roles.</p>
+<div style="margin-bottom: 20%" class="container-fluid text-center">
+    <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;margin-bottom: 50px;">
+        <div class="container">
+            <h1 class="display-6">Gestión de usuarios</h1>
+            <p class="lead">En esta página, el admin puede gestionar los usuarios y sus roles.</p>
+        </div>
+    </div>
     
     <!-- ---TABLA USUARIOS--- -->
 

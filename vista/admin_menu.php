@@ -17,9 +17,13 @@
 }else{
     
 ?>
-
-    <h2>MENU - ROL</h2>
-    <p>En esta pagina el admin puede gestionar los menus y sus roles.</p>
+<div style="margin-bottom: 20%" class="container-fluid text-center">
+    <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;margin-bottom: 50px;">
+        <div class="container">
+            <h1 class="display-6">Gestión de menúes</h1>
+            <p class="lead">En esta página el admin puede gestionar los menúes y sus roles.</p>
+        </div>
+    </div>
 
     <!-- ---TABLA MENU--- -->
 
@@ -73,7 +77,7 @@
     </br>
     </br>
 
-    <table id="dgRol" title="MenuRol" class="easyui-datagrid" style="width:700px;height:250px"
+    <table id="dgRol" title="MenuRol" class="easyui-datagrid" style="width:800px;height:250px"
             url="accion/admin/listar_menuRol.php"
             toolbar="#toolbar2" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
@@ -113,7 +117,7 @@
     </br>
     </br>
 
-    <table id="dgRoll" title="Rol" class="easyui-datagrid" style="width:700px;height:250px"
+    <table id="dgRoll" title="Rol" class="easyui-datagrid" style="width:800px;height:250px"
             url="accion/admin/listar_roles.php"
             toolbar="#toolbar3" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">

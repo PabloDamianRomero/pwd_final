@@ -17,7 +17,14 @@
 }else{
     
 ?>
-<h2>GESTION DE PRODUCTOS - STOCK</h2>
+<div style="margin-bottom: 20%" class="container-fluid text-center">
+    <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;margin-bottom: 50px;">
+        <div class="container">
+            <h1 class="display-6">Gestión de productos - Stock</h1>
+            <p class="lead">En esta página el engarcado del depósito puede gestionar el stock de los productos.</p>
+        </div>
+    </div>
+
     <table id="dg" title="Productos" class="easyui-datagrid" style="width:950px;height:500px"
                 url="accion/deposito/listar_productos.php"
                 toolbar="#toolbar" pagination="true"
