@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2021 a las 08:29:35
+-- Tiempo de generación: 18-11-2021 a las 08:43:27
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -102,10 +102,10 @@ CREATE TABLE `menu` (
 
 INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
 (1, 'Opciones Administrador', 'desc', NULL, '0000-00-00 00:00:00'),
-(2, 'Opciones de Deposito', 'desc', NULL, '0000-00-00 00:00:00'),
+(2, 'Opciones de Depósito', 'desc', NULL, '0000-00-00 00:00:00'),
 (3, 'Opciones de Cliente', 'desc', NULL, '0000-00-00 00:00:00'),
 (4, 'Gestionar usuario', 'admin_users', 1, '0000-00-00 00:00:00'),
-(5, 'Gestionar menu', 'admin_menu', 1, '0000-00-00 00:00:00'),
+(5, 'Gestionar menú', 'admin_menu', 1, '0000-00-00 00:00:00'),
 (7, 'Gestionar productos', 'deposito_nuevo', 2, '0000-00-00 00:00:00'),
 (9, 'Cambiar estado de producto', 'deposito_baja', 2, '0000-00-00 00:00:00'),
 (10, 'Modificar stock de producto', 'deposito_stock', 2, '0000-00-00 00:00:00'),
@@ -142,7 +142,7 @@ CREATE TABLE `producto` (
   `idproducto` bigint(20) NOT NULL,
   `pronombre` varchar(100) NOT NULL,
   `prodetalle` varchar(50) NOT NULL,
-  `proprecio` varchar(11)NOT NULL,
+  `proprecio` varchar(11) NOT NULL,
   `prodeshabilitado` timestamp NULL DEFAULT current_timestamp(),
   `procantstock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -174,7 +174,7 @@ CREATE TABLE `rol` (
 
 INSERT INTO `rol` (`idrol`, `rodescripcion`) VALUES
 (1, 'Administrador'),
-(2, 'Deposito'),
+(2, 'Depósito'),
 (3, 'Cliente');
 
 -- --------------------------------------------------------
@@ -198,8 +198,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
 (1, 'PabloR', '0192023a7bbd73250516f069df18b500', 'admin@gmail.com', '0000-00-00 00:00:00'),
 (2, 'MatiasP', '81dc9bdb52d04dc20036dbd8313ed055', 'gmail@gmail.com', '0000-00-00 00:00:00'),
-(3, 'NicoS', '4118af4d1a8ac07d93f11ce4f3bf1f58', 'nico@gmail.com', '0000-00-00 00:00:00');
-
+(3, 'NicoS', '4118af4d1a8ac07d93f11ce4f3bf1f58', 'nico@gmail.com', '2021-11-18 07:34:06');
 
 -- --------------------------------------------------------
 
@@ -337,7 +336,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
