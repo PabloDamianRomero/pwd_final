@@ -3,8 +3,23 @@ $titulo = "Actualizar información del cliente";
 $estructuraAMostrar = "desdeVista";
 $seguro = true;
 include_once "estructura/cabecera.php";
-if($rolActivo->getIdrol() != 3){ // si no es cliente
-    ?>
+
+// ---------------------- Verificar si el sub-enlace del menú está habilitado -------------------------------
+$i = 0;
+$existeSubEnlace = false;
+if(isset($arrSubMenu)){
+    while(($i < count($arrSubMenu)) && (!$existeSubEnlace)){
+        $subMenuActual = $arrSubMenu[$i];
+        if(($subMenuActual->getMedeshabilitado() != "0000-00-00 00:00:00") && ($subMenuActual->getMedescripcion() == "actualizarInfoCliente")){
+            $existeSubEnlace = true;
+        }
+        $i++;
+    }
+}
+// ----------------------------------------------------------------------------------------------------------
+
+// ---------------------- Si el usuario actual no es Cliente  -------------------------------
+if($rolActivo->getIdrol() != 3){?>
     <div style="margin-bottom: 20%" class="container-fluid text-center">
     <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
         <div class="container">
@@ -14,7 +29,10 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
         </div>
     </div>
 <?php
-}else if(($rolActivo->getIdrol() == 3) && (!isset($arrMenuPadre))){ // si es cliente pero el enlace-menu no está disponible
+// ----------------------------------------------------------------------------------------------------------
+
+// ---------------------- Si es Cliente pero el enlace-menu(padre) no está disponible  -------------------------------
+}else if(($rolActivo->getIdrol() == 3) && (!isset($arrMenuPadre))){ // si es cliente pero el enlace-menu(padre) no está disponible
     ?>
         <div style="margin-bottom: 20%" class="container-fluid text-center">
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
@@ -25,8 +43,25 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
         </div>
     </div>
     <?php
-}else{ // si es cliente y existe el enlace-menu
+// ----------------------------------------------------------------------------------------------------------
 
+// ---------------------- Si es Cliente pero el enlace-menu(sub menú) no está disponible  -------------------------------
+// ---------------------- Esto es para no acceder por url a la página si el enlace-menú esta deshabilitado  -------------------------------
+ }else if(($rolActivo->getIdrol() == 3) && (isset($arrMenuPadre)) && ($existeSubEnlace)){
+    ?>
+        <div style="margin-bottom: 20%" class="container-fluid text-center">
+        <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
+            <div class="container">
+                <div class="alert alert-danger" role="alert">
+                    <span style="font-weight: bold;">Este apartado no se encuentra disponible.</span>
+            </div>
+        </div>
+        </div>
+    <?php
+}else{
+// ----------------------------------------------------------------------------------------------------------    
+
+// ---------------------- Si es Cliente y existe el enlace-menu (padre e hijo)  ------------------------------- 
 ?>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
