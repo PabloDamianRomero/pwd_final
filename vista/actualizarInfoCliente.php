@@ -15,7 +15,7 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
     </div>
 <?php
 }else{
-    
+
 ?>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
@@ -58,6 +58,7 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
             </div>
             <div>
                 <input name="idusuario" value="idusuario" type="hidden">
+                <input name="usdeshabilitado" value="usdeshabilitado" type="hidden">
             </div>
         </form>
     </div>
