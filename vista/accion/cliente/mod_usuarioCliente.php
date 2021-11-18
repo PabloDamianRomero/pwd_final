@@ -2,7 +2,7 @@
 include_once("../../../configuracion.php");
 $datos=data_submitted();
 
-if (isset($datos['idusuario']) && isset($datos['usnombre']) && isset($datos['uspass']) && isset($datos['usmail'])){
+if (isset($datos['idusuario']) && isset($datos['usnombre']) && isset($datos['uspass']) && isset($datos['usmail']) && isset($datos['usdeshabilitado'])){
     $abmUs=new abmUsuario();
     
     
