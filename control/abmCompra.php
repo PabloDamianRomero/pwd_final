@@ -85,20 +85,20 @@ class abmCompra
         if ($this->seteadosCamposClaves($param)){
             $elObjtCompra = $this->cargarObjetoConClave($param);
             if ($elObjtCompra!=null){
-                $abmCompraitem=new abmCompraitem();
-                $arrayCompraitem=$abmCompraitem->buscar(['idcompra'=>$param['idcompra']]);
-                if (!empty($arrayCompraitem)){
-                    foreach($arrayCompraitem as $obj){
-                        $abmCompraitem->baja(['idcompraitem'=>$obj->getIdcompraitem()]);
-                    }
-                }
-                $abmCompraEstado=new abmCompraestado();
-                $arrayCompraEstado=$abmCompraEstado->buscar(['idcompra'=>$param['idcompra']]);
-                if (!empty($arrayCompraEstado)){
-                    foreach($arrayCompraEstado as $obj){
-                        $abmCompraEstado->baja(['idcompraestado'=>$obj->getIdcompraestado()]);
-                    }
-                }
+                // $abmCompraitem=new abmCompraitem();
+                // $arrayCompraitem=$abmCompraitem->buscar(['idcompra'=>$param['idcompra']]);
+                // if (!empty($arrayCompraitem)){
+                //     foreach($arrayCompraitem as $obj){
+                //         $obj->eliminar();
+                //     }
+                // }
+                // $abmCompraEstado=new abmCompraestado();
+                // $arrayCompraEstado=$abmCompraEstado->buscar(['idcompra'=>$param['idcompra']]);
+                // if (!empty($arrayCompraEstado)){
+                //     foreach($arrayCompraEstado as $obj){
+                //         $obj->eliminar();
+                //     }
+                // }
                 if ($elObjtCompra->eliminar()){
                     $resp = true;
                 }

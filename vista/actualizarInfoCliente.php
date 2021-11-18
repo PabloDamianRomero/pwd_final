@@ -1,5 +1,5 @@
 <?php
-$titulo = "Actualizar información";
+$titulo = "Actualizar información del cliente";
 $estructuraAMostrar = "desdeVista";
 $seguro = true;
 include_once "estructura/cabecera.php";
@@ -15,44 +15,36 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
     </div>
 <?php
 }else{
-    $abmUsuario = new abmUsuario();
-    $arrUsuario = $abmUsuario->buscar(["usnombre" => $sesion->getUsuarioActual()], ["uspass"=>$sesion->getPass()]);
-    if(count($arrUsuario) > 0){
-        $objUsuario = $arrUsuario[0];
-    }
+    
 ?>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
-    <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
+    <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;margin-bottom: 50px;">
         <div class="container">
-            <h1 class="display-4">Actualizar información de usuario (Cliente)</h1>
-            <!-- <p class="lead">La tienda online de componentes de PC que estabas buscando.</p> -->
+            <h1 class="display-5">Actualizar información del cliente</h1>
+            <p class="lead">Seleccione la fila de su usuario y luego presione en <span style="color: green;">Editar Usuario</span>.</p>
         </div>
     </div>
 
     <!-- ---TABLA USUARIO--- -->
 
-    <table id="dg" title="Usuarios" class="easyui-datagrid" style="width:700px;height:250px;"
-            url="accion/listarUsuarioActual.php?idu=1"
+    <table id="dg" title="Usuario" class="easyui-datagrid" style="width:700px;height:250px;"
+        url="accion/cliente/listarUsuarioActual.php"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
             <tr>
-                <!-- <th field="idusuario" width="30">ID</th> -->
                 <th field="usnombre" width="50">Nombre</th>
                 <th field="uspass" width="50">Contraseña</th>
                 <th field="usmail" width="50">Email</th>
-                <!-- <th field="usdeshabilitado" width="70">Deshabilitado</th> -->
             </tr>
         </thead>
     </table>
     <div id="toolbar">
-        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">Nuevo Usuario</a> -->
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Editar Usuario</a>
-        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Eliminar Usuario</a> -->
     </div>
     
-    <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
+    <div id="dlg" class="easyui-dialog" style="width:400px;" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
         <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
             <h3>Informacion Usuario</h3>
             <div style="margin-bottom:10px">
@@ -64,9 +56,6 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
             <div style="margin-bottom:10px">
                 <input name="usmail" class="easyui-textbox" required="true" label="Mail:" style="width:100%">
             </div>
-            <!-- <div style="margin-bottom:10px">
-                <input name="usdeshabilitado" value="usdeshabilitado" class="easyui-checkbox" label="Des-habilitar:">
-            </div> -->
             <div>
                 <input name="idusuario" value="idusuario" type="hidden">
             </div>
@@ -85,7 +74,7 @@ if($rolActivo->getIdrol() != 3){ // si no es cliente
             if (row){
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Usuario');
                 $('#fm').form('load',row);
-                url = 'accion/mod_usuario.php?id='+row.id;
+                url = 'accion/cliente/mod_usuarioCliente.php?id='+row.id;
             }
         }
         function saveUser(){

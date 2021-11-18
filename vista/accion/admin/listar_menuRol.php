@@ -1,18 +1,17 @@
 <?php
-include_once("../../configuracion.php");
-
+include_once("../../../configuracion.php");
 $data=data_submitted();
-$objControl=new abmUsuariorol();
+$objControl=new abmMenurol();
 $list=$objControl->buscar($data);
 $arreglo_salida=array();
 foreach($list as $elem){
-    $nuevoElem['idusuario']=$elem->getObjUsuario()->getIdusuario();
-    $abmUs=new abmUsuario();
-    $arrUs=$abmUs->buscar(['idusuario'=>$elem->getObjUsuario()->getIdusuario()]);
-    if (!empty($arrUs)){
-        $nuevoElem['usnombre']=$arrUs[0]->getUsnombre();
+    $nuevoElem['idmenu']=$elem->getObjMenu()->getIdmenu();
+    $abmMe=new abmMenu();
+    $arrMe=$abmMe->buscar(['idmenu'=>$elem->getObjMenu()->getIdmenu()]);
+    if (!empty($arrMe)){
+        $nuevoElem['menombre']=$arrMe[0]->getMenombre();
     }else{
-        $nuevoElem['usnombre']="";
+        $nuevoElem['menombre']="";
     }
     $nuevoElem['idrol']=$elem->getObjRol()->getIdrol();
     $abmRol=new abmRol();

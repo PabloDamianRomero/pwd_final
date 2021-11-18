@@ -1,5 +1,5 @@
 <?php
-    $titulo = "Gestionar Usuarios";
+    $titulo = "Gestionar Menus";
     $estructuraAMostrar = "desdeVista";
     $seguro = true;
     include_once "estructura/cabecera.php";
@@ -18,69 +18,69 @@
     
 ?>
 
-    <h2>USUARIO - ROL</h2>
-    <p>En esta pagina el admin puede gestionar los usuarios y sus roles.</p>
-    
-    <!-- ---TABLA USUARIOS--- -->
+    <h2>MENU - ROL</h2>
+    <p>En esta pagina el admin puede gestionar los menus y sus roles.</p>
 
-    <table id="dg" title="Usuarios" class="easyui-datagrid" style="width:950px;height:250px"
-            url="accion/admin/listar_usuarios.php"
+    <!-- ---TABLA MENU--- -->
+
+    <table id="dg" title="Menu" class="easyui-datagrid" style="width:800px;height:400px"
+            url="accion/admin/listar_menu.php"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
             <tr>
-                <th field="idusuario" width="20">ID</th>
-                <th field="usnombre" width="50">Nombre</th>
-                <th field="uspass" width="120">Contraseña</th>
-                <th field="usmail" width="60">Email</th>
-                <th field="usdeshabilitado" width="70">Deshabilitado</th>
+                <th field="idmenu" width="20">ID</th>
+                <th field="menombre" width="90">Nombre</th>
+                <th field="medescripcion" width="70">Descripcion</th>
+                <th field="idpadre" width="30">ID padre</th>
+                <th field="medeshabilitado" width="70">Deshabilitado</th>
             </tr>
         </thead>
     </table>
     <div id="toolbar">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">Nuevo Usuario</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Editar Usuario</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Baja/Alta</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newMenu()">Nuevo Menu</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editMenu()">Editar Menu</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyMenu()">Baja/Alta</a>
     </div>
     
     <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
         <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
-            <h3>Informacion Usuario</h3>
+            <h3>Informacion Menu</h3>
             <div style="margin-bottom:10px">
-                <input name="usnombre" class="easyui-textbox" required="true" label="Nombre:" style="width:100%">
+                <input name="menombre" class="easyui-textbox" required="true" label="Nombre:" style="width:100%">
             </div>
             <div style="margin-bottom:10px">
-                <input name="uspass" class="easyui-textbox" required="true" label="Contraseña:" style="width:100%">
+                <input name="medescripcion" class="easyui-textbox" required="true" label="Descripcion:" style="width:100%">
             </div>
             <div style="margin-bottom:10px">
-                <input name="usmail" class="easyui-textbox" required="true" label="Mail:" style="width:100%">
+                <input name="idpadre" class="easyui-textbox" label="ID Padre:" style="width:100%">
             </div>
             <div>
-                <input name="usdeshabilitado" value="usdeshabilitado" type="hidden">
+                <input name="medeshabilitado" value="medeshabilitado" type="hidden">
             </div>
             <div>
-                <input name="idusuario" value="idusuario" type="hidden">
+                <input name="idmenu" value="idmenu" type="hidden">
             </div>
         </form>
     </div>
     <div id="dlg-buttons">
-        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">Aceptar</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveMenu()" style="width:90px">Aceptar</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
     </div>
 
 
-    <!-- ---TABLA ROLES USUARIO--- -->
+    <!-- ---TABLA ROLES MENU--- -->
     </br>
     </br>
 
-    <table id="dgRol" title="UsuarioRol" class="easyui-datagrid" style="width:700px;height:250px"
-            url="accion/admin/listar_usuariosRol.php"
+    <table id="dgRol" title="MenuRol" class="easyui-datagrid" style="width:700px;height:250px"
+            url="accion/admin/listar_menuRol.php"
             toolbar="#toolbar2" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
             <tr>
-                <th field="idusuario" width="50">ID</th>
-                <th field="usnombre" width="50">Usuario</th>
+                <th field="idmenu" width="50">ID</th>
+                <th field="menombre" width="50">Menu</th>
                 <th field="idrol" width="50">Rol</th>
                 <th field="rodescripcion" width="50">Descripcion</th>
             </tr>
@@ -88,15 +88,15 @@
     </table>
 
     <div id="toolbar2">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUsRol()">Nuevo Rol Usuario</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUsRol()">Eliminar Rol Usuario</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newMeRol()">Nuevo Rol Menu</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyMeRol()">Eliminar Rol Menu</a>
     </div>
     
     <div id="dlgRol" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlgRol-buttons'">
         <form id="fmRol" method="post" novalidate style="margin:0;padding:20px 50px">
-            <h3>Informacion UsuarioRol</h3>
+            <h3>Informacion MenuRol</h3>
             <div style="margin-bottom:10px">
-                <input name="idusuario" class="easyui-textbox" required="true" label="ID Usuario:" style="width:100%">
+                <input name="idmenu" class="easyui-textbox" required="true" label="ID Menu:" style="width:100%">
             </div>
             <div style="margin-bottom:10px">
                 <input name="idrol" class="easyui-textbox" required="true" label="ID Rol:" style="width:100%">
@@ -104,7 +104,7 @@
         </form>
     </div>
     <div id="dlgRol-buttons">
-        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUsRol()" style="width:90px">Aceptar</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveMeRol()" style="width:90px">Aceptar</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgRol').dialog('close')" style="width:90px">Cancelar</a>
     </div>
 
@@ -154,24 +154,22 @@
 
 
 
-
-
     <script type="text/javascript">
         var url;
-        function newUser(){
-            $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Usuario');
+        function newMenu(){
+            $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Menu');
             $('#fm').form('clear');
-            url = 'accion/admin/alta_usuario.php';
+            url = 'accion/admin/alta_menu.php';
         }
-        function editUser(){
+        function editMenu(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
-                $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Usuario');
+                $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Menu');
                 $('#fm').form('load',row);
-                url = 'accion/admin/mod_usuario.php';
+                url = 'accion/admin/mod_menu.php';
             }
         }
-        function saveUser(){
+        function saveMenu(){
             $('#fm').form('submit',{
                 url: url,
                 iframe: false,
@@ -187,18 +185,18 @@
                         });
                     } else {
                         $('#dlg').dialog('close');        // close the dialog
-                        $('#dg').datagrid('reload');    // reload the user data
+                        $('#dg').datagrid('reload');    // reload the menu data
                     }
                 }
             });
         }
-        function destroyUser(){
+        function destroyMenu(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
-                $.messager.confirm('Confirmar','Cambiar el estado del Usuario?',function(r){
+                $.messager.confirm('Confirmar','Cambiar el estado del menu?',function(r){
                     if (r){
                         $('#fm').form('load',row);
-                        url = 'accion/admin/baja_usuario.php';
+                        url = 'accion/admin/baja_menu.php';
                         $('#fm').form('submit',{
                             url: url,
                             iframe: false,
@@ -223,15 +221,15 @@
         }
         
         //
-        // ---TABLA USUARIO-ROL---
+        // ---TABLA MENU-ROL---
         //
 
-        function newUsRol(){
-            $('#dlgRol').dialog('open').dialog('center').dialog('setTitle','Nuevo Usuario');
+        function newMeRol(){
+            $('#dlgRol').dialog('open').dialog('center').dialog('setTitle','Nuevo Menu');
             $('#fmRol').form('clear');
-            url = 'accion/admin/alta_usuarioRol.php';
+            url = 'accion/admin/alta_menuRol.php';
         }
-        function saveUsRol(){
+        function saveMeRol(){
             $('#fmRol').form('submit',{
                 url: url,
                 iframe: false,
@@ -252,12 +250,12 @@
                 }
             });
         }
-        function destroyUsRol(){
+        function destroyMeRol(){
             var row = $('#dgRol').datagrid('getSelected');
             if (row){
-                $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
+                $.messager.confirm('Confirmar','Esta seguro que desea eliminar este Menu-Rol?',function(r){
                     if (r){
-                        $.post('accion/admin/baja_usuarioRol.php',{idusuario:row.idusuario,idrol:row.idrol},function(result){
+                        $.post('accion/admin/baja_menuRol.php',{idmenu:row.idmenu,idrol:row.idrol},function(result){
                             if (result.respuesta){
                                 $('#dgRol').datagrid('reload');    // reload the user data
                             } else {

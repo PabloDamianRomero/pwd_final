@@ -102,8 +102,14 @@ class MenuRol
             if ($res > 0) {
 
                 while ($row = $base->Registro()) {
+                    $objMenu=new Menu();
+                    $objMenu->setIdmenu($row['idmenu']);
+                    $objMenu->cargar();
+                    $objRol=new Rol();
+                    $objRol->setIdrol($row['idrol']);
+                    $objRol->cargar();
                     $obj = new Menurol();
-                    $obj->setear($row['idmenu'], $row['idrol']);
+                    $obj->setear($objMenu, $objRol);
                     array_push($arreglo, $obj);
                 }
 

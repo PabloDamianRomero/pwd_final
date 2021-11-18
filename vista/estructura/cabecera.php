@@ -62,6 +62,20 @@ if ($estructuraAMostrar == "desdeAccion") {
   body{
     padding: 0;
   }
+
+  .panel.datagrid.panel-htop {
+    margin-left: auto;
+    margin-right: auto;
+}
+.panel-header {
+    background: -moz-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
+    background: -o-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
+    background: linear-gradient(to bottom,#eafbff 0,#93d7e7 100%);
+}
+
+.datagrid-toolbar, .datagrid-pager {
+    background: #cfe9ef;
+}
   
 </style>
 

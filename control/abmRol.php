@@ -58,6 +58,7 @@ class abmRol
     public function alta($param)
     {
         $resp = false;
+        $param['idrol']=null;
         $elObjtRol = $this->cargarObjeto($param);
         if ($elObjtRol != null and $elObjtRol->insertar()) {
             $resp = true;
@@ -77,16 +78,6 @@ class abmRol
         if ($this->seteadosCamposClaves($param)){
             $elObjtRol = $this->cargarObjetoConClave($param);
             if ($elObjtRol!=null){
-                $abmMenuRol=new abmMenurol();
-                $arrayMenuRol=$abmMenuRol->buscar(['idrol'=>$param['idrol']]);
-                if (!empty($arrayMenuRol)){
-                    $abmMenuRol->baja(['idrol'=>$param['idrol']]);
-                }
-                $abmUsuarioRol=new abmUsuariorol();
-                $arrayUsuarioRol=$abmUsuarioRol->buscar(['idrol'=>$param['idrol']]);
-                if (!empty($arrayUsuarioRol)){
-                    $abmUsuarioRol->baja(['idrol'=>$param['idrol']]);
-                }
                 if ($elObjtRol->eliminar()){
                     $resp = true;
                 }

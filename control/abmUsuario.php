@@ -10,14 +10,9 @@ class abmUsuario
     {
         $obj = null;
         if (array_key_exists('idusuario', $param) and array_key_exists('usnombre', $param)
-            and array_key_exists('uspass', $param)) {
+            and array_key_exists('uspass', $param) and array_key_exists('usdeshabilitado', $param)) {
             if (!isset($param['usmail'])){
                 $param['usmail']="";
-            }
-            if (!isset($param['usdeshabilitado'])){
-                $param['usdeshabilitado']=null;
-            }else{
-                $param['usdeshabilitado']=date("Y-m-d H:i:s");
             }
             $obj = new Usuario();
             $obj->setear(
@@ -90,18 +85,6 @@ class abmUsuario
         if ($this->seteadosCamposClaves($param)){
             $elObjtUsuario = $this->cargarObjetoConClave($param);
             if ($elObjtUsuario!=null){
-                $abmCompra=new abmCompra();
-                $arrayCompra=$abmCompra->buscar(['idusuario'=>$param['idusuario']]);
-                if (!empty($arrayCompra)){
-                    foreach($arrayCompra as $obj){
-                        $abmCompra->baja(['idcompra'=>$obj->getIdcompra()]);
-                    }
-                }
-                $abmUsuarioRol=new abmUsuariorol();
-                $arrayUsuarioRol=$abmUsuarioRol->buscar(['idusuario'=>$param['idusuario']]);
-                if (!empty($arrayUsuarioRol)){
-                    $abmUsuarioRol->baja(['idusuario'=>$param['idusuario']]);
-                }
                 if ($elObjtUsuario->eliminar()){
                     $resp = true;
                 }
