@@ -9,7 +9,7 @@
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
             <div class="container">
                 <div class="alert alert-danger" role="alert">
-                    No puede modificar información de Productos (No está con el rol Depósito).
+                    No puede gestionar Productos (No está con el rol <span style='font-weight: bold; font-style: italic;'>Depósito</span>).
                     <?php 
                         if(!(isset($arrMenuPadre))){ // si no existe el enlace-menu
                             echo "<br><span style='font-weight: bold;'>APARTADO NO DISPONIBLE</span>";

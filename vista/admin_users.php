@@ -9,12 +9,30 @@
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
             <div class="container">
                 <div class="alert alert-danger" role="alert">
-                    No puede modificar información de usuario-admin (No está con el rol Administrador).
+                    No puede gestionar Usuarios (No está con el rol <span style='font-weight: bold; font-style: italic;'>Administrador</span>).
+                    <?php 
+                    if(!(isset($arrMenuPadre))){ // si no existe el enlace-menu
+                        echo "<br><span style='font-weight: bold;'>APARTADO NO DISPONIBLE</span>";
+                    }
+                ?>
             </div>
         </div>
     </div>
 <?php
-}else{
+}elseif($rolActivo->getIdrol() == 1){ // si es admin pero el enlace-menu no está disponible
+    if(!(isset($arrMenuPadre))){?>
+        <div style="margin-bottom: 20%" class="container-fluid text-center">
+        <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
+            <div class="container">
+                <div class="alert alert-danger" role="alert">
+                    <span style="font-weight: bold;">Este apartado no se encuentra disponible.</span>
+            </div>
+        </div>
+    </div>
+    <?php
+    }
+}
+else{ // si es admin y existe el enlace-menu
     
 ?>
 <div style="margin-bottom: 20%" class="container-fluid text-center">
