@@ -10,17 +10,12 @@
             <div class="container">
                 <div class="alert alert-danger" role="alert">
                     No puede gestionar Productos (No está con el rol <span style='font-weight: bold; font-style: italic;'>Depósito</span>).
-                    <?php 
-                        if(!(isset($arrMenuPadre))){ // si no existe el enlace-menu
-                            echo "<br><span style='font-weight: bold;'>APARTADO NO DISPONIBLE</span>";
-                        }
-                    ?>
             </div>
         </div>
     </div>
 <?php
-}elseif($rolActivo->getIdrol() == 2){ // si es deposito pero el enlace-menu no está disponible
-    if(!(isset($arrMenuPadre))){?>
+}else if(($rolActivo->getIdrol() == 2) && (!isset($arrMenuPadre))){ // si es deposito pero el enlace-menu no está disponible
+    ?>
         <div style="margin-bottom: 20%" class="container-fluid text-center">
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
             <div class="container">
@@ -30,7 +25,7 @@
         </div>
     </div>
     <?php
-    }
+    
 }
 else{ // si es deposito y existe el enlace-menu
     
