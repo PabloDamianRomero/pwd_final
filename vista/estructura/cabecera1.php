@@ -18,6 +18,11 @@ if ($estructuraAMostrar == "desdeAccion") {
 ?>
 
 <style>
+  body{
+    background-image: url(https://image.freepik.com/vector-gratis/fondo-escritorio-minimo-vector-diseno-abstracto-blanco_53876-135921.jpg);
+    background-size: cover;
+  }
+
   button.dropdown-item.text-center {
     padding: 4px 0;
   }

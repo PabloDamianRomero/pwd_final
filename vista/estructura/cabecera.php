@@ -63,6 +63,8 @@ if ($estructuraAMostrar == "desdeAccion") {
 
   body{
     padding: 0;
+    background-image: url(https://image.freepik.com/vector-gratis/fondo-escritorio-minimo-vector-diseno-abstracto-blanco_53876-135921.jpg);
+    background-size: cover;
   }
 
   .panel.datagrid.panel-htop {
