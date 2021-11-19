@@ -64,7 +64,7 @@ if ($estructuraAMostrar == "desdeAccion") {
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end">
               <li><button class="dropdown-item text-center" type="button"><a href="login.php">Iniciar Sesión</a></button></li>
-              <li><button class="dropdown-item text-center" type="button"><a href="#">Registrarse</a></button></li>              
+              <li><button class="dropdown-item text-center" type="button"><a href="registro.php">Registrarse</a></button></li>              
             </ul>
           </div>
         <?php
