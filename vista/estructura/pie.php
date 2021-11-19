@@ -10,7 +10,7 @@
                 <div class="p-2"><a href="aboutUs.php?idrol=<?php $valorIdRol;?>" style="color:#fff;">Sobre nosotros</a></div>
                 <?php
             }else{?>
-                <div class="p-2"><a href="#" style="color:#fff;">Sobre nosotros</a></div>
+                <div class="p-2"><a href="aboutUs.php" style="color:#fff;">Sobre nosotros</a></div>
                 <?php
             }?>
             
