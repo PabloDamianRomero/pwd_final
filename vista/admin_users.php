@@ -66,7 +66,7 @@ else{ // si es admin y existe el enlace-menu
 <div style="margin-bottom: 20%" class="container-fluid text-center">
     <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;margin-bottom: 50px;">
         <div class="container">
-            <h1 class="display-6">Gestión de usuarios</h1>
+            <h1 class="display-5 fuente-monts">Gestión de usuarios</h1>
             <p class="lead">En esta página, el admin puede gestionar los usuarios y sus roles.</p>
         </div>
     </div>

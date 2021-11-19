@@ -67,7 +67,7 @@
 <div style="margin-bottom: 20%" class="container-fluid text-center">
     <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;margin-bottom: 50px;">
         <div class="container">
-            <h1 class="display-6">Gestión de productos</h1>
+            <h1 class="display-6 fuente-monts">Gestión de productos</h1>
             <p class="lead">En esta página el engarcado del depósito puede gestionar los productos.</p>
         </div>
     </div>

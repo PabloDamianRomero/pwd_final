@@ -25,7 +25,7 @@ if (isset($datos['reg'])){
 <div style="margin-bottom: 20%" class="container-fluid text-center">
 <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
         <div class="container">
-            <h1 class="display-4">Compupartes</h1>
+            <h1 class="display-4 fuente-monts">Compupartes</h1>
             <p class="lead">La tienda online de componentes de PC que estabas buscando.</p>
         </div>
         <h2 class="display-5" style="margin-top:50px;">Inicio de sesión</h2>

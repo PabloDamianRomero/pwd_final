@@ -33,7 +33,7 @@ if ($contactSession->activa()) {
 <section class="my-5">
 
 <!-- Section heading -->
-<h2 class="h1-responsive font-weight-bold text-center my-5">Compupartes - Contacto</h2>
+<h1 class="h1-responsive font-weight-bold text-center my-5 fuente-monts">Compupartes - Contacto</h1>
 <!-- Section description -->
 
 <!-- Grid row -->
