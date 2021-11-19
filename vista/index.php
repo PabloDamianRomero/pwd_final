@@ -23,7 +23,7 @@ include_once "estructura/cabecera1.php";
                 <div class="card-body">
                   <h5 class="card-title">Sobre nosotros</h5>
                   <p class="card-text">Una breve introducción sobre la tienda y sus autores.</p>
-                  <a href="#" class="btn btn-primary">Ver más</a>
+                  <a href="aboutUs.php" class="btn btn-primary">Ver más</a>
                 </div>
               </div>
             </div>
