@@ -1,6 +1,6 @@
 <?php
 include_once("../configuracion.php");
-$titulo = "Index";
+$titulo = "Contacto";
 $estructuraAMostrar = "desdeVista";
 $seguro = true;
 $contactSession = new Session();
