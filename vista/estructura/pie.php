@@ -5,7 +5,15 @@
             <strong class="text-light">Integrantes: Peralta & Romero</strong>
         </div>
         <div class="container d-flex justify-content-center">
-            <div class="p-2"><a href="#" style="color:#fff;">Sobre nosotros</a></div>
+        <?php if(isset($roles)){
+                $valorIdRol = $roles[0]->getObjRol()->getIdrol();?>
+                <div class="p-2"><a href="aboutUs.php?idrol=<?php $valorIdRol;?>" style="color:#fff;">Sobre nosotros</a></div>
+                <?php
+            }else{?>
+                <div class="p-2"><a href="#" style="color:#fff;">Sobre nosotros</a></div>
+                <?php
+            }?>
+            
             <?php if(isset($roles)){
                 $valorIdRol = $roles[0]->getObjRol()->getIdrol();?>
                 <div class="p-2"><a href="contacto.php?idrol=<?php $valorIdRol;?>" style="color:#fff;">Contacto</a></div>
