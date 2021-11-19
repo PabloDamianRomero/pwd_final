@@ -2,7 +2,7 @@
 $titulo = "Index";
 $estructuraAMostrar = "desdeVista";
 $seguro = true;
-include_once "estructura/cabecera1.php";
+include_once "estructura/cabeceraEstatica.php";
 ?>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">

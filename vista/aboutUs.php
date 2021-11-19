@@ -9,7 +9,7 @@ if ($contactSession->activa()) {
     include_once "estructura/cabecera.php";
 }else{
     $contactSession->cerrar();
-    include_once "estructura/cabecera1.php";
+    include_once "estructura/cabeceraEstatica.php";
 }
 ?>
 <style>
