@@ -86,7 +86,6 @@ if ($estructuraAMostrar == "desdeAccion") {
 <body>
   <?php
   $datos = data_submitted();
-  // print_r($datos);
   if ($seguro) {
     $sesion = new Session();
     if (!$sesion->activa()) {
@@ -94,11 +93,9 @@ if ($estructuraAMostrar == "desdeAccion") {
         exit();
     }
     $roles = $sesion->getRol();
-    // $rolDesc = "";
     $rolActivo = "";
-    if(count($roles) > 0){
-      // $rolDesc = $roles[0]->getObjRol()->getRodescripcion();
 
+    if(count($roles) > 0){
       if(isset($datos["idrol"])){
         $sesion->setRolActivo($datos["idrol"]);
         $rolActivo = $sesion->getRolActivo();
@@ -132,14 +129,18 @@ if ($estructuraAMostrar == "desdeAccion") {
           </svg>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+          </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 20px;">
         
         <?php
         if ($estructuraAMostrar=="desdeVista"){?>
-          <!-- ICONO MENU-ROL -->
+          <!-- ICONO y Enlaces MENU-ROL -->
           <div class="btn-group" style="margin-right:10px;">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
@@ -149,7 +150,12 @@ if ($estructuraAMostrar == "desdeAccion") {
             </svg>
             <?php 
                 if(isset($arrMenuPadre)){
-                  echo $arrMenuPadre[0]->getMenombre();
+                   if($arrMenuPadre[0]->getMedeshabilitado() == "0000-00-00 00:00:00"){ // si menu padre no está deshabilitado
+                     echo $arrMenuPadre[0]->getMenombre();
+                   }else{
+                     echo "Sin opciones";
+                     $arrSubMenu = array();
+                   }
                 ?>
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -163,9 +169,7 @@ if ($estructuraAMostrar == "desdeAccion") {
                     
                   }
                 }
-              }else{ // isset($arrMenuPadre
-                echo "Sin opciones actualmente";
-              } 
+              } // cierre if (isset($arrMenuPadre))
               ?>           
             </ul>
           </div>
@@ -178,7 +182,7 @@ if ($estructuraAMostrar == "desdeAccion") {
                 </li>
               </ul>
             </div>
-            <!-- ICONO ROLES -->
+            <!-- ICONO Cambiar ROLES -->
           <div class="btn-group" style="margin-right:10px;">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-diagram-2" viewBox="0 0 16 16">
@@ -211,35 +215,8 @@ if ($estructuraAMostrar == "desdeAccion") {
         }
 
         if ($estructuraAMostrar=="desdeAccion"){?>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../enlace.php">Enlace_accion_1</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../enlace.php">Enlace_accion_2</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../enlace.php">Enlace_accion_3</a>
-            </li>
-            </ul>
-            </div><!-- cierre collapse navbar-collapse -->
-            <!-- USUARIO Y ROL -->
-            <div style="margin: 0 25px; padding: 0 10px; background: #ffffff87;">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                   Usuario: <span style="font-family: monospace; color: #ff5504; font-weight: 700;"><?php echo $sesion->getUsuarioActual(); ?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rol: <span style="font-family: monospace; color: #0451ff; font-weight: 700;"><?php echo $rolActivo->getRodescripcion(); ?></span>
-                </li>
-              </ul>
-            </div>
-            <!-- ENLACE CERRAR SESION -->
-            <div>
-                <a class="navbar-brand" href="cerrarSesion.php">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
-                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
-                  </svg>
-                </a>
-            </div>
-            <?php
+          <!-- ---------- CONTENIDO PARA desdeAccion --------------------- -->
+          <?php  
         }?>
 
     </div> <!-- cierre container-fluid -->
