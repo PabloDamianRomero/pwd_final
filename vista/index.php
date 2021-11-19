@@ -33,7 +33,7 @@ include_once "estructura/cabecera1.php";
                 <div class="card-body">
                   <h5 class="card-title">Contacto</h5>
                   <p class="card-text">Comuníquese con nosotros ante cualquier duda.</p>
-                  <a href="#" class="btn btn-primary">Ver más</a>
+                  <a href="contacto.php" class="btn btn-primary">Ver más</a>
                 </div>
               </div>
             </div>
