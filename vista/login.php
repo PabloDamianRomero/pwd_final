@@ -12,8 +12,13 @@ if ($objLogin->activa()) {
 
 $datos = data_submitted();
 $mensaje = "";
+$msjRegistro = "";
 if (isset($datos['error'])){
     $mensaje = $datos['error'];
+}
+
+if (isset($datos['reg'])){
+    $msjRegistro = $datos['reg'];
 }
 ?>
 
@@ -24,6 +29,7 @@ if (isset($datos['error'])){
             <p class="lead">La tienda online de componentes de PC que estabas buscando.</p>
         </div>
         <h2 class="display-5" style="margin-top:50px;">Inicio de sesión</h2>
+        <?php if(!$msjRegistro==""){?><h4 style="margin-top:50px; color:green;">SE REGISTRÓ AL SISTEMA. POR FAVOR, INICIE SESIÓN</h2> <?php } ?>
     </div>
 
     <div class="text-center mt-5 mb-5">
@@ -60,3 +66,7 @@ if (isset($datos['error'])){
     </div>
 
 </div>
+
+<?php
+include_once "estructura/pie.php";
+?>
