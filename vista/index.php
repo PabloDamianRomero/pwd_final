@@ -43,7 +43,7 @@ include_once "estructura/cabeceraEstatica.php";
                   <div class="card-body">
                     <h5 class="card-title">Información</h5>
                     <p class="card-text">Detalles adicionales sobre el sitio.</p>
-                    <a href="#" class="btn btn-primary">Ver más</a>
+                    <a href="info.php" class="btn btn-primary">Ver más</a>
                   </div>
                 </div>
               </div>

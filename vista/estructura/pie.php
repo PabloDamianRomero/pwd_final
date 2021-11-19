@@ -24,8 +24,16 @@
                 <?php
             }
             ?>
-            
-            <div class="p-2"><a href="#" style="color:#fff;">Información</a></div>
+            <?php if(isset($roles)){
+                $valorIdRol = $roles[0]->getObjRol()->getIdrol();?>
+                <div class="p-2"><a href="info.php?idrol=<?php $valorIdRol;?>" style="color:#fff;">Información</a></div>
+            <?php
+            }else{
+                ?>
+                <div class="p-2"><a href="info.php" style="color:#fff;">Información</a></div>
+                <?php
+            }
+            ?>
         </div>
 
     </footer>
