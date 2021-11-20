@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
@@ -106,11 +106,12 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (3, 'Opciones de Cliente', 'desc', NULL, '0000-00-00 00:00:00'),
 (4, 'Gestionar usuario', 'admin_users', 1, '0000-00-00 00:00:00'),
 (5, 'Gestionar menú', 'admin_menu', 1, '0000-00-00 00:00:00'),
-(7, 'Gestionar productos', 'deposito_nuevo', 2, '0000-00-00 00:00:00'),
-(9, 'Cambiar estado de producto', 'deposito_baja', 2, '0000-00-00 00:00:00'),
-(10, 'Modificar stock de producto', 'deposito_stock', 2, '0000-00-00 00:00:00'),
-(11, 'Actualizar información', 'actualizarInfoCliente', 3, '0000-00-00 00:00:00'),
-(12, 'Realizar compra', 'desc', 3, '0000-00-00 00:00:00');
+(6, 'Gestionar productos', 'deposito_nuevo', 2, '0000-00-00 00:00:00'),
+(7, 'Cambiar estado de producto', 'deposito_baja', 2, '0000-00-00 00:00:00'),
+(8, 'Modificar stock de producto', 'deposito_stock', 2, '0000-00-00 00:00:00'),
+(9, 'Actualizar información', 'actualizarInfoCliente', 3, '0000-00-00 00:00:00'),
+(10, 'Realizar compra', 'tienda', 3, '0000-00-00 00:00:00'),
+(11, 'Ver Carrito', 'carrito', 3, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
