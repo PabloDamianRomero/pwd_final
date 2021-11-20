@@ -16,7 +16,7 @@ class abmCompra
 
             //creo objeto estadotipos
             $objUsuario = new Usuario();
-            $objUsuario->getIdUsuario($param['idusuario']); // ????? VERIFICAR ESTO
+            $objUsuario->setIdUsuario($param['idusuario']);
             $objUsuario->cargar();
 
             //agregarle los otros objetos
@@ -65,13 +65,16 @@ class abmCompra
      */
     public function alta($param)
     {
-        $resp = false;
+        $retorno['respuesta'] = false;
         $param['idcompra'] = null;
+        $param['cofecha']=date('Y-m-d H:i:s');
         $elObjtArchivoE = $this->cargarObjeto($param);
         if ($elObjtArchivoE != null and $elObjtArchivoE->insertar()) {
-            $resp = true;
+            $retorno['respuesta'] = true;
+            $retorno['idcompra']=$elObjtArchivoE->getIdcompra();
+
         }
-        return $resp;
+        return $retorno;
     }
 
     /**
