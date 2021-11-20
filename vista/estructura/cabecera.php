@@ -37,6 +37,19 @@ if ($estructuraAMostrar == "desdeAccion") {
     <script type="text/javascript" src="../../util/jquery-easyui/jquery.easyui.min.js"></script>
     <?php
 }
+if ($estructuraAMostrar == "desdeSubAccion") {
+  include_once("../../../configuracion.php");?>
+  <link rel='stylesheet' href='../../css/bootstrap/bootstrap.css'>
+  <link rel='stylesheet' href='../../css/bootstrap/bootstrap.min.css'>
+  <!-- Enlaces jQuery-Easyui -->
+  <link rel="stylesheet" type="text/css" href="../../../util/jquery-easyui/themes/default/easyui.css">
+  <link rel="stylesheet" type="text/css" href="../../../util/jquery-easyui/themes/icon.css">
+  <link rel="stylesheet" type="text/css" href="../../../util/jquery-easyui/themes/color.css">
+  <link rel="stylesheet" type="text/css" href="../../../util/jquery-easyui/demo/demo.css">
+  <script type="text/javascript" src="../../../util/jquery-easyui/jquery.min.js"></script>
+  <script type="text/javascript" src="../../../util/jquery-easyui/jquery.easyui.min.js"></script>
+  <?php
+}
 ?>
 <style>
   body{
