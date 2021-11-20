@@ -12,11 +12,6 @@ if ($contactSession->activa()) {
     include_once "estructura/cabeceraEstatica.php";
 }
 ?>
-<style>
-    .p-about{
-        font-size: 23px;
-    }
-</style>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
     <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">

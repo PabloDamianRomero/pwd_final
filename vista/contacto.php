@@ -12,21 +12,6 @@ if ($contactSession->activa()) {
     include_once "estructura/cabeceraEstatica.php";
 }
 ?>
-<style>
-    .map-container-section {
-  overflow:hidden;
-  padding-bottom:56.25%;
-  position:relative;
-  height:0;
-}
-.map-container-section iframe {
-  left:0;
-  top:0;
-  height:100%;
-  width:100%;
-  position:absolute;
-}
-</style>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
    <!-- Section: Contact v.1 -->

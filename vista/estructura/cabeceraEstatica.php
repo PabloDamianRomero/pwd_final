@@ -7,6 +7,7 @@ if ($estructuraAMostrar == "desdeVista") {
     <link rel='stylesheet' href='css/bootstrap/bootstrap.css'>
     <link rel='stylesheet' href='css/bootstrap/bootstrap.min.css'>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/gral.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,26 +24,6 @@ if ($estructuraAMostrar == "desdeAccion") {
 }
 ?>
 
-<style>
-  body{
-    background-image: url(https://image.freepik.com/vector-gratis/fondo-escritorio-minimo-vector-diseno-abstracto-blanco_53876-135921.jpg);
-    background-size: cover;
-  }
-
-  button.dropdown-item.text-center {
-    padding: 4px 0;
-  }
-
-  nav.navbar.navbar-expand-lg a {
-    color: #000;
-    text-decoration: none;
-    display: block;
-  }
-
-  .fuente-monts{
-  font-family: 'Montserrat', sans-serif;
-}
-</style>
 
 <title><?php echo $titulo; ?></title>
 </head>

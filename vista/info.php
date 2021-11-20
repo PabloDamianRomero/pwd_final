@@ -12,14 +12,6 @@ if ($contactSession->activa()) {
     include_once "estructura/cabeceraEstatica.php";
 }
 ?>
-<style>
-    .p-about{
-        font-size: 20px;
-    }
-    .negrita{
-        font-weight: bold;
-    }
-</style>
 
 <div style="margin-bottom: 20%" class="container-fluid text-center">
     <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
@@ -45,13 +37,10 @@ if ($contactSession->activa()) {
     <div class="jumbotron jumbotron-fluid" style="margin-top: 50px;">
         <div class="container">
             <p class=p-about>La aplicación es desarrollada sobre una arquitectura <span class="negrita">MVC</span> (Modelo-Vista-Control) utilizando PHP como lenguaje de programación.</p>
-            <p class=p-about>Se utiliza una Base de Datos llamada <span class="negrita">bdcarritocompras</span> otorgada por la cátedra. Esto es acompañado con la implementación del <span class="negrita">ORM</span> de las tablas del modelo de base de datos. </p>
+            <p class=p-about>Se utiliza una Base de Datos llamada <span class="negrita italica fuente-celeste">bdcarritocompras</span> otorgada por la cátedra. Esto es acompañado con la implementación del <span class="negrita">ORM</span> de las tablas del modelo de base de datos. </p>
             <p class=p-about>La aplicación utiliza un módulo de autenticación para otorgar acceso tanto a las páginas públicas como a las restringidas, mediante un usuario y contraseña.</p>
             <p class=p-about>El menú de la aplicación es un menú dinámico que puede ser gestionado por el administrador de la aplicación.</p>
             <p class=p-about>Cualquier usuario que tenga más de un rol asignado, puede cambiar de rol según lo desee.</p>
-            <p class=p-about></p>
-            <p class=p-about></p>
-            <p class=p-about></p>
         </div>
     </div>
 <div>
@@ -64,7 +53,7 @@ if ($contactSession->activa()) {
     </div>
     <div class="jumbotron jumbotron-fluid" style="margin-top: 60px;">
         <div class="container">
-            <h3 class="fuente-monts">Para un usuario Cliente:</h3>
+            <h3 class="fuente-monts">Para un usuario <span class="fuente-celeste">Cliente</span>:</h3>
         </div>
     </div>
     <div class="jumbotron jumbotron-fluid" style="margin-top: 50px;">
@@ -75,7 +64,7 @@ if ($contactSession->activa()) {
     </div>
     <div class="jumbotron jumbotron-fluid" style="margin-top: 60px;">
         <div class="container">
-            <h3 class="fuente-monts">Para un usuario Depósito:</h3>
+            <h3 class="fuente-monts">Para un usuario <span class="fuente-celeste">Depósito</span>:</h3>
         </div>
     </div>
     <div class="jumbotron jumbotron-fluid" style="margin-top: 50px;">
@@ -87,7 +76,7 @@ if ($contactSession->activa()) {
     </div>
     <div class="jumbotron jumbotron-fluid" style="margin-top: 60px;">
         <div class="container">
-            <h3 class="fuente-monts">Para un usuario Administrador:</h3>
+            <h3 class="fuente-monts">Para un usuario <span class="fuente-celeste">Administrador</span>:</h3>
         </div>
     </div>
     <div class="jumbotron jumbotron-fluid" style="margin-top: 50px;">

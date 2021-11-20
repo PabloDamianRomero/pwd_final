@@ -1,0 +1,91 @@
+body {
+  background-image: url(https://image.freepik.com/vector-gratis/fondo-escritorio-minimo-vector-diseno-abstracto-blanco_53876-135921.jpg);
+  background-size: cover;
+}
+
+button.dropdown-item.text-center {
+  padding: 4px 0;
+}
+
+a.enlaces-menu {
+  color: #000;
+  font-family: monospace;
+}
+
+a.enlaces-menu:hover {
+  color: white;
+  text-shadow: 1px 1px 2px #0000009e;
+}
+
+a.enlaceSinEstilo {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  font-size: 12px;
+}
+
+a.enlaceSinEstiloYPadding {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.panel.datagrid.panel-htop {
+  margin-left: auto;
+  margin-right: auto;
+}
+.panel-header {
+  background: -moz-linear-gradient(top, #eff5ff 0, #e0ecff 100%);
+  background: -o-linear-gradient(top, #eff5ff 0, #e0ecff 100%);
+  background: linear-gradient(to bottom, #eafbff 0, #93d7e7 100%);
+}
+
+.datagrid-toolbar,
+.datagrid-pager {
+  background: #cfe9ef;
+}
+
+nav.navbar.navbar-expand-lg a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+}
+
+.fuente-monts {
+  font-family: "Montserrat", sans-serif;
+}
+
+.negrita {
+  font-weight: bold;
+}
+
+.italica{
+  font-style: italic;
+}
+
+.fuente-celeste{
+  color: rgb(48, 141, 184);
+}
+
+/* pagina sobre-nosotros */
+.p-about {
+  font-size: 18px;
+}
+
+/* pagina contacto */
+.map-container-section {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.map-container-section iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}

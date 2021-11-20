@@ -7,6 +7,7 @@ if ($estructuraAMostrar == "desdeVista") {
     <link rel='stylesheet' href='css/bootstrap/bootstrap.css'>
     <link rel='stylesheet' href='css/bootstrap/bootstrap.min.css'>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/gral.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,61 +38,10 @@ if ($estructuraAMostrar == "desdeAccion") {
     <?php
 }
 ?>
-
 <style>
-  button.dropdown-item.text-center {
-    padding: 4px 0;
-  }
-
-   a.enlaces-menu {
-    color: #000;
-    font-family: monospace;
-  }
-
-   a.enlaces-menu:hover {
-    color: white;
-    text-shadow: 1px 1px 2px #0000009e;
-  }
-
-  a.enlaceSinEstilo{
-    color: #000;
-    text-decoration: none;
-    display: block;
-    font-size: 12px;
-  }
-
-  a.enlaceSinEstiloYPadding{
-    color: #000;
-    text-decoration: none;
-    display: block;
-    padding: 0 10px;
-    font-size: 12px;
-  }
-
   body{
     padding: 0;
-    background-image: url(https://image.freepik.com/vector-gratis/fondo-escritorio-minimo-vector-diseno-abstracto-blanco_53876-135921.jpg);
-    background-size: cover;
   }
-
-  .panel.datagrid.panel-htop {
-    margin-left: auto;
-    margin-right: auto;
-}
-.panel-header {
-    background: -moz-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
-    background: -o-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
-    background: linear-gradient(to bottom,#eafbff 0,#93d7e7 100%);
-}
-
-.datagrid-toolbar, .datagrid-pager {
-    background: #cfe9ef;
-}
-
-.fuente-monts{
-  font-family: 'Montserrat', sans-serif;
-}
-  
 </style>
 
 <title><?php echo $titulo; ?></title>
