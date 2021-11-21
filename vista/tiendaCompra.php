@@ -4,7 +4,8 @@
     $seguro=true;
     include_once("estructura/cabecera.php");
 // ---------------------- Si el usuario actual no es cliente  -------------------------------
-if($rolActivo->getIdrol() != 3){?>
+
+if($idrol!= 3){?>
     <div style="margin-bottom: 20%" class="container-fluid text-center">
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
             <div class="container">
@@ -27,8 +28,22 @@ if($rolActivo->getIdrol() != 3){?>
             echo '<input type="hidden" id="idproducto" name="idproducto" value="'.$datos['idproducto'].'">';
             echo '<input type="submit" value="Comprar" class="btn btn-primary"></form>';
         }
-    }elseif($datos['metodo']=="carrito"){
-
+    }elseif($datos['metodo']=="carrito" && isset($datos['idcompra'])){
+        $abmItems=new abmCompraitem();
+        $items=$abmItems->buscar(['idcompra'=>$datos['idcompra']]);
+        if (!empty($items)){
+            echo '<h1>Finalizar Compra</h1>';
+            $total=0;
+            foreach($items as $item){
+                echo '<div>Producto: '.$item->getObjProducto()->getPronombre();
+                echo 'Cantidad:'.$item->getCicantidad().'</div>';
+                $total+=($item->getObjProducto()->getProprecio())*$item->getCicantidad();
+            }
+            echo '<div>Total a pagar: $'.$total.'</div>';
+            echo '<form method="post" action="accion/compra/compraCarrito.php">';
+            echo '<input type="hidden" name="idcompra" id="idcompra" value="'.$datos['idcompra'].'">';
+            echo '<input type="submit" value="Comprar" class="btn btn-primary"></form>';
+        }
     }
 }
 

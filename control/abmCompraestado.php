@@ -8,7 +8,10 @@ class abmCompraestado{
     private function cargarObjeto($param){
         $obj = null;
            
-        if( array_key_exists('idcompraestado',$param) and array_key_exists('idcompra',$param) and array_key_exists('idcompraestadotipo',$param) and array_key_exists('cefechaini',$param) and array_key_exists('cefechafin',$param)){
+        if( array_key_exists('idcompraestado',$param) and array_key_exists('idcompra',$param) and array_key_exists('idcompraestadotipo',$param) and array_key_exists('cefechaini',$param)){
+            if (!isset($param['cefechafin'])){
+                $param['cefechafin']="0000-00-00 00:00:00";
+            }
             $obj = new CompraEstado();
             $abmCompra=new abmCompra();            
             $objCompra=$abmCompra->buscar(['idcompra'=>$param['idcompra']]);

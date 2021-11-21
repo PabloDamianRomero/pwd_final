@@ -18,18 +18,8 @@ if($rolActivo->getIdrol() != 3){?>
 $objUsuario=$sesion->getUsuario();
 $idusuario=$objUsuario->getIdusuario();
 $abmCompra=new abmCompra();
-$comprasUs=$abmCompra->buscar(['idusuario'=>$idusuario]);
-//Busco agregar al carrito compras a las que el usuario todavia no dio inicio (no se encuentra en la tabla de compraestado).
-if (!empty($comprasUs)){
-    $abmEstado=new abmCompraestado();
-    $noIniciada=[];
-    foreach($comprasUs as $compra){
-        $yaIniciada=$abmEstado->buscar(['idcompra'=>$compra->getIdcompra()]);
-        if (empty($yaIniciada)){
-            array_push($noIniciada,$compra);
-        }
-    }
-    echo '<form method="post" action="iniciaCompra.php"><table class="table table-striped mt-5">
+$comprasUs=$abmCompra->buscar(['idusuario'=>$idusuario,'metodo'=>'carrito']);
+echo '<table class="table table-striped mt-5">
                 <tr class="table-success">
                     <th>Producto</th>
                     <th>Precio individual</th>
@@ -37,27 +27,24 @@ if (!empty($comprasUs)){
                     <th>Precio total</th>
                     <th></th>
                 </tr>';
-    if (!empty($noIniciada)){
-        $items=[];
-        foreach($noIniciada as $compra){
-            $abmItems=new abmCompraitem();
-            $item=$abmItems->buscar(['idcompra'=>$compra->getidCompra()]);
-            if (count($item)==1){
-                array_push($items,$item[0]);
-            }
-        }      
-        if (!empty($items)){
-            foreach($items as $item){
-                echo '<tr class="table-light"><th>'.$item->getObjProducto()->getPronombre().'</th>';
-                echo '<th>'.$item->getObjProducto()->getProprecio().'</th>';
-                echo '<th>'.$item->getCicantidad().'</th>';
-                echo '<th>'.($item->getObjProducto()->getProprecio()*$item->getCicantidad()).'</th>';
-                echo '<th>Eliminar</th></tr>';
-            }
+if (count($comprasUs)==1){ //Solo puede haber un carrito activo
+    $abmItems=new abmCompraitem();
+    $items=$abmItems->buscar(['idcompra'=>$comprasUs[0]->getidCompra()]);
+    if (!empty($items)){
+        foreach($items as $item){
+            echo '<tr class="table-light"><th>'.$item->getObjProducto()->getPronombre().'</th>';
+            echo '<th>'.$item->getObjProducto()->getProprecio().'</th>';
+            echo '<th>'.$item->getCicantidad().'</th>';
+            echo '<th>'.($item->getObjProducto()->getProprecio()*$item->getCicantidad()).'</th>';
+            echo '<th>Eliminar</th></tr>';
         }
-
-    }
-    echo '</table>';
+    }  
+}
+echo '</table>';
+if (!empty($comprasUs)){
+    echo '<form method="post" action="tiendaCompra.php">';
+    echo '<input type="hidden" name="idcompra" id="idcompra" value="'.$comprasUs[0]->getidCompra().'">';
+    echo '<input type="hidden" name="metodo" id="metodo" value="carrito">';
     echo '<div class="mt-5"><input type="submit" class="btn btn-primary" id="compra" name="compra" value="Comprar"></form>';
     echo '<a href="#"><input type="submit" class="btn btn-danger" value="Cancelar Compra"></a></div>';
 }
