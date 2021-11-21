@@ -32,6 +32,19 @@ a.enlaceSinEstiloYPadding {
   font-size: 12px;
 }
 
+a.enlace-footer{
+  color: #dfb10c;
+  text-decoration: none;
+}
+
+a.enlace-footer:hover{
+  color: #fff;
+}
+
+nav.menu-pagina{
+  background-color: #93d7e7;
+}
+
 .panel.datagrid.panel-htop {
   margin-left: auto;
   margin-right: auto;
@@ -71,7 +84,7 @@ nav.navbar.navbar-expand-lg a {
 
 /* pagina sobre-nosotros */
 .p-about {
-  font-size: 18px;
+  font-size: 17px;
 }
 
 /* pagina contacto */

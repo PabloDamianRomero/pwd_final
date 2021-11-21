@@ -36,7 +36,7 @@ if ($estructuraAMostrar == "desdeAccion") {
       exit();
   }
   ?>
-    <nav class="navbar navbar-expand-lg" style="background-color: #93d7e7;">
+    <nav class="navbar navbar-expand-lg menu-pagina">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.php">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
