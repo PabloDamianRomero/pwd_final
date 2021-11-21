@@ -70,16 +70,16 @@ if ($estructuraAMostrar == "desdeSubAccion") {
     }
     $roles = $sesion->getRol();
     $rolActivo = "";
-
     if(count($roles) > 0){
-      if(isset($datos["idrol"])){
-        $sesion->setRolActivo($datos["idrol"]);
+      if(!empty($sesion->getRolActivo())){
+        if (isset($datos["idrol"])){
+          $sesion->setRolActivo($datos["idrol"]);
+        }
         $rolActivo = $sesion->getRolActivo();
       }else{ // si se ingresa por primera vez y variable $_SESSION no pose rolActivo
         $sesion->setRolActivo($roles[0]->getObjRol()->getIdrol());
         $rolActivo = $sesion->getRolActivo();
       }
-
       $abmMenuRol = new AbmMenurol();
       $arrMenu = $abmMenuRol->buscar(['idrol'=>$rolActivo->getIdrol()]);
       if(count($arrMenu) > 0){
@@ -140,6 +140,7 @@ if ($estructuraAMostrar == "desdeSubAccion") {
                   if($subMenu->getMedeshabilitado() == "0000-00-00 00:00:00"){
                     if($subMenu->getMedescripcion() != ""){
                       $enlace = $subMenu->getMedescripcion().".php";
+                      $idrol=$rolActivo->getIdrol();
                       echo "<li><button class='dropdown-item text-center' type='button'><a href='".$enlace."?idrol=".$rolActivo->getIdrol()."' class='enlaceSinEstiloYPadding'>".$subMenu->getMenombre()."</a></button></li>";
                     }
                     
@@ -189,12 +190,16 @@ if ($estructuraAMostrar == "desdeSubAccion") {
           </div>
         <?php
         }
-
+        
         if ($estructuraAMostrar=="desdeAccion"){?>
           <!-- ---------- CONTENIDO PARA desdeAccion --------------------- -->
           <?php  
         }?>
-
+        <?php
+        if ($estructuraAMostrar=="desdeSubAccion"){
+          $idrol=$rolActivo->getIdrol();
+        }
+        ?>
     </div> <!-- cierre container-fluid -->
   </nav>
 
