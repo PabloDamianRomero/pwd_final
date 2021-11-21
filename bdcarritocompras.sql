@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2021 a las 08:43:27
+-- Tiempo de generación: 21-11-2021 a las 20:59:00
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -30,7 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `compra` (
   `idcompra` bigint(20) NOT NULL,
   `cofecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `idusuario` bigint(20) NOT NULL
+  `idusuario` bigint(20) NOT NULL,
+  `metodo` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -102,14 +103,14 @@ CREATE TABLE `menu` (
 
 INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
 (1, 'Opciones Administrador', 'desc', NULL, '0000-00-00 00:00:00'),
-(2, 'Opciones de Depósito', 'desc', NULL, '0000-00-00 00:00:00'),
+(2, 'Opciones de Dep?sito', 'desc', NULL, '0000-00-00 00:00:00'),
 (3, 'Opciones de Cliente', 'desc', NULL, '0000-00-00 00:00:00'),
 (4, 'Gestionar usuario', 'admin_users', 1, '0000-00-00 00:00:00'),
-(5, 'Gestionar menú', 'admin_menu', 1, '0000-00-00 00:00:00'),
+(5, 'Gestionar men?', 'admin_menu', 1, '0000-00-00 00:00:00'),
 (6, 'Gestionar productos', 'deposito_nuevo', 2, '0000-00-00 00:00:00'),
 (7, 'Cambiar estado de producto', 'deposito_baja', 2, '0000-00-00 00:00:00'),
 (8, 'Modificar stock de producto', 'deposito_stock', 2, '0000-00-00 00:00:00'),
-(9, 'Actualizar información', 'actualizarInfoCliente', 3, '0000-00-00 00:00:00'),
+(9, 'Actualizar informaci?n', 'actualizarInfoCliente', 3, '0000-00-00 00:00:00'),
 (10, 'Realizar compra', 'tienda', 3, '0000-00-00 00:00:00'),
 (11, 'Ver Carrito', 'carrito', 3, '0000-00-00 00:00:00');
 
@@ -175,7 +176,7 @@ CREATE TABLE `rol` (
 
 INSERT INTO `rol` (`idrol`, `rodescripcion`) VALUES
 (1, 'Administrador'),
-(2, 'Depósito'),
+(2, 'Dep?sito'),
 (3, 'Cliente');
 
 -- --------------------------------------------------------
