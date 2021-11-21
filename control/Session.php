@@ -85,8 +85,12 @@ class Session{
      */
     public function getRolActivo(){
         $abmRol = new AbmRol();
-        $rol = $abmRol->buscar(["idrol"=>$_SESSION['rolactivo']]);
-        return $rol[0];
+        $rol = null;
+        if(isset($_SESSION['rolactivo'])){
+            $rol = $abmRol->buscar(["idrol"=>$_SESSION['rolactivo']]);
+            $rol = $rol[0];
+        }
+        return $rol;
     }
 
     public function setRolActivo($idrol){
