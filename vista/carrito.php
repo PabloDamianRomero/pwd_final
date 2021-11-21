@@ -29,7 +29,7 @@ if (!empty($comprasUs)){
             array_push($noIniciada,$compra);
         }
     }
-    echo '<table class="table table-striped mt-5">
+    echo '<form method="post" action="iniciaCompra.php"><table class="table table-striped mt-5">
                 <tr class="table-success">
                     <th>Producto</th>
                     <th>Precio individual</th>
@@ -58,8 +58,8 @@ if (!empty($comprasUs)){
 
     }
     echo '</table>';
-    echo '<div class="mt-5"><button type="submit" class="btn btn-primary">Comprar</button>';
-    echo '<button type="submit" class="btn btn-danger">Cancelar Compra</button></div>';
+    echo '<div class="mt-5"><input type="submit" class="btn btn-primary" id="compra" name="compra" value="Comprar"></form>';
+    echo '<a href="#"><input type="submit" class="btn btn-danger" value="Cancelar Compra"></a></div>';
 }
 
 }
