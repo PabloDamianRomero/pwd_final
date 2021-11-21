@@ -12,7 +12,7 @@ class abmCompra
     {
         $obj = null;
         if (array_key_exists('idcompra', $param) and array_key_exists('cofecha', $param)
-            and array_key_exists('idusuario', $param)) {
+            and array_key_exists('idusuario', $param) and array_key_exists('metodo', $param)) {
 
             //creo objeto estadotipos
             $objUsuario = new Usuario();
@@ -21,7 +21,7 @@ class abmCompra
 
             //agregarle los otros objetos
             $obj = new Compra();
-            $obj->setear($param['idcompra'], $param['cofecha'], $objUsuario);
+            $obj->setear($param['idcompra'], $param['cofecha'], $objUsuario, $param['metodo']);
         }
         return $obj;
     }
@@ -37,7 +37,8 @@ class abmCompra
         $obj = null;
         if (isset($param['idcompra'])) {
             $obj = new Compra();
-            $obj->setear($param['idcompra'], null, null);
+            $obj->setIdcompra($param['idcompra']);
+            $obj->cargar();
         }
         return $obj;
     }
@@ -88,20 +89,6 @@ class abmCompra
         if ($this->seteadosCamposClaves($param)){
             $elObjtCompra = $this->cargarObjetoConClave($param);
             if ($elObjtCompra!=null){
-                // $abmCompraitem=new abmCompraitem();
-                // $arrayCompraitem=$abmCompraitem->buscar(['idcompra'=>$param['idcompra']]);
-                // if (!empty($arrayCompraitem)){
-                //     foreach($arrayCompraitem as $obj){
-                //         $obj->eliminar();
-                //     }
-                // }
-                // $abmCompraEstado=new abmCompraestado();
-                // $arrayCompraEstado=$abmCompraEstado->buscar(['idcompra'=>$param['idcompra']]);
-                // if (!empty($arrayCompraEstado)){
-                //     foreach($arrayCompraEstado as $obj){
-                //         $obj->eliminar();
-                //     }
-                // }
                 if ($elObjtCompra->eliminar()){
                     $resp = true;
                 }
@@ -146,6 +133,9 @@ class abmCompra
 
             if (isset($param['idusuario'])) {
                 $where .= " and idusuario ='" . $param['idusuario'] . "'";
+            }
+            if (isset($param['metodo'])) {
+                $where .= " and metodo ='" . $param['metodo'] . "'";
             }
 
         }

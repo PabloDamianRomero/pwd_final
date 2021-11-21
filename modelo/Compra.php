@@ -4,6 +4,7 @@ class Compra
     private $idcompra;
     private $cofecha;
     private $objUsuario;
+    private $metodo;
     private $mensajeoperacion;
 
     public function __construct()
@@ -11,14 +12,16 @@ class Compra
         $this->idcompra = "";
         $this->cofecha = "";
         $this->objUsuario = "";
+        $this->metodo= "";
         $this->mensajeoperacion = "";
     }
 
-    public function setear($idcompra, $cofecha, $objUsuario)
+    public function setear($idcompra, $cofecha, $objUsuario, $metodo)
     {
         $this->idcompra = $idcompra;
         $this->cofecha = $cofecha;
         $this->objUsuario = $objUsuario;
+        $this->metodo=$metodo;
     }
 
     public function cargar()
@@ -38,7 +41,7 @@ class Compra
                     } else {
                         $objUsuario = $objUsuario[0];
                     }
-                    $this->setear($row['idcompra'], $row['cofecha'], $objUsuario);
+                    $this->setear($row['idcompra'], $row['cofecha'], $objUsuario, $row['metodo']);
                 }
             }
         } else {
@@ -51,7 +54,7 @@ class Compra
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO compra(cofecha,idusuario)  VALUES('" . $this->getCofecha() . "','" . $this->getObjUsuario()->getIdusuario() . "');";
+        $sql = "INSERT INTO compra(cofecha,idusuario,metodo)  VALUES('" . $this->getCofecha() . "','" . $this->getObjUsuario()->getIdusuario() . "','".$this->getMetodo()."');";
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)) {
                 $this->setIdcompra($elid);
@@ -69,7 +72,7 @@ class Compra
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "UPDATE compra SET cofecha='" . $this->getCofecha() . "', idusuario= '" . $this->getObjUsuario()->getIdusuario() . "' WHERE idcompra=" . $this->getIdcompra();
+        $sql = "UPDATE compra SET cofecha='" . $this->getCofecha() . "', idusuario= '" . $this->getObjUsuario()->getIdusuario() . "', metodo= '".$this->getMetodo()."' WHERE idcompra=" . $this->getIdcompra();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -120,7 +123,7 @@ class Compra
                     } else {
                         $objUsuario = $objUsuario[0];
                     }
-                    $obj->setear($row['idcompra'], $row['cofecha'], $objUsuario);
+                    $obj->setear($row['idcompra'], $row['cofecha'], $objUsuario, $row['metodo']);
                     array_push($arreglo, $obj);
                 }
             }
@@ -168,5 +171,13 @@ class Compra
     public function setMensajeoperacion($mensajeoperacion)
     {
         $this->mensajeoperacion = $mensajeoperacion;
+    }
+    public function getMetodo()
+    {
+        return $this->metodo;
+    }
+    public function setMetodo($metodo)
+    {
+        $this->metodo = $metodo;
     }
 }
