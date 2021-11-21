@@ -23,6 +23,7 @@ if (isset($datos['usnombre']) && isset($datos['uspass'])
                     header("Location:../../login.php?reg=" . $reg);
                     exit();
                 } else {
+                    $respBaja = $abmUs->baja($datos['idusuario']); // si no pudo insertar en usuariorol pero si en usuario, borro el usuario
                     $reg = "No se pudo registrar el usuario cliente.";
                     header("Location:../../registro.php?reg=" . $reg);
                     exit();
