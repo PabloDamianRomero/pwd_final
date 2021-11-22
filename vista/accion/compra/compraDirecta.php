@@ -13,7 +13,9 @@
             $respItem=$abmCompItem->alta(["idproducto"=>$datos['idproducto'],"idcompra"=>$resp['idcompra'],"cicantidad"=>$datos['cicantidad']]);
             if ($respItem){
                 $abmEstado=new abmCompraestado();
-                $respEst=$abmEstado->alta(['idcompra'=>$resp['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>date('Y-m-d H:i:s')]);
+                date_default_timezone_set('America/Argentina/Buenos_Aires');
+                $date = date('Y-m-d H:i:s');
+                $respEst=$abmEstado->alta(['idcompra'=>$resp['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>$date]);
                 if ($respEst){
                     header('Location:retornoCompra.php?resp=exito');
                 }else{

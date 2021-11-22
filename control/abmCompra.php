@@ -68,7 +68,9 @@ class abmCompra
     {
         $retorno['respuesta'] = false;
         $param['idcompra'] = null;
-        $param['cofecha']=date('Y-m-d H:i:s');
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $date = date('Y-m-d H:i:s');
+        $param['cofecha']=$date;
         $elObjtArchivoE = $this->cargarObjeto($param);
         if ($elObjtArchivoE != null and $elObjtArchivoE->insertar()) {
             $retorno['respuesta'] = true;
