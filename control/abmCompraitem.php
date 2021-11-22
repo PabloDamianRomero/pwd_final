@@ -29,7 +29,7 @@ class abmCompraitem{
         
         if( isset($param['idcompraitem']) ){
             $obj = new CompraItem();
-            $obj->setear($param['idcompraitem'],null,null,"");
+            $obj->setIdcompraitem($param['idcompraitem']);
         }
         return $obj;
     }

@@ -19,6 +19,7 @@ $objUsuario=$sesion->getUsuario();
 $idusuario=$objUsuario->getIdusuario();
 $abmCompra=new abmCompra();
 $comprasUs=$abmCompra->buscar(['idusuario'=>$idusuario,'metodo'=>'carrito']);
+$items=[];
 echo '<table class="table table-striped mt-5">
                 <tr class="table-success">
                     <th>Producto</th>
@@ -36,17 +37,17 @@ if (count($comprasUs)==1){ //Solo puede haber un carrito activo
             echo '<th>'.$item->getObjProducto()->getProprecio().'</th>';
             echo '<th>'.$item->getCicantidad().'</th>';
             echo '<th>'.($item->getObjProducto()->getProprecio()*$item->getCicantidad()).'</th>';
-            echo '<th>Eliminar</th></tr>';
+            echo '<th><a href="accion/compra/bajaItem.php?idcompraitem='.$item->getIdcompraitem().'">Eliminar</a></th></tr>';
         }
     }  
 }
 echo '</table>';
-if (!empty($comprasUs)){
+if (!empty($comprasUs) && !empty($items)){
     echo '<form method="post" action="tiendaCompra.php">';
     echo '<input type="hidden" name="idcompra" id="idcompra" value="'.$comprasUs[0]->getidCompra().'">';
     echo '<input type="hidden" name="metodo" id="metodo" value="carrito">';
     echo '<div class="mt-5"><input type="submit" class="btn btn-primary" id="compra" name="compra" value="Comprar"></form>';
-    echo '<a href="#"><input type="submit" class="btn btn-danger" value="Cancelar Compra"></a></div>';
+    echo '<a href="accion/compra/bajaCarrito.php" class="btn btn-danger">Cancelar Compra</a></div>';
 }
 
 }
