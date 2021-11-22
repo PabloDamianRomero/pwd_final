@@ -1,8 +1,8 @@
-Plataforma: AMD
-Capacidad máxima soportada de la memoria RAM: 32 GB
+ï»¿Plataforma: AMD
+Capacidad mÃ¡xima soportada de la memoria RAM: 32 GB
 Chipset: AMD A320
 Socket: Socket AM4
-Ranuras de expansión: 1 x PCI Express 3.0 x16 (x16 mode),1 x PCI Express 3.0 x16 (x8 mode),1 x PCI Express 3.0 x16 (x4 mode),2 x PCI Express 2.0 x1
+Ranuras de expansiÃ³n: 1 x PCI Express 3.0 x16 (x16 mode),1 x PCI Express 3.0 x16 (x8 mode),1 x PCI Express 3.0 x16 (x4 mode),2 x PCI Express 2.0 x1
 Con procesador: No
 Aplicaciones: oficina gaming
 Tipo de memoria RAM: DDR4

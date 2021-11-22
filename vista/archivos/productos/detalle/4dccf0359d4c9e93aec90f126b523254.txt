@@ -1,4 +1,4 @@
-Caracteristicas generales:
+﻿Características generales:
 
 Fabricante
 Nvidia
@@ -12,8 +12,8 @@ GeForce 10 Series
 Modelo
 GT 1030
 
-Version
+Versión
 GEFORCE GT 1030 2GD4 LP OC
 
-Edicion
+Edición
 OC Edition
