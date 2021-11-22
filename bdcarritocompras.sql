@@ -127,16 +127,17 @@ CREATE TABLE `menu` (
 
 INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
 (1, 'Opciones Administrador', 'desc', NULL, '0000-00-00 00:00:00'),
-(2, 'Opciones de Depósito', 'desc', NULL, '0000-00-00 00:00:00'),
+(2, 'Opciones de Deposito', 'desc', NULL, '0000-00-00 00:00:00'),
 (3, 'Opciones de Cliente', 'desc', NULL, '0000-00-00 00:00:00'),
 (4, 'Gestionar usuario', 'admin_users', 1, '0000-00-00 00:00:00'),
-(5, 'Gestionar menú', 'admin_menu', 1, '0000-00-00 00:00:00'),
-(6, 'Gestionar productos', 'deposito_nuevo', 2, '0000-00-00 00:00:00'),
-(7, 'Cambiar estado de producto', 'deposito_baja', 2, '0000-00-00 00:00:00'),
-(8, 'Modificar stock de producto', 'deposito_stock', 2, '0000-00-00 00:00:00'),
-(9, 'Actualizar información', 'actualizarInfoCliente', 3, '0000-00-00 00:00:00'),
-(10, 'Realizar compra', 'tienda', 3, '0000-00-00 00:00:00'),
-(11, 'Ver Carrito', 'carrito', 3, '0000-00-00 00:00:00');
+(5, 'Gestionar menu', 'admin_menu', 1, '0000-00-00 00:00:00'),
+(6, 'Gestionar Compras', 'admin_compras', 1, '0000-00-00 00:00:00'),
+(7, 'Gestionar productos', 'deposito_nuevo', 2, '0000-00-00 00:00:00'),
+(8, 'Cambiar estado de producto', 'deposito_baja', 2, '0000-00-00 00:00:00'),
+(9, 'Modificar stock de producto', 'deposito_stock', 2, '0000-00-00 00:00:00'),
+(10, 'Actualizar informacion', 'actualizarInfoCliente', 3, '0000-00-00 00:00:00'),
+(11, 'Realizar compra', 'tienda', 3, '0000-00-00 00:00:00'),
+(12, 'Ver Carrito', 'carrito', 3, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
