@@ -22,12 +22,21 @@ if($idrol!= 3){?>
         $abmCompra=new AbmCompra();
         $compra=$abmCompra->buscar(['idcompra'=>$datos['idcompra']]);
         $abmCompra->modificacion(['idcompra'=>$datos['idcompra'],'cofecha'=>$compra[0]->getCofecha(),'idusuario'=>$compra[0]->getObjUsuario()->getIdusuario(),'metodo'=>'normal']);
-        $abmEstado=new abmCompraestado();
+        //Pongo la compra en estado 'iniciada'
         date_default_timezone_set('America/Argentina/Buenos_Aires');
-        $date = date('Y-m-d H:i:s');
-        $resp=$abmEstado->alta(['idcompra'=>$datos['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>$date]);
+        $abmEstado=new abmCompraestado();
+        $resp=$abmEstado->alta(['idcompra'=>$datos['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>date('Y-m-d H:i:s')]);
         if ($resp){
-            header("Location:retornoCompra.php?resp=exito");
+            //Resto los items comprados del stock
+            $abmItems=new abmCompraitem();
+            $items=$abmItems->buscar(['idcompra']);
+            $abmProd=new abmProducto();
+            foreach($items as $item){
+                $producto=$item->getObjProducto();
+                $cantidad=($producto->getProcantstock())-($item->getCicantidad());
+                $abmProd->modificacion(['idproducto'=>$producto->getIdproducto(),'pronombre'=>$producto->getPronombre(),'prodetalle'=>$producto->getProdetalle(),'proprecio'=>$producto->getProprecio(),'prodeshabilitado'=>$producto->getProdeshabilitado(),'procantstock'=>$cantidad]);
+            }
+            header('Location:retornoCompra.php?resp=exito');
         }else{
             header("Location:retornoCompra.php?resp=fallo");
         }

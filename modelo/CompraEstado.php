@@ -120,7 +120,7 @@ class CompraEstado
         if ($res > -1) {
             if ($res > 0) {
                 while ($row = $base->Registro()) {
-                    $obj = new Usuario();
+                    $obj = new CompraEstado();
                     $abmCompra = new abmCompra();
                     $objCompra = $abmCompra->buscar(['idcompra' => $row['idcompra']]);
                     if (!empty($objCompra)) {

@@ -24,7 +24,7 @@
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
             <div class="container">
                 <div class="alert alert-danger" role="alert">
-                    No puede gestionar Menúes (No está con el rol <span style='font-weight: bold; font-style: italic;'>Administrador</span>).
+                    No puede gestionar Menus (No está con el rol <span style='font-weight: bold; font-style: italic;'>Administrador</span>).
             </div>
         </div>
     </div>
@@ -68,8 +68,8 @@
 <div style="margin-bottom: 20%" class="container-fluid text-center">
     <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;margin-bottom: 50px;">
         <div class="container">
-            <h1 class="display-6 fuente-monts">Gestión de menúes</h1>
-            <p class="lead">En esta página el admin puede gestionar los menúes y sus roles.</p>
+            <h1 class="display-6 fuente-monts">Gestión de menus</h1>
+            <p class="lead">En esta página el admin puede gestionar los menus y sus roles.</p>
         </div>
     </div>
 
@@ -198,6 +198,7 @@
         <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRol()" style="width:90px">Aceptar</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgRoll').dialog('close')" style="width:90px">Cancelar</a>
     </div>
+</div>
 
 
 
