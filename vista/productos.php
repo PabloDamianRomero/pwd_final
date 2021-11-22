@@ -61,7 +61,8 @@ if($rolActivo->getIdrol() != 3){?>
                                 if (isset($datos['error'])){
                                     echo '<div style="color:red">Hubo un error con la compra. Intente de nuevo.</div>';
                                 }
-                                echo '<input type="hidden" name="idproducto" id="idproducto" value="'.$datos['idproducto'].'">
+                                echo '<input type="hidden" name="idproducto" id="idproducto" value="'.$datos['idproducto'].'">';
+                                echo '<input type="hidden" name="maxStock" id="maxStock" value="'.$objP->getProCantstock().'">
                             </div>
                             <div class="col">
                                 <input type="submit" class="btn btn-primary" id="compra" name="compra" value="Comprar">

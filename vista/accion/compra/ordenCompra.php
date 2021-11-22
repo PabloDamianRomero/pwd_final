@@ -39,7 +39,7 @@
             }
 
         }elseif (isset($datos['compra'])){
-            header('Location:../../tiendaCompra.php?metodo=directa&idproducto='.$datos['idproducto'].'&cantidad='.$datos['cantidad']);
+            header('Location:../../tiendaCompra.php?metodo=directa&idproducto='.$datos['idproducto'].'&cantidad='.$datos['cantidad'].'&maxStock='.$datos['maxStock']);
 
         }
     }else{
