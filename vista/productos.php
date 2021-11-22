@@ -57,7 +57,7 @@ if($rolActivo->getIdrol() != 3){?>
                             <form method="post" action="accion/compra/ordenCompra.php">
                             <div class="col-12 mb-2">
                                 <small>Cantidad</small>
-                                <input type="number" name="cantidad" id="cantidad" value="1">';
+                                <input type="number" name="cantidad" id="cantidad" value="1" min="1" max="'.$objP->getProCantstock().'">';
                                 if (isset($datos['error'])){
                                     echo '<div style="color:red">Hubo un error con la compra. Intente de nuevo.</div>';
                                 }
