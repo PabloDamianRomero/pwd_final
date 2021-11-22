@@ -29,6 +29,8 @@ if ($estructuraAMostrar == "desdeAccion") {
     include_once("../../configuracion.php");?>
     <link rel='stylesheet' href='../css/bootstrap/bootstrap.css'>
     <link rel='stylesheet' href='../css/bootstrap/bootstrap.min.css'>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../css/gral.css">
     <!-- Enlaces jQuery-Easyui -->
     <link rel="stylesheet" type="text/css" href="../../util/jquery-easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="../../util/jquery-easyui/themes/icon.css">
@@ -42,6 +44,8 @@ if ($estructuraAMostrar == "desdeSubAccion") {
   include_once("../../../configuracion.php");?>
   <link rel='stylesheet' href='../../css/bootstrap/bootstrap.css'>
   <link rel='stylesheet' href='../../css/bootstrap/bootstrap.min.css'>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="../../css/gral.css">
   <!-- Enlaces jQuery-Easyui -->
   <link rel="stylesheet" type="text/css" href="../../../util/jquery-easyui/themes/default/easyui.css">
   <link rel="stylesheet" type="text/css" href="../../../util/jquery-easyui/themes/icon.css">
@@ -98,8 +102,13 @@ if ($estructuraAMostrar == "desdeSubAccion") {
     }?>
   
     <nav class="navbar navbar-expand-lg menu-pagina">
-      <div class="container-fluid"> 
-        <a class="navbar-brand enlaces-menu" href="paginaSegura.php?idrol="<?php $rolActivo->getIdrol();?>>
+      <div class="container-fluid">
+        <?php $enlaceInicio = "paginaSegura.php?idrol=".$rolActivo->getIdrol(); 
+          if($estructuraAMostrar == "desdeSubAccion"){
+            $enlaceInicio = "../../paginaSegura.php?idrol=".$rolActivo->getIdrol();
+          }
+        ?> 
+        <a class="navbar-brand enlaces-menu" href=<?php echo $enlaceInicio; ?>>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
             <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
