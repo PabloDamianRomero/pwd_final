@@ -65,7 +65,7 @@ if($rolActivo->getIdrol() != 3){?>
                                 echo '<input type="hidden" name="maxStock" id="maxStock" value="'.$objP->getProCantstock().'">
                             </div>
                             <div class="col">
-                                <input type="submit" class="btn btn-primary" id="compra" name="compra" value="Comprar">
+                                <input type="submit" class="btn btn-success" id="compra" name="compra" value="Comprar">
                                 <input type="submit" class="btn btn-outline-primary" id="orden" name="orden" value="Agregar al carrito">
                             </div>
                             </form>';

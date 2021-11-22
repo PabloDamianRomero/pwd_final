@@ -46,8 +46,8 @@ if (!empty($comprasUs) && !empty($items)){
     echo '<form method="post" action="tiendaCompra.php">';
     echo '<input type="hidden" name="idcompra" id="idcompra" value="'.$comprasUs[0]->getidCompra().'">';
     echo '<input type="hidden" name="metodo" id="metodo" value="carrito">';
-    echo '<div class="mt-5"><input type="submit" class="btn btn-primary" id="compra" name="compra" value="Comprar"></form>';
-    echo '<a href="accion/compra/bajaCarrito.php" class="btn btn-danger">Cancelar Compra</a></div>';
+    echo '<div class="mt-5 text-center"><input type="submit" class="btn btn-success" id="compra" name="compra" value="Comprar"></form>';
+    echo '<a href="accion/compra/bajaCarrito.php" class="btn btn-danger" style="margin-left:20px;">Cancelar Compra</a></div>';
 }
 
 }
