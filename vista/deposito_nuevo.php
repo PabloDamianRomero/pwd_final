@@ -84,6 +84,7 @@
                 <th field="pronombre" width="120">Nombre</th>
                 <th field="prodetalle" width="50">Detalle</th>
                 <th field="proprecio" width="20">Precio</th>
+                <th field="proImg" width="20">Imagen</th>
             </tr>
         </thead>
     </table>
