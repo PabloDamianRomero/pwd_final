@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2021 a las 19:12:10
+-- Tiempo de generación: 23-11-2021 a las 23:51:52
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -34,14 +34,6 @@ CREATE TABLE `compra` (
   `metodo` varchar(15) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `compra`
---
-
-INSERT INTO `compra` (`idcompra`, `cofecha`, `idusuario`, `metodo`) VALUES
-(1, '2021-11-22 21:50:49', 1, 'normal'),
-(2, '2021-11-22 21:51:15', 1, 'carrito');
-
 -- --------------------------------------------------------
 
 --
@@ -55,13 +47,6 @@ CREATE TABLE `compraestado` (
   `cefechaini` timestamp NOT NULL DEFAULT current_timestamp(),
   `cefechafin` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `compraestado`
---
-
-INSERT INTO `compraestado` (`idcompraestado`, `idcompra`, `idcompraestadotipo`, `cefechaini`, `cefechafin`) VALUES
-(1, 1, 1, '2021-11-22 21:50:49', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -97,15 +82,6 @@ CREATE TABLE `compraitem` (
   `idcompra` bigint(20) NOT NULL,
   `cicantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `compraitem`
---
-
-INSERT INTO `compraitem` (`idcompraitem`, `idproducto`, `idcompra`, `cicantidad`) VALUES
-(1, 1, 1, 5),
-(2, 1, 2, 5),
-(3, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -224,9 +200,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
-(1, 'PabloR', '0192023a7bbd73250516f069df18b500', 'admin@gmail.com', '0000-00-00 00:00:00'),
-(2, 'MatiasP', '81dc9bdb52d04dc20036dbd8313ed055', 'gmail@gmail.com', '0000-00-00 00:00:00'),
-(3, 'NicoS', '4118af4d1a8ac07d93f11ce4f3bf1f58', 'nico@gmail.com', '2021-11-18 07:34:06');
+(1, 'PabloR', '08d73df56eabed0bb5dec9346fd8570b', 'pablo@gmail.com', '0000-00-00 00:00:00'),
+(2, 'MatiasP', '06098bbde90f356c3a7cddcdfcf92eee', 'matias@gmail.com', '0000-00-00 00:00:00'),
+(3, 'NadiaH', 'e89b626a614c79121a5fbdef26d43613', 'nahir@gmail.com', '0000-00-00 00:00:00'),
+(4, 'LucianaB', 'e79be9d750b820a767088c56c646b4b6', 'luciana@gmail.com', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -250,7 +227,8 @@ INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
 (2, 1),
 (2, 2),
 (2, 3),
-(3, 3);
+(3, 2),
+(4, 3);
 
 --
 -- Índices para tablas volcadas
@@ -340,25 +318,25 @@ ALTER TABLE `usuariorol`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idcompra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idcompra` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `compraestado`
 --
 ALTER TABLE `compraestado`
-  MODIFY `idcompraestado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idcompraestado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `compraitem`
 --
 ALTER TABLE `compraitem`
-  MODIFY `idcompraitem` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idcompraitem` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -376,7 +354,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
