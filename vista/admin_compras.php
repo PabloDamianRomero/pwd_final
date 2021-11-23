@@ -116,10 +116,6 @@
                 </div>
             </form>
         </div>
-        <div id="dlg-buttons">
-            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveMenu()" style="width:90px">Aceptar</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
-        </div>
     </div>
 
 
@@ -178,69 +174,6 @@
                         });
                     }    
                    
-                });
-            }
-        }
-        function newMenu(){
-            $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Menu');
-            $('#fm').form('clear');
-            url = 'accion/admin/alta_menu.php';
-        }
-        function editMenu(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Menu');
-                $('#fm').form('load',row);
-                url = 'accion/admin/mod_menu.php';
-            }
-        }
-        function saveMenu(){
-            $('#fm').form('submit',{
-                url: url,
-                iframe: false,
-                onSubmit: function(){
-                    return $(this).form('validate');
-                },
-                success: function(result){
-                    var result = eval('('+result+')');
-                    if (result.errorMsg){
-                        $.messager.show({
-                            title: 'Error',
-                            msg: result.errorMsg
-                        });
-                    } else {
-                        $('#dlg').dialog('close');        // close the dialog
-                        $('#dg').datagrid('reload');    // reload the menu data
-                    }
-                }
-            });
-        }
-        function destroyMenu(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('Confirmar','Cambiar el estado del menu?',function(r){
-                    if (r){
-                        $('#fm').form('load',row);
-                        url = 'accion/admin/baja_menu.php';
-                        $('#fm').form('submit',{
-                            url: url,
-                            iframe: false,
-                            onSubmit: function(){
-                                return $(this).form('validate');
-                            },
-                            success: function(result){
-                                var result = eval('('+result+')');
-                                if (result.errorMsg){
-                                    $.messager.show({
-                                        title: 'Error',
-                                        msg: result.errorMsg
-                                    });
-                                } else {
-                                    $('#dg').datagrid('reload');    // reload the menu data
-                                }
-                            }
-                        });
-                    }
                 });
             }
         }
