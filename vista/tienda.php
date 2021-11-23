@@ -66,7 +66,7 @@ echo '<div class="row text-center">';
             if ($obj->getProdeshabilitado()=="0000-00-00 00:00:00"){
                 echo '<div class="col-3" style="background-color: #cae3e9; margin:20px 10px;">
                 <a href="productos.php?idproducto='.$obj->getIdproducto().'">
-                <img style="width:300px; margin-top:20px;" src="archivos/productos/img/'.$obj->getProdetalle().'.jpg">
+                <img style="width:300px; margin-top:20px;" src="archivos/productos/img/'.$obj->getProdetalle().'.jpg?t='.time().'">
                 </a>';
                 $enlace="archivos/productos/detalle/".$obj->getProdetalle().".txt";
                 echo '<div><p>'.$obj->getPronombre().'</p></div>';

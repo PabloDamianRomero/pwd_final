@@ -39,7 +39,7 @@ if($rolActivo->getIdrol() != 3){?>
 <div class="row" style="margin-top: 5%;">
     <div class="col-2"></div>
     <div class="col-5">
-        <a href="<?php echo 'archivos/productos/img/'.$objP->getProdetalle().'.jpg' ?>"><img style="width:500px" src="<?php echo 'archivos/productos/img/'.$objP->getProdetalle().'.jpg' ?>"></a>        
+        <img style="width:500px" src="<?php echo 'archivos/productos/img/'.$objP->getProdetalle().'.jpg?t='.time() ?>">      
     </div>
     <div class="col-3">
         <div class="row">
