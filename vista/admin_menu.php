@@ -46,10 +46,10 @@
     <?php
 // ----------------------------------------------------------------------------------------------------------
 
-// ---------------------- Si es admin pero el enlace-menu(sub menú) no está disponible  -------------------------------
+// ---------------------- Si es admin pero el enlace-menu(sub menú o padre) no está disponible  -------------------------------
 // ---------------------- Esto es para no acceder por url a la página si el enlace-menú esta deshabilitado  -------------------------------
 // ---------------------- SECCIÓN NO IMPLEMENTADA SÓLO PARA EL ADMINISTRADOR  -------------------------------
-// }else if(($rolActivo->getIdrol() == 1) && (isset($arrMenuPadre)) && ($existeSubEnlace)){
+// }else if(($rolActivo->getIdrol() == 1) && (isset($arrMenuPadre)) && ($existeSubEnlace) || $arrMenuPadre[0]->getMedeshabilitado() != "0000-00-00 00:00:00"){
 ?>
         <!-- <div style="margin-bottom: 20%" class="container-fluid text-center">
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">

@@ -45,9 +45,9 @@ if($rolActivo->getIdrol() != 3){?>
     <?php
 // ----------------------------------------------------------------------------------------------------------
 
-// ---------------------- Si es Cliente pero el enlace-menu(sub menú) no está disponible  -------------------------------
+// ---------------------- Si es Cliente pero el enlace-menu(sub menú o padre) no está disponible  -------------------------------
 // ---------------------- Esto es para no acceder por url a la página si el enlace-menú esta deshabilitado  -------------------------------
- }else if(($rolActivo->getIdrol() == 3) && (isset($arrMenuPadre)) && ($existeSubEnlace)){
+ }else if(($rolActivo->getIdrol() == 3) && (isset($arrMenuPadre)) && ($existeSubEnlace) || $arrMenuPadre[0]->getMedeshabilitado() != "0000-00-00 00:00:00"){
     ?>
         <div style="margin-bottom: 20%" class="container-fluid text-center">
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
