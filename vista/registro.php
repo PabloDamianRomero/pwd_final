@@ -27,7 +27,7 @@ if (isset($datos['reg'])){
     </div>
 
     <div class="text-center mt-5 mb-5">
-        <form class="card needs-validation" method="post" action="accion/cliente/cliente_registro.php" style="max-width: 300px;margin:auto; padding:20px" novalidate>
+        <form class="card needs-validation" method="post" action="accion/cliente/cliente_registro.php" onSubmit="return validarRegistroUsuario();" style="max-width: 300px;margin:auto; padding:20px" novalidate>
                     <div class="mt-3">
                         <div id="invalid" style="color:red">
                             <?php if (!$mensaje==""){
