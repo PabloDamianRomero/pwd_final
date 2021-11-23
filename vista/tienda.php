@@ -64,11 +64,18 @@ if($rolActivo->getIdrol() != 3){?>
 echo '<div class="row text-center">';
         foreach ($arreglo as $obj){
             if ($obj->getProdeshabilitado()=="0000-00-00 00:00:00"){
-                echo '<div class="col-3" style="background-color: #cae3e9; margin:20px 10px;">
-                <a href="productos.php?idproducto='.$obj->getIdproducto().'">
-                <img style="width:300px; margin-top:20px;" src="archivos/productos/img/'.$obj->getProdetalle().'.jpg?t='.time().'">
-                </a>';
+                echo '<div class="col-3" style="background-color: #cae3e9; margin:20px 10px;">';
                 $enlace="archivos/productos/detalle/".$obj->getProdetalle().".txt";
+                if (file_exists($enlace)) {
+                    echo '<a href="productos.php?idproducto='.$obj->getIdproducto().'">
+                    <img style="width:300px; margin-top:20px;" src="archivos/productos/img/'.$obj->getProdetalle().'.jpg?t='.time().'">
+                    </a>';
+                }else{
+                    echo '<a href="#">
+                    <img style="width:300px; margin-top:20px;" src="archivos/productos/img/'.$obj->getProdetalle().'.jpg?t='.time().'">
+                    </a>';
+                    echo '<p>No disponible. Falta información.</p>';
+                }
                 echo '<div><p>'.$obj->getPronombre().'</p></div>';
                 echo '<div><p class="negrita">$'.$obj->getProprecio().'</p></div></div>';
             }
