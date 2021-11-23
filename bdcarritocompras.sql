@@ -138,7 +138,7 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (10, 'Actualizar informacion', 'actualizarInfoCliente', 3, '0000-00-00 00:00:00'),
 (11, 'Realizar compra', 'tienda', 3, '0000-00-00 00:00:00'),
 (12, 'Ver Carrito', 'carrito', 3, '0000-00-00 00:00:00'),
-(13, 'Gestionar compras', 'cliente_compras', 3, '0000-00-00 00:00:00');;
+(13, 'Gestionar compras', 'cliente_compras', 3, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
