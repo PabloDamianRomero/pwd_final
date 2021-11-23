@@ -13,7 +13,7 @@ foreach($list as $elem){
     $nuevoElem['prodeshabilitado']=$elem->getProdeshabilitado();
     $rutaImagen = $GLOBALS['ROOT']."/vista/archivos/productos/img/".$elem->getProdetalle().".jpg";
     if (file_exists($rutaImagen)) {
-        $nuevoElem['proImg']= '<a href="archivos/productos/img/'.$elem->getProdetalle().'.jpg"><img width="35" src="archivos/productos/img/'.$elem->getProdetalle().'.jpg"></a>';
+        $nuevoElem['proImg']= '<a href="archivos/productos/img/'.$elem->getProdetalle().'.jpg?t="'.time().'""><img width="35" src="archivos/productos/img/'.$elem->getProdetalle().'.jpg?t="'.time().'""></a>';
     }else{
         $nuevoElem['proImg']= 'Sin imagen';
     }
