@@ -47,7 +47,7 @@ function validarLogin() {
         $passHelp.innerHTML += "La clave no puede ser igual al usuario.";
     }
     return $valido;
-}
+};
 
 function validarRegistroUsuario() {
     $pass = document.getElementById("uspass");
@@ -100,11 +100,14 @@ function validarRegistroUsuario() {
 
     var $email = document.getElementById("usmail");
 
+    // alert(validateEmail($email.value));
+
     if(!(validateEmail($email.value))){
         $valido = false;
-        // $email.value= null;
+        $email.value= null;
         $mailHelp = document.getElementById("mail-text");
         $mailHelp.innerHTML = "El correo electrónico es incorrecto.";
+        $mailHelp.innerHTML += "Ej formato: mail@gmail.com";
     }
     return $valido;
 }
