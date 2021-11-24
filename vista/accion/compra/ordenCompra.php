@@ -14,12 +14,38 @@
             if (!empty($comprasUs)){
                 if (count($comprasUs)==1){  //Solo puede haber 1 carrito activo
                     $abmCompItem=new abmCompraitem();
-                    $respItem=$abmCompItem->alta(['idproducto'=>$datos['idproducto'],'idcompra'=>$comprasUs[0]->getIdcompra(),'cicantidad'=>$datos['cantidad']]);
-                    if ($respItem){
-                        header('Location:../../carrito.php');
-                    }else{
-                        header("Location:../../productos.php?idproducto=".$datos['idproducto']."&error=1");
+                    //Chequeo si en la compra ya se habia encargado el mismo producto
+                    $itemsPrevios=$abmCompItem->buscar(['idcompra'=>$comprasUs[0]->getIdcompra()]);
+                    $encontrado=false;
+                    if (!empty($itemsPrevios)){
+                        foreach($itemsPrevios as $item){
+                            if ($item->getObjProducto()->getIdproducto()==$datos['idproducto']){
+                                $encontrado=true;
+                                //Controlo stock
+                                $cantidad=($item->getCicantidad())+($datos['cantidad']);
+                                if ($cantidad<=($item->getObjProducto()->getProcantstock())){
+                                    $abmCompItem=new abmCompraitem();
+                                    $respCant=$abmCompItem->modificacion(['idcompraitem'=>$item->getIdcompraitem(),'idproducto'=>$datos['idproducto'],'idcompra'=>$comprasUs[0]->getIdcompra(),'cicantidad'=>$cantidad]);
+                                    if ($respCant){
+                                        header('Location:../../carrito.php');
+                                    }else{
+                                        header("Location:../../productos.php?idproducto=".$datos['idproducto']."&error=1");
+                                    }
+                                }else{
+                                    header("Location:../../productos.php?idproducto=".$datos['idproducto']."&error=2");
+                                }
+                            }
+                        }
                     }
+                    if (!$encontrado){
+                        $respItem=$abmCompItem->alta(['idproducto'=>$datos['idproducto'],'idcompra'=>$comprasUs[0]->getIdcompra(),'cicantidad'=>$datos['cantidad']]);
+                        if ($respItem){
+                            header('Location:../../carrito.php');
+                        }else{
+                            header("Location:../../productos.php?idproducto=".$datos['idproducto']."&error=1");
+                        }
+                    }
+                    
                 }else{
                     header("Location:../../productos.php?idproducto=".$datos['idproducto']."&error=1");
                 }

@@ -59,7 +59,13 @@ if($rolActivo->getIdrol() != 3){?>
                                 <small>Cantidad</small>
                                 <input type="number" name="cantidad" id="cantidad" value="1" min="1" max="'.$objP->getProCantstock().'">';
                                 if (isset($datos['error'])){
-                                    echo '<div style="color:red">Hubo un error con la compra. Intente de nuevo.</div>';
+                                    if ($datos['error']==1){
+                                        echo '<div style="color:red">Hubo un error con la compra. Intente de nuevo.</div>';
+                                    }
+                                    if ($datos['error']==2){
+                                        echo '<div style="color:red">Falta de stock. Revise su carro de compras.</div>';
+                                    }
+                                    
                                 }
                                 echo '<input type="hidden" name="idproducto" id="idproducto" value="'.$datos['idproducto'].'">';
                                 echo '<input type="hidden" name="maxStock" id="maxStock" value="'.$objP->getProCantstock().'">
