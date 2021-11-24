@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-11-2021 a las 23:51:52
+-- Tiempo de generación: 24-11-2021 a las 05:14:32
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -159,7 +159,11 @@ INSERT INTO `producto` (`idproducto`, `pronombre`, `prodetalle`, `proprecio`, `p
 (1, 'Memoria RAM Fury DDR4 8GB 1 HyperX HX426C16FB3/8', '8fc397f687757f39b33d16ed61af4bbd', '5.632', '0000-00-00 00:00:00', 97),
 (2, 'Placa de video Nvidia MSI GeForce 10 Series GT 1030 GEFORCE GT 1030 2GD4 LP OC OC Edition 2GB', '4dccf0359d4c9e93aec90f126b523254', '23.479', '0000-00-00 00:00:00', 32),
 (3, 'Mother Asus Prime A320m-k Am4 Ddr4 A320 Hdmi M2', 'd9e9c65d547bbab494d4531cc6a34fa9', '8.279', '0000-00-00 00:00:00', 45),
-(4, 'Disco duro interno Seagate SkyHawk 1TB', 'f03479e67573edbc044a68c24c8d5106', '6.799', '0000-00-00 00:00:00', 22);
+(4, 'Disco duro interno Seagate SkyHawk 1TB', 'f03479e67573edbc044a68c24c8d5106', '6.799', '0000-00-00 00:00:00', 22),
+(5, 'Disco sólido interno Kingston SA400S37/240G 240GB', '24e4ade384bbcb8ba5002ad9320255c2', '4.019', '0000-00-00 00:00:00', 19),
+(6, 'Fuente de alimentación para PC Noga ATX-550 P4 550W negra 200V', 'd09a6b915d04e290d8b2c2347bdafe0a', '1.390', '0000-00-00 00:00:00', 84),
+(7, 'Gabinete Pc Gamer Sentey J20 4 X Fan Blue Vidrio Templado', '335694914dfdb9241b2d852896fbf66e', '6.999', '0000-00-00 00:00:00', 69),
+(8, 'Disco sólido interno Western Digital WDS100T2B0A 1TB azul', '5bea8dbdf5b0dca38321b57793e3ac79', '16.499', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -342,7 +346,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`

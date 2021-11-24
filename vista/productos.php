@@ -27,19 +27,22 @@ if($rolActivo->getIdrol() != 3){?>
     }
     if ($objP!=null){
         $enlace="archivos/productos/detalle/".$objP->getProdetalle().".txt";
-        $handle = fopen($enlace, "r");
-        if(filesize($enlace) > 0){
-            $content = fread($handle, filesize($enlace));
+        if (file_exists($enlace)){
+            $handle = fopen($enlace, "r");
+            if(filesize($enlace) > 0){
+                $content = fread($handle, filesize($enlace));
+            }
+            fclose($handle);
         }else{
             $content = "No hay descripcion del producto";
         }
-        fclose($handle);
+        
 
 ?>
-<div class="row" style="margin-top: 5%;">
+<div class="row mt-5">
     <div class="col-2"></div>
     <div class="col-5">
-        <img style="width:500px" src="<?php echo 'archivos/productos/img/'.$objP->getProdetalle().'.jpg?t='.time() ?>">      
+        <img style="max-width:450px; max-height:450px" src="<?php echo 'archivos/productos/img/'.$objP->getProdetalle().'.jpg?t='.time() ?>">      
     </div>
     <div class="col-3">
         <div class="row">

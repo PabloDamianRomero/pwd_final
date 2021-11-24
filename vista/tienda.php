@@ -61,23 +61,15 @@ if($rolActivo->getIdrol() != 3){?>
 // ---------------------- Si es Cliente y existe el enlace-menu (padre e hijo)  ------------------------------- 
     $abmProd=new abmProducto();
     $arreglo=$abmProd->buscar(null);
-echo '<div class="row text-center">';
+echo '<div class="row text-center mb-5">';
         foreach ($arreglo as $obj){
             if ($obj->getProdeshabilitado()=="0000-00-00 00:00:00"){
-                echo '<div class="col-3" style="background-color: #cae3e9; margin:20px 10px;">';
-                $enlace="archivos/productos/detalle/".$obj->getProdetalle().".txt";
-                if (file_exists($enlace)) {
-                    echo '<a href="productos.php?idproducto='.$obj->getIdproducto().'">
-                    <img style="width:300px; margin-top:20px;" src="archivos/productos/img/'.$obj->getProdetalle().'.jpg?t='.time().'">
-                    </a>';
-                }else{
-                    echo '<a href="#">
-                    <img style="width:300px; margin-top:20px;" src="archivos/productos/img/'.$obj->getProdetalle().'.jpg?t='.time().'">
-                    </a>';
-                    echo '<p>No disponible. Falta información.</p>';
-                }
-                echo '<div><p>'.$obj->getPronombre().'</p></div>';
-                echo '<div><p class="negrita">$'.$obj->getProprecio().'</p></div></div>';
+                echo '<div class="col-3 mt-5" style="height:350px">';
+                echo '<div style="background-color:#cae3e9; padding:5px; height:350px">';
+                echo '<div id="img" style="height:250px"><a href="productos.php?idproducto='.$obj->getIdproducto().'"><img style="max-height:230px; max-width:230px; margin-top:20px;" src="archivos/productos/img/'.$obj->getProdetalle().'.jpg?t='.time().'">
+                    </a></div>';
+                echo '<div id="nombre" style="height:60px"><p>'.$obj->getPronombre().'</p></div>';
+                echo '<div><p class="negrita">$'.$obj->getProprecio().'</p></div></div></div>';
             }
         }
 echo '</div>';

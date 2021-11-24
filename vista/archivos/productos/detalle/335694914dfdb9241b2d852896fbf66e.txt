@@ -1,0 +1,9 @@
+﻿Incluye fuente de alimentación: No
+Tipo de estructura: Mid tower
+Puertos: USB 3.0
+Bahías: 1 x 5 1/4
+Potencia de la fuente de alimentación: 0.01 W
+Altura x Ancho x Largo: 45 cm x 19 cm x 40 cm
+Es gamer: Sí
+Placas madre compatibles: ATX
+Es kit: No

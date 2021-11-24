@@ -1,0 +1,4 @@
+﻿Potencia de salida de 550W.
+Fuente de tipo ATX.
+Diámetro del ventilador de 8cm.
+Refrigeración por aire.
