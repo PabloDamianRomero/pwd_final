@@ -76,13 +76,20 @@ if (count($comprasUs)==1){ //Solo puede haber un carrito activo
     $abmItems=new abmCompraitem();
     $items=$abmItems->buscar(['idcompra'=>$comprasUs[0]->getidCompra()]);
     if (!empty($items)){
+        $precioTotal = 0;
         foreach($items as $item){
+            $precioTotal += $item->getObjProducto()->getProprecio() * $item->getCicantidad();
             echo '<tr class="table-light"><th>'.$item->getObjProducto()->getPronombre().'</th>';
-            echo '<th>'.$item->getObjProducto()->getProprecio().'</th>';
+            echo '<th>$ '.$item->getObjProducto()->getProprecio().'</th>';
             echo '<th>'.$item->getCicantidad().'</th>';
-            echo '<th>'.($item->getObjProducto()->getProprecio()*$item->getCicantidad()).'</th>';
+            echo '<th>$ '.$item->getObjProducto()->getProprecio() * $item->getCicantidad().'</th>';
             echo '<th><a href="accion/compra/bajaItem.php?idcompraitem='.$item->getIdcompraitem().'">Eliminar</a></th></tr>';
         }
+        echo '<th></th>';
+        echo '<th></th>';
+        echo '<th></th>';
+        echo '<th style="background-color: #c7dbd2;">$ '.$precioTotal.'</th>';
+        echo '<th></th>';
     }  
 }
 echo '</table>';

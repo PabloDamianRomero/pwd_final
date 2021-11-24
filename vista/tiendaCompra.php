@@ -33,17 +33,17 @@ if($idrol!= 3){?>
         $abmItems=new abmCompraitem();
         $items=$abmItems->buscar(['idcompra'=>$datos['idcompra']]);
         if (!empty($items)){
-            echo '<h1>Finalizar Compra</h1>';
+            echo '<h1 class="text-center" style="margin-top: 30px;">Finalizar Compra</h1>';
             $total=0;
             foreach($items as $item){
-                echo '<div>Producto: '.$item->getObjProducto()->getPronombre();
-                echo 'Cantidad:'.$item->getCicantidad().'</div>';
+                echo '<div class="text-center">Producto: '.$item->getObjProducto()->getPronombre();
+                echo '&nbsp;&nbsp;Cantidad:'.$item->getCicantidad().'</div>';
                 $total+=($item->getObjProducto()->getProprecio())*$item->getCicantidad();
             }
-            echo '<div>Total a pagar: $'.$total.'</div>';
-            echo '<form method="post" action="accion/compra/compraCarrito.php">';
+            echo '<div class="text-center" style="margin-top: 50px;">Total a pagar: $'.$total.'</div>';
+            echo '<form method="post" action="accion/compra/compraCarrito.php" class="text-center">';
             echo '<input type="hidden" name="idcompra" id="idcompra" value="'.$datos['idcompra'].'">';
-            echo '<input type="submit" value="Comprar" class="btn btn-primary"></form>';
+            echo '<input type="submit" value="Comprar" class="btn btn-success m-3"></form>';
         }
     }
 }
