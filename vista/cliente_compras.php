@@ -68,7 +68,7 @@
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;margin-bottom: 50px;">
             <div class="container">
                 <h1 class="display-6 fuente-monts">Gestión de Compras</h1>
-                <p class="lead">En esta página el admin puede gestionar los estados de las compras.</p>
+                <p class="lead">En esta página el cliente puede gestionar el estado de la compra.</p>
             </div>
         </div>
     
