@@ -89,8 +89,8 @@
             </thead>
         </table>
         <div id="toolbar">
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="cancelarCompra()">Cancelar</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="detallesCompra()">Detalles</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="cancelarCompraCl()">Cancelar</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="detallesCompraCl()">Detalles</a>
         </div>
         
         <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
@@ -119,46 +119,6 @@
     </div>
 
 
-
-    <script>
-        var url;
-        function cancelarCompra(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('Confirmar','Cancelar la compra?',function(r){
-                    if (r){
-                        $('#fm').form('load',row);
-                        url = 'accion/cliente/baja_compra.php';
-                        $('#fm').form('submit',{
-                        url: url,
-                        iframe: false,
-                        onSubmit: function(){
-                            return $(this).form('validate');
-                        },
-                        success: function(result){
-                            var result = eval('('+result+')');
-                            if (result.errorMsg){
-                                $.messager.show({
-                                    title: 'Error',
-                                    msg: result.errorMsg
-                                });
-                            } else {    
-                                $('#dg').datagrid('reload');    // reload the menu data
-                            }
-                        }
-                        });
-                    }    
-                   
-                });
-            }
-        }
-        function detallesCompra(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                window.location.href = "accion/compra/detalleCompra.php?idcompra="+row.idcompra+"&rol=3";                    
-            }
-        }
-    </script>
 <?php
 }
 include_once "estructura/pie.php";

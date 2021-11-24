@@ -77,12 +77,14 @@
             <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
             <script src="js/validacion.js"></script>
             <script src="js/validarDatos.js"></script>
+            <script src="js/jeasyui.js"></script>
             <?php
         }
         if ($estructuraAMostrar == "desdeAccion") {?>
             <script src="../js/bootstrap/bootstrap.bundle.min.js"></script>
             <script src="../js/validacion.js"></script>
             <script src="../js/validarDatos.js"></script>
+            <script src="../js/jeasyui.js"></script>
             <?php
         }?>
 </body>

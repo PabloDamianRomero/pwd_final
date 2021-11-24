@@ -114,38 +114,7 @@
 
 
 
-    <script type="text/javascript">
-        var url;
-        function destroyProducto(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('Confirmar','Cambiar el estado del Producto?',function(r){
-                    if (r){
-                        $('#fm').form('load',row);
-                        url = 'accion/deposito/baja_prod.php';
-                        $('#fm').form('submit',{
-                            url: url,
-                            iframe: false,
-                            onSubmit: function(){
-                                return $(this).form('validate');
-                            },
-                            success: function(result){
-                                var result = eval('('+result+')');
-                                if (result.errorMsg){
-                                    $.messager.show({
-                                        title: 'Error',
-                                        msg: result.errorMsg
-                                    });
-                                } else {
-                                    $('#dg').datagrid('reload');    // reload the menu data
-                                }
-                            }
-                        });
-                    }
-                });
-            }
-        }
-    </script>
+   
 
 
 <?php

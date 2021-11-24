@@ -178,9 +178,9 @@
     </table>
 
     <div id="toolbar3">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newRol()">Nuevo Rol</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editRol()">Editar Rol</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyRol()">Eliminar Rol</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newMeRol()">Nuevo Rol</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editMeRol()">Editar Rol</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyMeRol()">Eliminar Rol</a>
     </div>
     
     <div id="dlgRoll" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlgRoll-buttons'">
@@ -195,7 +195,7 @@
         </form>
     </div>
     <div id="dlgRoll-buttons">
-        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRol()" style="width:90px">Aceptar</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveMeRol()" style="width:90px">Aceptar</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgRoll').dialog('close')" style="width:90px">Cancelar</a>
     </div>
 </div>
@@ -206,182 +206,6 @@
 
 
 
-
-    <script type="text/javascript">
-        var url;
-        function newMenu(){
-            $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Menu');
-            $('#fm').form('clear');
-            url = 'accion/admin/alta_menu.php';
-        }
-        function editMenu(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Menu');
-                $('#fm').form('load',row);
-                url = 'accion/admin/mod_menu.php';
-            }
-        }
-        function saveMenu(){
-            $('#fm').form('submit',{
-                url: url,
-                iframe: false,
-                onSubmit: function(){
-                    return $(this).form('validate');
-                },
-                success: function(result){
-                    var result = eval('('+result+')');
-                    if (result.errorMsg){
-                        $.messager.show({
-                            title: 'Error',
-                            msg: result.errorMsg
-                        });
-                    } else {
-                        $('#dlg').dialog('close');        // close the dialog
-                        $('#dg').datagrid('reload');    // reload the menu data
-                    }
-                }
-            });
-        }
-        function destroyMenu(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('Confirmar','Cambiar el estado del menu?',function(r){
-                    if (r){
-                        $('#fm').form('load',row);
-                        url = 'accion/admin/baja_menu.php';
-                        $('#fm').form('submit',{
-                            url: url,
-                            iframe: false,
-                            onSubmit: function(){
-                                return $(this).form('validate');
-                            },
-                            success: function(result){
-                                var result = eval('('+result+')');
-                                if (result.errorMsg){
-                                    $.messager.show({
-                                        title: 'Error',
-                                        msg: result.errorMsg
-                                    });
-                                } else {
-                                    $('#dg').datagrid('reload');    // reload the menu data
-                                }
-                            }
-                        });
-                    }
-                });
-            }
-        }
-        
-        //
-        // ---TABLA MENU-ROL---
-        //
-
-        function newMeRol(){
-            $('#dlgRol').dialog('open').dialog('center').dialog('setTitle','Nuevo Menu');
-            $('#fmRol').form('clear');
-            url = 'accion/admin/alta_menuRol.php';
-        }
-        function saveMeRol(){
-            $('#fmRol').form('submit',{
-                url: url,
-                iframe: false,
-                onSubmit: function(){
-                    return $(this).form('validate');
-                },
-                success: function(result){
-                    var result = eval('('+result+')');
-                    if (result.errorMsg){
-                        $.messager.show({
-                            title: 'Error',
-                            msg: result.errorMsg
-                        });
-                    } else {
-                        $('#dlgRol').dialog('close');        // close the dialog
-                        $('#dgRol').datagrid('reload');    // reload the user data
-                    }
-                }
-            });
-        }
-        function destroyMeRol(){
-            var row = $('#dgRol').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('Confirmar','Esta seguro que desea eliminar este Menu-Rol?',function(r){
-                    if (r){
-                        $.post('accion/admin/baja_menuRol.php',{idmenu:row.idmenu,idrol:row.idrol},function(result){
-                            if (result.respuesta){
-                                $('#dgRol').datagrid('reload');    // reload the user data
-                            } else {
-                                $.messager.show({    // show error message
-                                    title: 'Error',
-                                    msg: result.errorMsg
-                                });
-                            }
-                        },'json');
-                    }
-                });
-            }
-        }
-
-        //
-        // ---TABLA ROLES---
-        //
-
-        function newRol(){
-            $('#dlgRoll').dialog('open').dialog('center').dialog('setTitle','Nuevo Rol');
-            $('#fmRoll').form('clear');
-            url = 'accion/admin/alta_rol.php';
-        }
-        function editRol(){
-            var row = $('#dgRoll').datagrid('getSelected');
-            if (row){
-                $('#dlgRoll').dialog('open').dialog('center').dialog('setTitle','Editar Rol');
-                $('#fmRoll').form('load',row);
-                url = 'accion/admin/mod_rol.php?id='+row.id;
-            }
-        }
-        function saveRol(){
-            $('#fmRoll').form('submit',{
-                url: url,                
-                iframe: false,
-                onSubmit: function(){
-                    return $(this).form('validate');
-                },
-                success: function(result){
-                    var result = eval('('+result+')');
-                    if (result.errorMsg){
-                        $.messager.show({
-                            title: 'Error',
-                            msg: result.errorMsg
-                        });
-                    } else {
-                        $('#dlgRoll').dialog('close');        // close the dialog
-                        $('#dgRoll').datagrid('reload');    // reload the user data
-                    }
-                }
-            });
-        }
-        function destroyRol(){
-            var row = $('#dgRoll').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('Confirmar','Esta seguro de borrar el Rol?',function(r){
-                    if (r){
-                        $.post('accion/admin/baja_rol.php',{idrol:row.idrol},function(result){
-                            console.log(result);
-                            if (result.respuesta){
-                                $('#dgRoll').datagrid('reload');    // reload the user data
-                            } else {
-                                $.messager.show({    // show error message
-                                    title: 'Error',
-                                    msg: result.errorMsg
-                                });
-                            }
-                        },'json');
-                    }
-                });
-            }
-        }
-    </script>
 <?php
 }
 ?>
