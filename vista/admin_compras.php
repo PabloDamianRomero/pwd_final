@@ -181,7 +181,7 @@
         function detallesCompra(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
-                window.location.href = "accion/admin/detalleCompra.php?idcompra="+row.idcompra;                    
+                window.location.href = "accion/compra/detalleCompra.php?idcompra="+row.idcompra+"&rol=1";                    
             }
         }
     </script>

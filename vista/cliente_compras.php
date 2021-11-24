@@ -90,6 +90,7 @@
         </table>
         <div id="toolbar">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="cancelarCompra()">Cancelar</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="detallesCompra()">Detalles</a>
         </div>
         
         <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
@@ -149,6 +150,12 @@
                     }    
                    
                 });
+            }
+        }
+        function detallesCompra(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                window.location.href = "accion/compra/detalleCompra.php?idcompra="+row.idcompra+"&rol=3";                    
             }
         }
     </script>

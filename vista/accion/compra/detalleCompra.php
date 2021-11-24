@@ -40,7 +40,13 @@ if (isset($datos['idcompra'])){?>
         }
         echo '</tbody></table>';
     
-    echo '<a class="btn btn-primary" href="../../admin_compras.php">Volver</a>';
+    if ($datos['rol']==1){
+        echo '<a class="btn btn-primary" href="../../admin_compras.php">Volver</a>';
+    }
+    if ($datos['rol']==3){
+        echo '<a class="btn btn-primary" href="../../cliente_compras.php">Volver</a>';
+    }
+    
     
 }
 
