@@ -53,7 +53,7 @@ if($rolActivo->getIdrol() != 3){?>
                 <p><?php echo $content ?></p>
             </div>
             <?php
-                if ($objP->getProCantstock()>0){
+                if ($objP->getProCantstock()>0 && $objP->getProdeshabilitado() == "0000-00-00 00:00:00"){
                     echo '<div class="col-12 mt-5">
                                 <h6>Unidades disponibles: '.$objP->getProCantstock().'</h6>
                             </div>
