@@ -53,7 +53,7 @@ class Producto
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO producto(pronombre,prodetalle,proprecio,procantstock,prodeshabilitado)  VALUES('" . $this->getPronombre() . "','" . $this->getProdetalle() . "',".$this->getProprecio().",".$this->getProcantstock().",";
+        $sql = "INSERT INTO producto(pronombre,prodetalle,proprecio,procantstock,prodeshabilitado)  VALUES('" . $this->getPronombre() . "','" . $this->getProdetalle() . "','".$this->getProprecio()."','".$this->getProcantstock()."',";
         if ($this->getProdeshabilitado()!=null){
             $sql.="'".$this->getProdeshabilitado()."'";
         }else{
