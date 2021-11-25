@@ -64,13 +64,26 @@ class abmUsuario
      */
     public function alta($param)
     {
-        $resp = false;
-        $param['idusuario'] = null;
-        $param['usdeshabilitado']=null;
-        $elObjtUsuario = $this->cargarObjeto($param);
-        if ($elObjtUsuario != null and $elObjtUsuario->insertar()) {
-            $resp = true;
+        $resp['respuesta'] = false;
+        $validacion=$this->validacion($param);
+        if ($validacion['valid']) {
+            $param['uspass'] = md5($param['uspass']);
+            $param['idusuario'] = null;
+            $param['usdeshabilitado']=null;
+            $elObjtUsuario = $this->cargarObjeto($param);
+            if ($elObjtUsuario != null and $elObjtUsuario->insertar()) {
+                $resp['respuesta'] = true;
+            }
+        } else {
+            $resp['respuesta'] = false;
+            if (!isset($validacion['errorMsg'])){
+                $resp['errorMsg'] = "Debe contener 1 letra y 1 número.";
+            }else{
+                $resp['errorMsg'] =$validacion['errorMsg'];
+            }
+            
         }
+        
         return $resp;
 
     }
@@ -100,12 +113,30 @@ class abmUsuario
      */
     public function modificacion($param)
     {
-        $resp = false;
-        if ($this->seteadosCamposClaves($param)) {
-            $elObjtUsuario = $this->cargarObjeto($param);
-            if ($elObjtUsuario != null and $elObjtUsuario->modificar()) {
-                $resp = true;
+        $resp['respuesta'] = false;
+        $validacion=$this->validacion($param);
+        if ($validacion['valid']) {
+            $param['uspass'] = md5($param['uspass']);
+            if ($param['usdeshabilitado']=="0000-00-00 00:00:00"){
+                $date = date('Y-m-d H:i:s');
+                $param['usdeshabilitado']=$date;  //Si estaba activo ahora ingresa la fecha actual
+            }else{
+                $param['usdeshabilitado']="0000-00-00 00:00:00"; //Si estaba inactivo ahora lo setea en nulo (lo activa)
             }
+            if ($this->seteadosCamposClaves($param)) {
+                $elObjtUsuario = $this->cargarObjeto($param);
+                if ($elObjtUsuario != null and $elObjtUsuario->modificar()) {
+                    $resp['respuesta'] = true;
+                }
+            }
+        }else {
+            $resp['respuesta'] = false;
+            if (!isset($validacion['errorMsg'])){
+                $resp['errorMsg'] = "Debe contener 1 letra y 1 número.";
+            }else{
+                $resp['errorMsg'] =$validacion['errorMsg'];
+            }
+            
         }
         return $resp;
     }
@@ -143,6 +174,57 @@ class abmUsuario
         $arreglo = Usuario::listar($where);
         return $arreglo;
 
+    }
+
+
+    public function validacion($param){
+        // Compruebo que la contraseña cumpla con el formato establecido
+        // Contraseña de 8 a 10 caracteres. Debe contener 1 letra y 1 número.
+        $validacion = false;
+        $longitudPsw = strlen($param['uspass']);
+        if (($longitudPsw >= 8) && ($longitudPsw <= 10)) {
+            $letra = false;
+            $numero = false;
+            for ($i = 0; $i < $longitudPsw; $i++) {
+                if ($param['uspass'][$i] == "0" ||
+                    $param['uspass'][$i] == "1" ||
+                    $param['uspass'][$i] == "2" ||
+                    $param['uspass'][$i] == "3" ||
+                    $param['uspass'][$i] == "4" ||
+                    $param['uspass'][$i] == "5" ||
+                    $param['uspass'][$i] == "6" ||
+                    $param['uspass'][$i] == "7" ||
+                    $param['uspass'][$i] == "8" ||
+                    $param['uspass'][$i] == "9") {
+                    $numero = true;
+                } else if ($param['uspass'][$i] != " ") {
+                    $letra = true;
+                }
+            }
+            if ($letra && $numero) {
+                $validacion = true;
+            }
+            $retorno['valid'] = $validacion;
+        } else {
+            $retorno['valid'] = $validacion;
+            $retorno['errorMsg'] = "Logitud de contraseña incorrecta. Debe contener de 8 a 10 caracteres.";
+        }
+        
+        return $retorno;
+    }
+
+    public function listado($param){
+        $list=$this->buscar($param);
+        $arreglo_salida=array();
+        foreach($list as $elem){
+            $nuevoElem['idusuario']=$elem->getIdusuario();
+            $nuevoElem['usnombre']=$elem->getUsnombre();
+            $nuevoElem['uspass']=$elem->getUspass();
+            $nuevoElem['usmail']=$elem->getUsmail();
+            $nuevoElem['usdeshabilitado']=$elem->getUsdeshabilitado();
+            array_push($arreglo_salida,$nuevoElem);
+        }
+        return $arreglo_salida;
     }
 
 }

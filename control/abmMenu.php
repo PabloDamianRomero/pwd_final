@@ -106,6 +106,12 @@ class abmMenu
     public function modificacion($param)
     {
         $resp = false;
+        if ($param['medeshabilitado']=="0000-00-00 00:00:00"){
+            $date = date('Y-m-d H:i:s');
+            $param['medeshabilitado']=$date;  //Si estaba activo ahora ingresa la fecha actual
+        }else{
+            $param['medeshabilitado']="0000-00-00 00:00:00"; //Si estaba inactivo ahora lo setea en nulo (lo activa)
+        }
         if ($this->seteadosCamposClaves($param)) {
             $elObjtMenu = $this->cargarObjeto($param);
             if ($elObjtMenu != null and $elObjtMenu->modificar()) {
@@ -147,5 +153,23 @@ class abmMenu
         }
         $arreglo = Menu::listar($where);
         return $arreglo;
+    }
+
+    public function listado($param){
+        $list=$this->buscar($param);
+        $arreglo_salida=array();
+        foreach($list as $elem){
+            $nuevoElem['idmenu']=$elem->getIdmenu();
+            $nuevoElem['menombre']=$elem->getMenombre();
+            $nuevoElem['medescripcion']=$elem->getMedescripcion();
+            if ($elem->getObjMenu()!=null){
+                $nuevoElem['idpadre']=$elem->getObjMenu()->getidMenu();
+            }else{
+                $nuevoElem['idpadre']=null;
+            }
+            $nuevoElem['medeshabilitado']=$elem->getMedeshabilitado();
+            array_push($arreglo_salida,$nuevoElem);
+        }
+        return $arreglo_salida;
     }
 }

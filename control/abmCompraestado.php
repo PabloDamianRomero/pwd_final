@@ -85,6 +85,8 @@ class abmCompraestado{
         
         return $resp;
     }
+
+
     
     /**
      * permite modificar un objeto
@@ -124,6 +126,95 @@ class abmCompraestado{
         }
         $arreglo = CompraEstado::listar($where);  
         return $arreglo;
+    }
+
+
+    /**
+     * 
+     */
+    public function cancelaCompra($param){
+        $resp=false;
+        $colEstados=$this->buscar(['idcompra'=>$param['idcompra']]);
+        if (count($colEstados)==$param['idcompraestadotipo']){
+            if ($param['cetdescripcion']=="iniciada" || $param['cetdescripcion']=="aceptada" || $param['cetdescripcion']=="enviada"){
+                //Le doy fin al estado actual
+                $resp=$this->modificacion(['idcompra'=>$param['idcompra'],'idcompraestado'=>$param['idcompraestado'],'idcompraestadotipo'=>$param['idcompraestadotipo'],'cefechaini'=>$param['cefechaini'],'cefechafin'=>date('Y-m-d H:i:s')]);
+                if ($resp){
+                    //Inicio cancelacion
+                    $resp=$this->alta(['idcompra'=>$param['idcompra'],'idcompraestadotipo'=>4,'cefechaini'=>date('Y-m-d H:i:s')]);
+                    if (!$resp){
+                        $retorno['errorMsg']="Hubo un problema en la creacion del nuevo estado.";
+                    }else{
+                        //Retorno los items de la compra al stock del producto
+                        $abmItem=new abmCompraitem();
+                        $items=$abmItem->buscar(['idcompra'=>$param['idcompra']]);
+                        foreach ($items as $item){
+                            $cantidad=$item->getCicantidad();
+                            $producto=$item->getObjProducto();
+                            $cantidad+=$producto->getProcantstock();
+                            $abmProducto=new abmProducto();
+                            $resp=$abmProducto->modificacion(['idproducto'=>$producto->getIdproducto(),'pronombre'=>$producto->getPronombre(),'prodetalle'=>$producto->getProdetalle(),'proprecio'=>$producto->getProprecio(),'prodeshabilitado'=>$producto->getProdeshabilitado(),'procantstock'=>$cantidad]);
+                        }
+                    }
+                    
+                }else{
+                    $respuesta['errorMsg']="Hubo un problema en la modificacion del estado.";
+                }
+            }else{
+                $respuesta['errorMsg']="Solo puede cancelarse la compra si actualmente esta 'iniciada', 'aceptada' o 'enviada'.";
+            }
+        }else{
+            $respuesta['errorMsg']="La compra ya se encuentra en un estado mas avanzado.";
+        }
+        
+        $respuesta['respuesta']=$resp;
+        return $respuesta;
+    }
+
+    public function cambiarEstado($param){
+        $respuesta['resp']=false;
+        $colEstados=$this->buscar(['idcompra'=>$param['idcompra']]);
+        if (count($colEstados)==$param['idcompraestadotipo']){
+            if ($param['cetdescripcion']=="iniciada" || $param['cetdescripcion']=="aceptada"){
+                //Le doy fin al estado actual
+                $respuesta['respuesta']=$this->modificacion(['idcompra'=>$param['idcompra'],'idcompraestado'=>$param['idcompraestado'],'idcompraestadotipo'=>$param['idcompraestadotipo'],'cefechaini'=>$param['cefechaini'],'cefechafin'=>date('Y-m-d H:i:s')]);
+                if ($respuesta['respuesta']){
+                    //Inicio un nuevo estado
+                    if ($param['cetdescripcion']=="iniciada"){
+                        $respuesta['respuesta']=$this->alta(['idcompra'=>$param['idcompra'],'idcompraestadotipo'=>2,'cefechaini'=>date('Y-m-d H:i:s')]);
+                    }elseif($param['cetdescripcion']=="aceptada"){
+                        $respuesta['respuesta']=$this->alta(['idcompra'=>$param['idcompra'],'idcompraestadotipo'=>3,'cefechaini'=>date('Y-m-d H:i:s')]);
+                    }
+                    if (!$respuesta['respuesta']){
+                        $respuesta['errorMsg']="Hubo un problema en la creacion del nuevo estado.";
+                    }
+                    
+                }else{
+                    $respuesta['errorMsg']="Hubo un problema en la modificacion del estado.";
+                }
+            }else{
+                $respuesta['errorMsg']="Solo puede actualizarse el estado si es 'iniciada' o 'aceptada'.";
+            }
+        }else{
+            $respuesta['errorMsg']="La compra ya se encuentra en un estado mas avanzado.";
+        }
+        return $respuesta;
+    }
+
+
+    public function listado($param){
+        $list=$this->buscar($param);
+        $arreglo_salida=array();
+        foreach($list as $elem){
+            $nuevoElem['idcompraestado']=$elem->getIdcompraestado();
+            $nuevoElem['idcompra']=$elem->getObjCompra()->getIdcompra();
+            $nuevoElem['idcompraestadotipo']=$elem->getObjCompraestadotipo()->getIdcompraestadotipo();
+            $nuevoElem['cetdescripcion']=$elem->getObjCompraestadotipo()->getCetdescripcion();
+            $nuevoElem['cefechaini']=$elem->getCefechaini();
+            $nuevoElem['cefechafin']=$elem->getCefechafin();
+            array_push($arreglo_salida,$nuevoElem);
+        }
+        return $arreglo_salida;
     }
 }
 ?>

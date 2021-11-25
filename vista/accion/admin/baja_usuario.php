@@ -2,13 +2,7 @@
 include_once("../../../configuracion.php");
 $datos=data_submitted();
 $resp=false;
-if (isset($datos['idusuario']) && isset($datos['usnombre']) && isset($datos['uspass']) && isset($datos['usmail']) && isset($datos['usdeshabilitado'])){
-    if ($datos['usdeshabilitado']=="0000-00-00 00:00:00"){
-        $date = date('Y-m-d H:i:s');
-        $datos['usdeshabilitado']=$date;  //Si estaba activo ahora ingresa la fecha actual
-    }else{
-        $datos['usdeshabilitado']="0000-00-00 00:00:00"; //Si estaba inactivo ahora lo setea en nulo (lo activa)
-    }
+if (isset($datos['idusuario']) && isset($datos['usnombre']) && isset($datos['uspass']) && isset($datos['usmail']) && isset($datos['usdeshabilitado'])){    
     $abmUs=new abmUsuario();
     $resp=$abmUs->modificacion($datos);
 }

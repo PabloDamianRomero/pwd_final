@@ -73,7 +73,21 @@ class abmRol
      * @return boolean
      */
     public function baja($param)
-    {
+    {   
+        $abmMenuRol=new abmMenurol();
+        $arrayMenuRol=$abmMenuRol->buscar(['idrol'=>$param['idrol']]);
+        if (!empty($arrayMenuRol)){
+            foreach ($arrayMenuRol as $obj){
+                $obj->eliminar();   //Borra los objetos con claves foraneas de tabla MenuRol
+            }
+        }
+        $abmUsuarioRol=new abmUsuariorol();
+        $arrayUsuarioRol=$abmUsuarioRol->buscar(['idrol'=>$param['idrol']]);
+        if (!empty($arrayUsuarioRol)){
+            foreach ($arrayUsuarioRol as $obj){
+                $obj->eliminar();   //Borra los objetos con claves foraneas de tabla UsuarioRol
+            }
+        }
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $elObjtRol = $this->cargarObjetoConClave($param);
@@ -123,5 +137,16 @@ class abmRol
         }
         $arreglo = Rol::listar($where);
         return $arreglo;
+    }
+
+    public function listado($param){
+        $list=$this->buscar($param);
+        $arreglo_salida=array();
+        foreach($list as $elem){
+            $nuevoElem['idrol']=$elem->getIdrol();
+            $nuevoElem['rodescripcion']=$elem->getRodescripcion();
+            array_push($arreglo_salida,$nuevoElem);
+        }
+        return $arreglo_salida;
     }
 }

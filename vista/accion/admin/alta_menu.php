@@ -2,9 +2,7 @@
     include_once("../../../configuracion.php");
     $datos=data_submitted();
     if (isset($datos['menombre'])){
-        if ($datos['idpadre']==0){
-            $datos['idpadre']=null;
-        }
+        
         $abmMe=new abmMenu();
         $resp=$abmMe->alta($datos);
     }else{

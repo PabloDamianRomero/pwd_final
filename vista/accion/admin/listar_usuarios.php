@@ -2,15 +2,6 @@
 include_once("../../../configuracion.php");
 $data=data_submitted();
 $objControl=new abmUsuario();
-$list=$objControl->buscar($data);
-$arreglo_salida=array();
-foreach($list as $elem){
-    $nuevoElem['idusuario']=$elem->getIdusuario();
-    $nuevoElem['usnombre']=$elem->getUsnombre();
-    $nuevoElem['uspass']=$elem->getUspass();
-    $nuevoElem['usmail']=$elem->getUsmail();
-    $nuevoElem['usdeshabilitado']=$elem->getUsdeshabilitado();
-    array_push($arreglo_salida,$nuevoElem);
-}
+$arreglo_salida=$objControl->listado($data);
 echo json_encode($arreglo_salida);
 ?>
