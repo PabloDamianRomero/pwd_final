@@ -92,7 +92,6 @@ class abmCompraestado{
      * @return boolean
      */
     public function modificacion($param){
-        //echo "Estoy en modificacion";
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $elObjtCompraEstado = $this->cargarObjeto($param);

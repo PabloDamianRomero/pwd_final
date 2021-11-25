@@ -91,7 +91,6 @@ class abmMenurol{
      * @return boolean
      */
     public function modificacion($param){
-        //echo "Estoy en modificacion";
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $elObjtMenurol = $this->cargarObjeto($param);
