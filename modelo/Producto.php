@@ -53,7 +53,7 @@ class Producto
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO producto(pronombre,prodetalle,proprecio,procantstock,prodeshabilitado)  VALUES('" . $this->getPronombre() . "','" . $this->getProdetalle() . "','".$this->getProprecio()."','".$this->getProcantstock()."',";
+        $sql = "INSERT INTO producto(pronombre,prodetalle,proprecio,procantstock,prodeshabilitado)  VALUES('" . $this->getPronombre() . "','" . $this->getProdetalle() . "',".$this->getProprecio().",".$this->getProcantstock().",";
         if ($this->getProdeshabilitado()!=null){
             $sql.="'".$this->getProdeshabilitado()."'";
         }else{
@@ -77,7 +77,7 @@ class Producto
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "UPDATE producto SET pronombre='" . $this->getPronombre() . "', prodetalle= '" . $this->getProdetalle() . "',proprecio='".$this->getProprecio()."', procantstock= " . $this->getProCantstock() . ", prodeshabilitado= '".$this->getProdeshabilitado()."' WHERE idproducto=" . $this->getIdproducto();
+        $sql = "UPDATE producto SET pronombre='" . $this->getPronombre() . "', prodetalle= '" . $this->getProdetalle() . "',proprecio=".$this->getProprecio().", procantstock= " . $this->getProCantstock() . ", prodeshabilitado= '".$this->getProdeshabilitado()."' WHERE idproducto=" . $this->getIdproducto();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
