@@ -6,8 +6,9 @@ if (isset($datos['usnombre']) && isset($datos['uspass'])
     && isset($datos['usmail'])) {
     $datos['uspass'] = md5($datos['uspass']);
     $abmUs = new abmUsuario();
-    $usuarioExiste = $abmUs->buscar($datos);
-    if (!$usuarioExiste) { // si no existe el usuario
+    $usuarioExisteConMail = $abmUs->buscar($datos);
+    $usuarioExisteSinMail = $abmUs->buscar(["usnombre" => $datos['usnombre']], ["uspass" => md5($datos['uspass'])]);
+    if (!$usuarioExisteConMail && !$usuarioExisteSinMail) { // si no existe el usuario con o sin mail
         $resp = $abmUs->alta($datos);
         if ($resp) { // si el usuario se pudo insertar en bd
             $arrUser = $abmUs->buscar($datos);
