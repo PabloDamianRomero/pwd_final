@@ -33,6 +33,7 @@ diferentes operaciones. Los roles iniciales son: cliente, depósito y administra
 
 ### Observaciones:
 - El nombre del proyecto dentro del directorio "htdocs" se debe llamar pwd_final.
+- Se debe crear la base de datos con el nombre "bdcarritocompras", y luego importar el archivo bdcarritocompras.sql ubicado dentro del proyecto.
 - Al registrarse en el sistema, el usuario pasa a ser automáticamente cliente. Si el usuario cliente desea "aumentar" su rol, la decisión correrá a cargo de algún administrador.
 
 Integrantes:
