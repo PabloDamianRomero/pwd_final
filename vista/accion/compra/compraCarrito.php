@@ -23,7 +23,6 @@ if($idrol!= 3){?>
         $compra=$abmCompra->buscar(['idcompra'=>$datos['idcompra']]);
         $abmCompra->modificacion(['idcompra'=>$datos['idcompra'],'cofecha'=>$compra[0]->getCofecha(),'idusuario'=>$compra[0]->getObjUsuario()->getIdusuario(),'metodo'=>'normal']);
         //Pongo la compra en estado 'iniciada'
-        date_default_timezone_set('America/Argentina/Buenos_Aires');
         $abmEstado=new abmCompraestado();
         $resp=$abmEstado->alta(['idcompra'=>$datos['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>date('Y-m-d H:i:s')]);
         if ($resp){

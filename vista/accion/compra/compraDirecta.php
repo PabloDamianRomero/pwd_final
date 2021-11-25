@@ -16,7 +16,6 @@
             if ($respItem){
                 //Pongo la compra en estado 'iniciada'
                 $abmEstado=new abmCompraestado();
-                date_default_timezone_set('America/Argentina/Buenos_Aires');
                 $respEst=$abmEstado->alta(['idcompra'=>$resp['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>date('Y-m-d H:i:s')]);
                 if ($respEst){
                     //Resto los items comprados del stock

@@ -4,7 +4,6 @@ $datos=data_submitted();
 $resp=false;
 if (isset($datos['idusuario']) && isset($datos['usnombre']) && isset($datos['uspass']) && isset($datos['usmail']) && isset($datos['usdeshabilitado'])){
     if ($datos['usdeshabilitado']=="0000-00-00 00:00:00"){
-        date_default_timezone_set('America/Argentina/Buenos_Aires');
         $date = date('Y-m-d H:i:s');
         $datos['usdeshabilitado']=$date;  //Si estaba activo ahora ingresa la fecha actual
     }else{

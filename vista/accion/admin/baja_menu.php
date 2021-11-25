@@ -4,7 +4,6 @@ $datos=data_submitted();
 $resp=false;
 if (isset($datos['idmenu']) && isset($datos['menombre']) && isset($datos['medescripcion']) && isset($datos['medeshabilitado']) && isset($datos['idpadre'])){
     if ($datos['medeshabilitado']=="0000-00-00 00:00:00"){
-        date_default_timezone_set('America/Argentina/Buenos_Aires');
         $date = date('Y-m-d H:i:s');
         $datos['medeshabilitado']=$date;  //Si estaba activo ahora ingresa la fecha actual
     }else{

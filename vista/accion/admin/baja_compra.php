@@ -8,7 +8,6 @@
         if (count($colEstados)==$datos['idcompraestadotipo']){
             if ($datos['cetdescripcion']=="iniciada" || $datos['cetdescripcion']=="aceptada" || $datos['cetdescripcion']=="enviada"){
                 //Le doy fin al estado actual
-                date_default_timezone_set('America/Argentina/Buenos_Aires');
                 $resp=$abmEstado->modificacion(['idcompra'=>$datos['idcompra'],'idcompraestado'=>$datos['idcompraestado'],'idcompraestadotipo'=>$datos['idcompraestadotipo'],'cefechaini'=>$datos['cefechaini'],'cefechafin'=>date('Y-m-d H:i:s')]);
                 if ($resp){
                     //Inicio cancelacion
