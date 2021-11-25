@@ -31,20 +31,20 @@ if (isset($datos['idcompra'])){?>
                 echo '<th>'.$item->getObjProducto()->getPronombre().'</th>';
                 echo '<th><img width="40" src="'.$enlaceImg.'"></th>';
                 echo '<th>'.$item->getCicantidad().'</th>';
-                echo '<th>'.$item->getObjProducto()->getProprecio().'</th>';
-                echo '<th>'.$precio.'</th></tr>';
+                echo '<th>$ '.$item->getObjProducto()->getProprecio().'</th>';
+                echo '<th>$ '.$precio.'</th></tr>';
                 $i++;
                 $total+=$precio;
             }
-            echo '<tr><th></th><th></th><th></th><th></th><th>Total Compra:</th><th>'.$total.'</th></tr>';
+            echo '<tr><th></th><th></th><th></th><th></th><th>Total Compra:</th><th>$ '.$total.'</th></tr>';
         }
         echo '</tbody></table>';
     
     if ($datos['rol']==1){
-        echo '<a class="btn btn-primary" href="../../admin_compras.php">Volver</a>';
+        echo '<div class="text-center"><a class="btn btn-primary" href="../../admin_compras.php">Volver</a></div>';
     }
     if ($datos['rol']==3){
-        echo '<a class="btn btn-primary" href="../../cliente_compras.php">Volver</a>';
+        echo '<div class="text-center"><a class="btn btn-primary" href="../../cliente_compras.php">Volver</a></div>';
     }
     
     
