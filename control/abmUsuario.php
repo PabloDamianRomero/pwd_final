@@ -227,4 +227,41 @@ class abmUsuario
         return $arreglo_salida;
     }
 
+
+    public function registroUs($datos){
+        $resp=false;
+        $usuarioExisteConMail = $this->buscar($datos);
+        $usuarioExisteSinMail = $this->buscar(["usnombre" => $datos['usnombre'],"uspass" => md5($datos['uspass'])]);
+        if (!$usuarioExisteConMail && !$usuarioExisteSinMail) { // si no existe el usuario con o sin mail
+            $resp = $this->alta($datos);
+            if ($resp['respuesta']) { // si el usuario se pudo insertar en bd
+                $datos['uspass'] = md5($datos['uspass']);
+                $arrUser = $this->buscar($datos);
+                if (count($arrUser) > 0) {
+                    $objUsuario = $arrUser[0];
+                    $idUsuario = $objUsuario->getIdusuario();
+                    $datos['idusuario'] = $idUsuario;
+                    $datos['idrol'] = 3;
+                    $abmUsRol = new abmUsuariorol();
+                    $resp = $abmUsRol->alta($datos);
+                    if ($resp) {
+                        $reg = "ALTA USUARIO-ROL EXITOSA.";
+                        $retorno['enlace']="Location:../../login.php?reg=" . $reg;
+                    } else {
+                        $respBaja = $this->baja($datos['idusuario']); // si no pudo insertar en usuariorol pero si en usuario, borro el usuario
+                        $reg = "No se pudo registrar el usuario cliente.";
+                        $retorno['enlace']="Location:../../registro.php?reg=" . $reg;
+                    }
+                }
+            } else {
+                $reg = "No se pudo guardar el usuario. ".$resp['errorMsg'];
+                $retorno['enlace']="Location:../../registro.php?reg=" . $reg;
+            }
+        }else{
+            $reg = "El usuario ya existe";
+            $retorno['enlace']="Location:../../registro.php?reg=" . $reg;
+        }
+        return $retorno;
+    }
+
 }
