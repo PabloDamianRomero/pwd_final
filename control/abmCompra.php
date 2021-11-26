@@ -167,26 +167,42 @@ class abmCompra
     //  La funcion debe dar de alta la compra en carrito
     //  Se retorna un string con el enlace que llevara el header
     public function compraCarrito($param){
-        //Cambio el metodo de compra de 'carrito' a 'normal' para que no se cargue en la tabla de carrito.
+        //Chequeo si hay stock disponible
         $compra=$this->buscar(['idcompra'=>$param['idcompra']]);
-        $this->modificacion(['idcompra'=>$param['idcompra'],'cofecha'=>$compra[0]->getCofecha(),'idusuario'=>$compra[0]->getObjUsuario()->getIdusuario(),'metodo'=>'normal']);
-        //Pongo la compra en estado 'iniciada'
-        $abmEstado=new abmCompraestado();
-        $resp=$abmEstado->alta(['idcompra'=>$param['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>date('Y-m-d H:i:s')]);
-        if ($resp){
-            //Resto los items comprados del stock
-            $abmItems=new abmCompraitem();
-            $items=$abmItems->buscar(['idcompra']);
-            $abmProd=new abmProducto();
-            foreach($items as $item){
-                $producto=$item->getObjProducto();
-                $cantidad=($producto->getProcantstock())-($item->getCicantidad());
-                $abmProd->modificacion(['idproducto'=>$producto->getIdproducto(),'pronombre'=>$producto->getPronombre(),'prodetalle'=>$producto->getProdetalle(),'proprecio'=>$producto->getProprecio(),'prodeshabilitado'=>$producto->getProdeshabilitado(),'procantstock'=>$cantidad]);
+        $abmItems=new abmCompraitem();
+        $items=$abmItems->buscar(['idcompra']);
+        $abmProd=new abmProducto();
+        $sinStock=false;
+        foreach($items as $item){
+            $producto=$item->getObjProducto();
+            $cantidad=($producto->getProcantstock())-($item->getCicantidad());
+            if ($cantidad < 0){
+                $sinStock=true;
+                //Elimino el producto sin stock del carrito
+                $abmItems->baja(['idcompraitem'=>$item->getIdcompraitem()]);
             }
-            $header="Location:../../retornoCompra.php?resp=exito";
-        }else{
-            $header="Location:../../retornoCompra.php?resp=fallo";
         }
+        if (!$sinStock){
+            //Cambio el metodo de compra de 'carrito' a 'normal' para que no se cargue en la tabla de carrito.
+            $this->modificacion(['idcompra'=>$param['idcompra'],'cofecha'=>$compra[0]->getCofecha(),'idusuario'=>$compra[0]->getObjUsuario()->getIdusuario(),'metodo'=>'normal']);
+            //Pongo la compra en estado 'iniciada'
+            $abmEstado=new abmCompraestado();
+            $resp=$abmEstado->alta(['idcompra'=>$param['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>date('Y-m-d H:i:s')]);
+            if ($resp){
+                //Resto los items comprados del stock
+                foreach($items as $item){
+                    $producto=$item->getObjProducto();
+                    $cantidad=($producto->getProcantstock())-($item->getCicantidad());
+                    $abmProd->modificacion(['idproducto'=>$producto->getIdproducto(),'pronombre'=>$producto->getPronombre(),'prodetalle'=>$producto->getProdetalle(),'proprecio'=>$producto->getProprecio(),'prodeshabilitado'=>$producto->getProdeshabilitado(),'procantstock'=>$cantidad]);
+                }
+                $header="Location:../../retornoCompra.php?resp=exito";
+            }else{
+                $header="Location:../../retornoCompra.php?resp=fallo";
+            }
+        }else{
+            $header="Location:../../retornoCompra.php?resp=stock";
+        }
+        
         return $header;
     }
 
@@ -194,42 +210,56 @@ class abmCompra
     //  La funcion debe dar de alta la compra individual
     //  Se retorna un string con el enlace que llevara el header
     public function compraDirecta($param){
-        $sesion=new Session();
-        $objUsuario=$sesion->getUsuario();
-        $idusuario=$objUsuario->getIdusuario();
-        //Doy de alta la compra
-        $resp=$this->alta(['idusuario'=>$idusuario, 'metodo'=>'normal']);
-        if ($resp['respuesta']){
-            //Doy de alta a la compra de items
-            $abmCompItem=new abmCompraitem();
-            $respItem=$abmCompItem->alta(["idproducto"=>$param['idproducto'],"idcompra"=>$resp['idcompra'],"cicantidad"=>$param['cicantidad']]);            
-            if ($respItem){
-                //Pongo la compra en estado 'iniciada'
-                $abmEstado=new abmCompraestado();
-                $respEst=$abmEstado->alta(['idcompra'=>$resp['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>date('Y-m-d H:i:s')]);
-                if ($respEst){
-                    //Resto los items comprados del stock
-                    $abmProd=new abmProducto();
-                    $producto=$abmProd->buscar(['idproducto'=>$param['idproducto']]);
-                    if (count($producto)==1){
-                        $cantidad=($producto[0]->getProcantstock())-($param['cicantidad']);
-                        $respProd=$abmProd->modificacion(['idproducto'=>$producto[0]->getIdproducto(),'pronombre'=>$producto[0]->getPronombre(),'prodetalle'=>$producto[0]->getProdetalle(),'proprecio'=>$producto[0]->getProprecio(),'prodeshabilitado'=>$producto[0]->getProdeshabilitado(),'procantstock'=>$cantidad]);
-                        if ($respProd){
-                            $header='Location:../../retornoCompra.php?resp=exito';
-                        }else{
-                            $header='Location:../../retornoCompra.php?resp=fallo';
+        //Chequeo si hay stock disponible
+        $sinStock=false;
+        $abmProd=new abmProducto();
+        $producto=$abmProd->buscar(['idproducto'=>$param['idproducto']]);
+        if (count($producto)==1){
+            if ($producto[0]->getProcantstock()<$param['cicantidad']){
+                $sinStock=true;
+            }
+        }else{
+            $header='Location:../../retornoCompra.php?resp=fallo';
+        }
+        if (!$sinStock){
+            $sesion=new Session();
+            $objUsuario=$sesion->getUsuario();
+            $idusuario=$objUsuario->getIdusuario();
+            //Doy de alta la compra
+            $resp=$this->alta(['idusuario'=>$idusuario, 'metodo'=>'normal']);
+            if ($resp['respuesta']){
+                //Doy de alta a la compra de items
+                $abmCompItem=new abmCompraitem();
+                $respItem=$abmCompItem->alta(["idproducto"=>$param['idproducto'],"idcompra"=>$resp['idcompra'],"cicantidad"=>$param['cicantidad']]);            
+                if ($respItem){
+                    //Pongo la compra en estado 'iniciada'
+                    $abmEstado=new abmCompraestado();
+                    $respEst=$abmEstado->alta(['idcompra'=>$resp['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>date('Y-m-d H:i:s')]);
+                    if ($respEst){
+                        //Resto los items comprados del stock
+                        if (count($producto)==1){
+                            $cantidad=($producto[0]->getProcantstock())-($param['cicantidad']);
+                            $respProd=$abmProd->modificacion(['idproducto'=>$producto[0]->getIdproducto(),'pronombre'=>$producto[0]->getPronombre(),'prodetalle'=>$producto[0]->getProdetalle(),'proprecio'=>$producto[0]->getProprecio(),'prodeshabilitado'=>$producto[0]->getProdeshabilitado(),'procantstock'=>$cantidad]);
+                            if ($respProd){
+                                $header='Location:../../retornoCompra.php?resp=exito';
+                            }else{
+                                $header='Location:../../retornoCompra.php?resp=fallo';
+                            }
                         }
+                    }else{
+                        $header='Location:../../retornoCompra.php?resp=fallo';
                     }
                 }else{
                     $header='Location:../../retornoCompra.php?resp=fallo';
                 }
+                
             }else{
                 $header='Location:../../retornoCompra.php?resp=fallo';
             }
-            
         }else{
-            $header='Location:../../retornoCompra.php?resp=fallo';
+            $header='Location:../../retornoCompra.php?resp=stock';
         }
+        
         return $header;
     }
 

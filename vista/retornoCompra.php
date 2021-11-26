@@ -17,6 +17,11 @@ $titulo = "Estado de la compra";
             Hubo un error con la compra.
         </div>
     <?php
+    }elseif($datos['resp']=="stock"){?>
+        <div class="alert alert-danger text-center" role="alert" style="margin-top: 10%;">
+            Uno de los productos no tiene stock suficiente.
+        </div>
+    <?php
     }
     include_once("estructura/pie.php");
 ?>
