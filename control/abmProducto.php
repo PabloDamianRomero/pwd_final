@@ -59,8 +59,11 @@ class abmProducto
      * @return boolean
      */
     public function alta($param)
-    {
+    {   
         $resp = false;
+        $colProd=$this->buscar(null);
+        $cant=count($colProd);
+        $param['prodetalle'] = md5("detProd".$cant);    //Genero un string que no se repita y lo codifico
         $param['idproducto']=null;
         $param['prodeshabilitado']=null;
         $elObjtProducto = $this->cargarObjeto($param);
@@ -97,11 +100,27 @@ class abmProducto
     public function modificacion($param)
     {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)) {
-            $elObjtProducto = $this->cargarObjeto($param);
-            if ($elObjtProducto != null and $elObjtProducto->modificar()) {
-                $resp = true;
+        if (isset($param['baja'])){
+            if ($param['prodeshabilitado']=="0000-00-00 00:00:00"){
+                $param['prodeshabilitado']=date('Y-m-d H:i:s');  //Si estaba activo ahora ingresa la fecha actual
+            }else{
+                $param['prodeshabilitado']="0000-00-00 00:00:00"; //Si estaba inactivo ahora lo setea en nulo (lo activa)
             }
+        }
+        $controlCantidad =true;
+        if($param['procantstock'] < 0){
+            $controlCantidad = false;
+        }
+        if($controlCantidad){
+            if ($this->seteadosCamposClaves($param)) {
+                $elObjtProducto = $this->cargarObjeto($param);
+                if ($elObjtProducto != null and $elObjtProducto->modificar()) {
+                    $resp = true;
+                }
+            }
+        }else{
+            $resp['respuesta']=false;
+            $resp['errorMsg']="El valor de stock no puede ser negativo. Si no existen productos coloque 0 (Cero).";
         }
         return $resp;
     }
@@ -239,5 +258,26 @@ class abmProducto
         }
         $arrayRespuesta["respuesta"]=$todoOK;
         return $arrayRespuesta;
+    }
+
+    public function listado($param){
+        $list=$this->buscar($param);
+        $arreglo_salida=array();
+        foreach($list as $elem){
+            $nuevoElem['idproducto']=$elem->getIdproducto();
+            $nuevoElem['pronombre']=$elem->getPronombre();
+            $nuevoElem['prodetalle']=$elem->getProdetalle();
+            $nuevoElem['proprecio']=$elem->getProprecio();
+            $nuevoElem['procantstock']=$elem->getProcantstock();
+            $nuevoElem['prodeshabilitado']=$elem->getProdeshabilitado();
+            $rutaImagen = $GLOBALS['ROOT']."/vista/archivos/productos/img/".$elem->getProdetalle().".jpg";
+            if (file_exists($rutaImagen)) {
+                $nuevoElem['proImg']= '<a href="archivos/productos/img/'.$elem->getProdetalle().'.jpg?t="'.time().'""><img width="35" src="archivos/productos/img/'.$elem->getProdetalle().'.jpg?t="'.time().'""></a>';
+            }else{
+                $nuevoElem['proImg']= 'Sin imagen';
+            }
+            array_push($arreglo_salida,$nuevoElem);
+        }
+        return $arreglo_salida;
     }
 }
