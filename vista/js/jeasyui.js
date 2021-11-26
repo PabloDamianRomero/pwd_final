@@ -430,7 +430,7 @@ function cancelarCompra(){
 function detallesCompra(){
     var row = $('#dg').datagrid('getSelected');
     if (row){
-        window.location.href = "accion/compra/detalleCompra.php?idcompra="+row.idcompra+"&rol=1";                    
+        window.location.href = "detalleCompra.php?idcompra="+row.idcompra+"&rol=1";                    
     }
 }
 
@@ -669,7 +669,7 @@ function cancelarCompraCl(){
 function detallesCompraCl(){
     var row = $('#dg').datagrid('getSelected');
     if (row){
-        window.location.href = "accion/compra/detalleCompra.php?idcompra="+row.idcompra+"&rol=3";                    
+        window.location.href = "detalleCompra.php?idcompra="+row.idcompra+"&rol=3";                    
     }
 }
 

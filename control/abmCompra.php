@@ -144,4 +144,164 @@ class abmCompra
         $arreglo = Compra::listar($where);
         return $arreglo;
     }
+
+    public function bajaCarrito(){
+        $sesion=new Session();
+        $objUsuario=$sesion->getUsuario();
+        $idusuario=$objUsuario->getIdusuario();
+        $comprasUs=$this->buscar(['idusuario'=>$idusuario,'metodo'=>'carrito']);
+        if (count($comprasUs)==1){
+            $abmItems=new abmCompraitem();
+            $items=$abmItems->buscar(['idcompra'=>$comprasUs[0]->getIdcompra()]);
+            if (!empty($items)){
+                foreach($items as $item){
+                    $abmItems->baja(['idcompraitem'=>$item->getIdcompraitem()]);
+                }
+                $this->baja(['idcompra'=>$comprasUs[0]->getIdcompra()]);
+            }
+        }
+    }
+
+
+    //  Recibe como parametro 'idcompra'
+    //  La funcion debe dar de alta la compra en carrito
+    //  Se retorna un string con el enlace que llevara el header
+    public function compraCarrito($param){
+        //Cambio el metodo de compra de 'carrito' a 'normal' para que no se cargue en la tabla de carrito.
+        $compra=$this->buscar(['idcompra'=>$param['idcompra']]);
+        $this->modificacion(['idcompra'=>$param['idcompra'],'cofecha'=>$compra[0]->getCofecha(),'idusuario'=>$compra[0]->getObjUsuario()->getIdusuario(),'metodo'=>'normal']);
+        //Pongo la compra en estado 'iniciada'
+        $abmEstado=new abmCompraestado();
+        $resp=$abmEstado->alta(['idcompra'=>$param['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>date('Y-m-d H:i:s')]);
+        if ($resp){
+            //Resto los items comprados del stock
+            $abmItems=new abmCompraitem();
+            $items=$abmItems->buscar(['idcompra']);
+            $abmProd=new abmProducto();
+            foreach($items as $item){
+                $producto=$item->getObjProducto();
+                $cantidad=($producto->getProcantstock())-($item->getCicantidad());
+                $abmProd->modificacion(['idproducto'=>$producto->getIdproducto(),'pronombre'=>$producto->getPronombre(),'prodetalle'=>$producto->getProdetalle(),'proprecio'=>$producto->getProprecio(),'prodeshabilitado'=>$producto->getProdeshabilitado(),'procantstock'=>$cantidad]);
+            }
+            $header="Location:../../retornoCompra.php?resp=exito";
+        }else{
+            $header="Location:../../retornoCompra.php?resp=fallo";
+        }
+        return $header;
+    }
+
+    //  Recibe como parametro 'idproducto' e 'idcantidad'
+    //  La funcion debe dar de alta la compra individual
+    //  Se retorna un string con el enlace que llevara el header
+    public function compraDirecta($param){
+        $sesion=new Session();
+        $objUsuario=$sesion->getUsuario();
+        $idusuario=$objUsuario->getIdusuario();
+        //Doy de alta la compra
+        $resp=$this->alta(['idusuario'=>$idusuario, 'metodo'=>'normal']);
+        if ($resp['respuesta']){
+            //Doy de alta a la compra de items
+            $abmCompItem=new abmCompraitem();
+            $respItem=$abmCompItem->alta(["idproducto"=>$param['idproducto'],"idcompra"=>$resp['idcompra'],"cicantidad"=>$param['cicantidad']]);            
+            if ($respItem){
+                //Pongo la compra en estado 'iniciada'
+                $abmEstado=new abmCompraestado();
+                $respEst=$abmEstado->alta(['idcompra'=>$resp['idcompra'],'idcompraestadotipo'=>1,'cefechaini'=>date('Y-m-d H:i:s')]);
+                if ($respEst){
+                    //Resto los items comprados del stock
+                    $abmProd=new abmProducto();
+                    $producto=$abmProd->buscar(['idproducto'=>$param['idproducto']]);
+                    if (count($producto)==1){
+                        $cantidad=($producto[0]->getProcantstock())-($param['cicantidad']);
+                        $respProd=$abmProd->modificacion(['idproducto'=>$producto[0]->getIdproducto(),'pronombre'=>$producto[0]->getPronombre(),'prodetalle'=>$producto[0]->getProdetalle(),'proprecio'=>$producto[0]->getProprecio(),'prodeshabilitado'=>$producto[0]->getProdeshabilitado(),'procantstock'=>$cantidad]);
+                        if ($respProd){
+                            $header='Location:../../retornoCompra.php?resp=exito';
+                        }else{
+                            $header='Location:../../retornoCompra.php?resp=fallo';
+                        }
+                    }
+                }else{
+                    $header='Location:../../retornoCompra.php?resp=fallo';
+                }
+            }else{
+                $header='Location:../../retornoCompra.php?resp=fallo';
+            }
+            
+        }else{
+            $header='Location:../../retornoCompra.php?resp=fallo';
+        }
+        return $header;
+    }
+
+
+
+    //  Realiza la orden o encargo de la compra del producto
+    //  Retorna el enlace del header dependiendo de si se tuvo exito o no. En caso de tener exito tambien varia si la compra es individual o en carrito
+    public function ordenCompra($param){
+        if (isset($param['orden'])){
+            $sesion=new Session();
+            $objUsuario=$sesion->getUsuario();
+            $idusuario=$objUsuario->getIdusuario();
+            //Busco compras agregadas al carrito por el usuario activo
+            $comprasUs=$this->buscar(['idusuario'=>$idusuario,'metodo'=>'carrito']);
+            if (!empty($comprasUs)){
+                if (count($comprasUs)==1){  //Solo puede haber 1 carrito activo
+                    $abmCompItem=new abmCompraitem();
+                    //Chequeo si en la compra ya se habia encargado el mismo producto
+                    $itemsPrevios=$abmCompItem->buscar(['idcompra'=>$comprasUs[0]->getIdcompra()]);
+                    $encontrado=false;
+                    if (!empty($itemsPrevios)){
+                        foreach($itemsPrevios as $item){
+                            if ($item->getObjProducto()->getIdproducto()==$param['idproducto']){
+                                $encontrado=true;
+                                //Controlo stock
+                                $cantidad=($item->getCicantidad())+($param['cantidad']);
+                                if ($cantidad<=($item->getObjProducto()->getProcantstock())){
+                                    $abmCompItem=new abmCompraitem();
+                                    $respCant=$abmCompItem->modificacion(['idcompraitem'=>$item->getIdcompraitem(),'idproducto'=>$param['idproducto'],'idcompra'=>$comprasUs[0]->getIdcompra(),'cicantidad'=>$cantidad]);
+                                    if ($respCant){
+                                        $header='Location:../../carrito.php';
+                                    }else{
+                                        $header="Location:../../productos.php?idproducto=".$param['idproducto']."&error=1";
+                                    }
+                                }else{
+                                    $header="Location:../../productos.php?idproducto=".$param['idproducto']."&error=2";
+                                }
+                            }
+                        }
+                    }
+                    if (!$encontrado){
+                        $respItem=$abmCompItem->alta(['idproducto'=>$param['idproducto'],'idcompra'=>$comprasUs[0]->getIdcompra(),'cicantidad'=>$param['cantidad']]);
+                        if ($respItem){
+                            $header='Location:../../carrito.php';
+                        }else{
+                            $header="Location:../../productos.php?idproducto=".$param['idproducto']."&error=1";
+                        }
+                    }
+                    
+                }else{
+                    $header="Location:../../productos.php?idproducto=".$param['idproducto']."&error=1";
+                }
+            }else{  //Si no hay carritos activos inicio uno.
+                $resp=$this->alta(['idusuario'=>$idusuario,'metodo'=>'carrito']);
+                if ($resp['respuesta']){
+                    $abmCompItem=new abmCompraitem();
+                    $respItem=$abmCompItem->alta(['idproducto'=>$param['idproducto'],'idcompra'=>$resp['idcompra'],'cicantidad'=>$param['cantidad']]);
+                    if ($respItem){
+                        $header='Location:../../carrito.php';
+                    }else{
+                        $header="Location:../../productos.php?idproducto=".$param['idproducto']."&error=1";
+                    }
+                }else{
+                    $header="Location:../../productos.php?idproducto=".$param['idproducto']."&error=1";
+                }
+            }
+
+        }elseif (isset($param['compra'])){
+            $header='Location:../../tiendaCompra.php?metodo=directa&idproducto='.$param['idproducto'].'&cantidad='.$param['cantidad'].'&maxStock='.$param['maxStock'];
+
+        }
+
+        return $header;
+    }
 }

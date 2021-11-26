@@ -1,15 +1,15 @@
 <?php
 $titulo = "Estado de la compra";
-    $estructuraAMostrar = "desdeSubAccion";
+    $estructuraAMostrar = "desdeVista";
     $seguro=true;
-    include_once("../../estructura/cabecera.php");
+    include_once("estructura/cabecera.php");
     $datos=data_submitted();
     if ($datos['resp']=="exito"){?>
         <div class="alert alert-success text-center" role="alert" style="margin-top: 10%;">
             Operación exitosa. Se esta revisando su compra.
         </div>
         <div class="text-center">
-            <a href="../../tienda.php?idrol="<?php $rolActivo->getIdrol(); ?>>Volver a la tienda</a>
+            <a href="tienda.php?idrol="<?php $rolActivo->getIdrol(); ?>>Volver a la tienda</a>
         </div>
     <?php
     }elseif($datos['resp']=="fallo"){?>
@@ -18,5 +18,5 @@ $titulo = "Estado de la compra";
         </div>
     <?php
     }
-    include_once("../../estructura/pie.php");
+    include_once("estructura/pie.php");
 ?>

@@ -1,7 +1,6 @@
 <?php
 $estructuraAMostrar = "desdeSubAccion";
 $seguro=true;
-$titulo="Carrito Cancelado";
 include_once ("../../estructura/cabecera.php");
 
 $datos=data_submitted();

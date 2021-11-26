@@ -1,8 +1,10 @@
 <?php
+// Muestra una lista con la compra seleccionada desde la tabla en la gestion de compra
+
 $titulo = "Estado de la compra";
-$estructuraAMostrar = "desdeSubAccion";
+$estructuraAMostrar = "desdeVista";
 $seguro=true;
-include_once("../../estructura/cabecera.php");
+include_once("estructura/cabecera.php");
 $datos=data_submitted();
 if (isset($datos['idcompra'])){?>
     <table class="table table-striped table-primary mt-5">
@@ -25,7 +27,7 @@ if (isset($datos['idcompra'])){?>
             $totalCant=0;
             $total=0;
             foreach ($items as $item){
-                $enlaceImg='../../archivos/productos/img/'.$item->getObjProducto()->getProdetalle().'.jpg';
+                $enlaceImg='archivos/productos/img/'.$item->getObjProducto()->getProdetalle().'.jpg';
                 $precio=($item->getObjProducto()->getProprecio())*($item->getCicantidad());
                 echo '<tr><th>'.$i.'</th>';
                 echo '<th>'.$item->getObjProducto()->getPronombre().'</th>';
@@ -41,15 +43,15 @@ if (isset($datos['idcompra'])){?>
         echo '</tbody></table>';
     
     if ($datos['rol']==1){
-        echo '<div class="text-center"><a class="btn btn-primary" href="../../admin_compras.php">Volver</a></div>';
+        echo '<div class="text-center"><a class="btn btn-primary" href="admin_compras.php">Volver</a></div>';
     }
     if ($datos['rol']==3){
-        echo '<div class="text-center"><a class="btn btn-primary" href="../../cliente_compras.php">Volver</a></div>';
+        echo '<div class="text-center"><a class="btn btn-primary" href="cliente_compras.php">Volver</a></div>';
     }
     
     
 }
 
 
-include_once("../../estructura/pie.php");
+include_once("estructura/pie.php");
 ?>
