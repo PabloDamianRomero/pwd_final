@@ -10,7 +10,7 @@
     if(isset($arrSubMenu)){
         while(($i < count($arrSubMenu)) && (!$existeSubEnlace)){
             $subMenuActual = $arrSubMenu[$i];
-            if(($subMenuActual->getMedeshabilitado() != "0000-00-00 00:00:00") && ($subMenuActual->getMedescripcion() == "admin_menu")){
+            if(($subMenuActual->getMedeshabilitado() != "0000-00-00 00:00:00") && ($subMenuActual->getMedescripcion() == "admin_compras")){
                 $existeSubEnlace = true;
             }
             $i++;
@@ -18,13 +18,19 @@
     }
     // ----------------------------------------------------------------------------------------------------------
 
-    // ---------------------- Si el usuario actual no es admin  -------------------------------
-    if($rolActivo->getIdrol() != 1){?>
+    // ---------------------- Si el usuario actual no tiene permisos  -------------------------------
+    $permiso=false;
+    foreach ($arrMenu as $menu){
+        if (($menu->getObjMenu()->getMedescripcion()=="admin_compras") && ($menu->getObjMenu()->getMedeshabilitado()=="0000-00-00 00:00:00")){
+            $permiso=true;
+        }
+    }
+    if(!$permiso){?>
     <div style="margin-bottom: 20%" class="container-fluid text-center">
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
             <div class="container">
                 <div class="alert alert-danger" role="alert">
-                    No puede gestionar Compras (No está con el rol <span style='font-weight: bold; font-style: italic;'>Administrador</span>).
+                    No puede gestionar Compras (No tiene permisos de Rol o la página está deshabilitada).
             </div>
         </div>
     </div>

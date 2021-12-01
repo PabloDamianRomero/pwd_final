@@ -3,13 +3,19 @@ $estructuraAMostrar = "desdeVista";
 $seguro=true;
 $titulo="Vista de Producto";
 include_once ("estructura/cabecera.php");
-// ---------------------- Si el usuario actual no es cliente  -------------------------------
-if($rolActivo->getIdrol() != 3){?>
+// ---------------------- Si el usuario actual no tiene permisos  -------------------------------
+$permiso=false;
+    foreach ($arrMenu as $menu){
+        if (($menu->getObjMenu()->getMedescripcion()=="tienda") && ($menu->getObjMenu()->getMedeshabilitado()=="0000-00-00 00:00:00")){
+            $permiso=true;
+        }
+    }
+    if(!$permiso){?>
     <div style="margin-bottom: 20%" class="container-fluid text-center">
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
             <div class="container">
                 <div class="alert alert-danger" role="alert">
-                    No puede visualizar esta pagina (No está con el rol <span style='font-weight: bold; font-style: italic;'>Cliente</span>).
+                    No puede gestionar Compras (No tiene permisos de Rol o la página está deshabilitada).
             </div>
         </div>
     </div>

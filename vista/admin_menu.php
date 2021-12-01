@@ -18,13 +18,19 @@
     }
     // ----------------------------------------------------------------------------------------------------------
 
-    // ---------------------- Si el usuario actual no es admin  -------------------------------
-    if($rolActivo->getIdrol() != 1){?>
+    // ---------------------- Si el usuario actual no es tiene permisos  -------------------------------
+    $permiso=false;
+    foreach ($arrMenu as $menu){
+        if (($menu->getObjMenu()->getMedescripcion()=="admin_menu") && ($menu->getObjMenu()->getMedeshabilitado()=="0000-00-00 00:00:00")){
+            $permiso=true;
+        }
+    }
+    if(!$permiso){?>
     <div style="margin-bottom: 20%" class="container-fluid text-center">
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
             <div class="container">
                 <div class="alert alert-danger" role="alert">
-                    No puede gestionar Menus (No está con el rol <span style='font-weight: bold; font-style: italic;'>Administrador</span>).
+                    No puede gestionar Menus (No tiene permisos de Rol o la página está deshabilitada).
             </div>
         </div>
     </div>
@@ -125,7 +131,7 @@
     </br>
     </br>
 
-    <table id="dgRol" title="MenuRol" class="easyui-datagrid" style="width:800px;height:250px"
+    <table id="dgRol" title="MenuRol" class="easyui-datagrid" style="width:800px;height:400px"
             url="accion/admin/listar_menuRol.php"
             toolbar="#toolbar2" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
@@ -178,9 +184,9 @@
     </table>
 
     <div id="toolbar3">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newMeRol()">Nuevo Rol</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editMeRol()">Editar Rol</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyMeRol()">Eliminar Rol</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newRoll()">Nuevo Rol</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editRoll()">Editar Rol</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyRoll()">Eliminar Rol</a>
     </div>
     
     <div id="dlgRoll" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlgRoll-buttons'">
@@ -195,7 +201,7 @@
         </form>
     </div>
     <div id="dlgRoll-buttons">
-        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveMeRol()" style="width:90px">Aceptar</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRoll()" style="width:90px">Aceptar</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgRoll').dialog('close')" style="width:90px">Cancelar</a>
     </div>
 </div>
