@@ -78,7 +78,7 @@ function destroyMenu(){
 //
 
 function newMeRol(){
-    $('#dlgRol').dialog('open').dialog('center').dialog('setTitle','Nuevo Menu');
+    $('#dlgRol').dialog('open').dialog('center').dialog('setTitle','Nuevo MenuRol');
     $('#fmRol').form('clear');
     url = 'accion/admin/alta_menuRol.php';
 }
@@ -127,12 +127,12 @@ function destroyMeRol(){
 // ---TABLA ROLES---
 //
 
-function newMeRol(){
+function newRoll(){
     $('#dlgRoll').dialog('open').dialog('center').dialog('setTitle','Nuevo Rol');
     $('#fmRoll').form('clear');
     url = 'accion/admin/alta_rol.php';
 }
-function editMeRol(){
+function editRoll(){
     var row = $('#dgRoll').datagrid('getSelected');
     if (row){
         $('#dlgRoll').dialog('open').dialog('center').dialog('setTitle','Editar Rol');
@@ -140,7 +140,7 @@ function editMeRol(){
         url = 'accion/admin/mod_rol.php?id='+row.id;
     }
 }
-function saveMeRol(){
+function saveRoll(){
     $('#fmRoll').form('submit',{
         url: url,                
         iframe: false,
@@ -161,7 +161,7 @@ function saveMeRol(){
         }
     });
 }
-function destroyMeRol(){
+function destroyRoll(){
     var row = $('#dgRoll').datagrid('getSelected');
     if (row){
         $.messager.confirm('Confirmar','Esta seguro de borrar el Rol?',function(r){
