@@ -29,7 +29,7 @@ $permiso=false;
         <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
             <div class="container">
                 <div class="alert alert-danger" role="alert">
-                    No puede gestionar Compras (No tiene permisos de Rol o la página está deshabilitada).
+                    No puede acceder al carrito (No tiene permisos de Rol o la página está deshabilitada).
             </div>
         </div>
     </div>
