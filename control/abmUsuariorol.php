@@ -138,6 +138,7 @@ class abmUsuariorol{
             
             array_push($arreglo_salida,$nuevoElem);
         }
+        return $arreglo_salida;
     }
 
 }
