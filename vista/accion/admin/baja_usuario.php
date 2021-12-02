@@ -4,7 +4,7 @@ $datos=data_submitted();
 $resp=false;
 if (isset($datos['idusuario']) && isset($datos['usnombre']) && isset($datos['uspass']) && isset($datos['usmail']) && isset($datos['usdeshabilitado'])){    
     $abmUs=new abmUsuario();
-    $resp=$abmUs->modificacion($datos);
+    $resp=$abmUs->deshabilitarUsuario($datos);
 }
 if (!$resp){
     $retorno['errorMsg']="No se pudo ELIMINAR el usuario.";
