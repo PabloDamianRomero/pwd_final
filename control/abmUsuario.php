@@ -11,8 +11,8 @@ class abmUsuario
         $obj = null;
         if (array_key_exists('idusuario', $param) and array_key_exists('usnombre', $param)
             and array_key_exists('uspass', $param) and array_key_exists('usdeshabilitado', $param)) {
-            if (!isset($param['usmail'])){
-                $param['usmail']="";
+            if (!isset($param['usmail'])) {
+                $param['usmail'] = "";
             }
             $obj = new Usuario();
             $obj->setear(
@@ -65,25 +65,25 @@ class abmUsuario
     public function alta($param)
     {
         $resp['respuesta'] = false;
-        $validacion=$this->validacion($param);
+        $validacion = $this->validacion($param);
         if ($validacion['valid']) {
             $param['uspass'] = md5($param['uspass']);
             $param['idusuario'] = null;
-            $param['usdeshabilitado']=null;
+            $param['usdeshabilitado'] = null;
             $elObjtUsuario = $this->cargarObjeto($param);
             if ($elObjtUsuario != null and $elObjtUsuario->insertar()) {
                 $resp['respuesta'] = true;
             }
         } else {
             $resp['respuesta'] = false;
-            if (!isset($validacion['errorMsg'])){
+            if (!isset($validacion['errorMsg'])) {
                 $resp['errorMsg'] = "Debe contener 1 letra y 1 número.";
-            }else{
-                $resp['errorMsg'] =$validacion['errorMsg'];
+            } else {
+                $resp['errorMsg'] = $validacion['errorMsg'];
             }
-            
+
         }
-        
+
         return $resp;
 
     }
@@ -95,10 +95,10 @@ class abmUsuario
     public function baja($param)
     {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)){
+        if ($this->seteadosCamposClaves($param)) {
             $elObjtUsuario = $this->cargarObjetoConClave($param);
-            if ($elObjtUsuario!=null){
-                if ($elObjtUsuario->eliminar()){
+            if ($elObjtUsuario != null) {
+                if ($elObjtUsuario->eliminar()) {
                     $resp = true;
                 }
             }
@@ -114,29 +114,46 @@ class abmUsuario
     public function modificacion($param)
     {
         $resp['respuesta'] = false;
-        $validacion=$this->validacion($param);
+        $validacion = $this->validacion($param);
         if ($validacion['valid']) {
             $param['uspass'] = md5($param['uspass']);
-            if ($param['usdeshabilitado']=="0000-00-00 00:00:00"){
-                $date = date('Y-m-d H:i:s');
-                $param['usdeshabilitado']=$date;  //Si estaba activo ahora ingresa la fecha actual
-            }else{
-                $param['usdeshabilitado']="0000-00-00 00:00:00"; //Si estaba inactivo ahora lo setea en nulo (lo activa)
-            }
             if ($this->seteadosCamposClaves($param)) {
                 $elObjtUsuario = $this->cargarObjeto($param);
                 if ($elObjtUsuario != null and $elObjtUsuario->modificar()) {
                     $resp['respuesta'] = true;
                 }
             }
-        }else {
+        } else {
             $resp['respuesta'] = false;
-            if (!isset($validacion['errorMsg'])){
+            if (!isset($validacion['errorMsg'])) {
                 $resp['errorMsg'] = "Debe contener 1 letra y 1 número.";
-            }else{
-                $resp['errorMsg'] =$validacion['errorMsg'];
+            } else {
+                $resp['errorMsg'] = $validacion['errorMsg'];
             }
-            
+
+        }
+        return $resp;
+    }
+
+    /**
+     * permite deshabilitar un usuario
+     * @param array $param
+     * @return boolean
+     */
+    public function deshabilitarUsuario($param)
+    {
+        $resp['respuesta'] = false;
+        if ($param['usdeshabilitado'] == "0000-00-00 00:00:00") {
+            $date = date('Y-m-d H:i:s');
+            $param['usdeshabilitado'] = $date; //Si estaba activo ahora ingresa la fecha actual
+        } else {
+            $param['usdeshabilitado'] = "0000-00-00 00:00:00"; //Si estaba inactivo ahora lo setea en nulo (lo activa)
+        }
+        if ($this->seteadosCamposClaves($param)) {
+            $elObjtUsuario = $this->cargarObjeto($param);
+            if ($elObjtUsuario != null and $elObjtUsuario->modificar()) {
+                $resp['respuesta'] = true;
+            }
         }
         return $resp;
     }
@@ -176,8 +193,8 @@ class abmUsuario
 
     }
 
-
-    public function validacion($param){
+    public function validacion($param)
+    {
         // Compruebo que la contraseña cumpla con el formato establecido
         // Contraseña de 8 a 10 caracteres. Debe contener 1 letra y 1 número.
         $validacion = false;
@@ -209,29 +226,30 @@ class abmUsuario
             $retorno['valid'] = $validacion;
             $retorno['errorMsg'] = "Logitud de contraseña incorrecta. Debe contener de 8 a 10 caracteres.";
         }
-        
+
         return $retorno;
     }
 
-    public function listado($param){
-        $list=$this->buscar($param);
-        $arreglo_salida=array();
-        foreach($list as $elem){
-            $nuevoElem['idusuario']=$elem->getIdusuario();
-            $nuevoElem['usnombre']=$elem->getUsnombre();
-            $nuevoElem['uspass']=$elem->getUspass();
-            $nuevoElem['usmail']=$elem->getUsmail();
-            $nuevoElem['usdeshabilitado']=$elem->getUsdeshabilitado();
-            array_push($arreglo_salida,$nuevoElem);
+    public function listado($param)
+    {
+        $list = $this->buscar($param);
+        $arreglo_salida = array();
+        foreach ($list as $elem) {
+            $nuevoElem['idusuario'] = $elem->getIdusuario();
+            $nuevoElem['usnombre'] = $elem->getUsnombre();
+            $nuevoElem['uspass'] = $elem->getUspass();
+            $nuevoElem['usmail'] = $elem->getUsmail();
+            $nuevoElem['usdeshabilitado'] = $elem->getUsdeshabilitado();
+            array_push($arreglo_salida, $nuevoElem);
         }
         return $arreglo_salida;
     }
 
-
-    public function registroUs($datos){
-        $resp=false;
+    public function registroUs($datos)
+    {
+        $resp = false;
         $usuarioExisteConMail = $this->buscar($datos);
-        $usuarioExisteSinMail = $this->buscar(["usnombre" => $datos['usnombre'],"uspass" => md5($datos['uspass'])]);
+        $usuarioExisteSinMail = $this->buscar(["usnombre" => $datos['usnombre'], "uspass" => md5($datos['uspass'])]);
         if (!$usuarioExisteConMail && !$usuarioExisteSinMail) { // si no existe el usuario con o sin mail
             $resp = $this->alta($datos);
             if ($resp['respuesta']) { // si el usuario se pudo insertar en bd
@@ -246,20 +264,20 @@ class abmUsuario
                     $resp = $abmUsRol->alta($datos);
                     if ($resp) {
                         $reg = "ALTA USUARIO-ROL EXITOSA.";
-                        $retorno['enlace']="Location:../../login.php?reg=" . $reg;
+                        $retorno['enlace'] = "Location:../../login.php?reg=" . $reg;
                     } else {
                         $respBaja = $this->baja($datos['idusuario']); // si no pudo insertar en usuariorol pero si en usuario, borro el usuario
                         $reg = "No se pudo registrar el usuario cliente.";
-                        $retorno['enlace']="Location:../../registro.php?reg=" . $reg;
+                        $retorno['enlace'] = "Location:../../registro.php?reg=" . $reg;
                     }
                 }
             } else {
-                $reg = "No se pudo guardar el usuario. ".$resp['errorMsg'];
-                $retorno['enlace']="Location:../../registro.php?reg=" . $reg;
+                $reg = "No se pudo guardar el usuario. " . $resp['errorMsg'];
+                $retorno['enlace'] = "Location:../../registro.php?reg=" . $reg;
             }
-        }else{
+        } else {
             $reg = "El usuario ya existe";
-            $retorno['enlace']="Location:../../registro.php?reg=" . $reg;
+            $retorno['enlace'] = "Location:../../registro.php?reg=" . $reg;
         }
         return $retorno;
     }

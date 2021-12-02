@@ -4,7 +4,7 @@ $datos=data_submitted();
 $resp=false;
 if (isset($datos['idmenu']) && isset($datos['menombre']) && isset($datos['medescripcion']) && isset($datos['medeshabilitado']) && isset($datos['idpadre'])){
     $abmMe=new abmMenu();
-    $resp=$abmMe->modificacion($datos);
+    $resp=$abmMe->deshabilitarMenu($datos);
 }
 if (!$resp){
     $retorno['errorMsg']="No se pudo ELIMINAR el menu.";
