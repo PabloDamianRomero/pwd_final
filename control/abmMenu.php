@@ -106,6 +106,23 @@ class abmMenu
     public function modificacion($param)
     {
         $resp = false;
+        if ($this->seteadosCamposClaves($param)) {
+            $elObjtMenu = $this->cargarObjeto($param);
+            if ($elObjtMenu != null and $elObjtMenu->modificar()) {
+                $resp = true;
+            }
+        }
+        return $resp;
+    }
+
+    /**
+     * Cambia el estado del menú
+     * @param array $param
+     * @return boolean
+     */
+    public function deshabilitarMenu($param)
+    {
+        $resp = false;
         if ($param['medeshabilitado']=="0000-00-00 00:00:00"){
             $date = date('Y-m-d H:i:s');
             $param['medeshabilitado']=$date;  //Si estaba activo ahora ingresa la fecha actual
