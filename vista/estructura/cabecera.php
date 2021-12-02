@@ -140,18 +140,18 @@ if ($estructuraAMostrar == "desdeSubAccion") {
                      echo $arrMenuPadre[0]->getMenombre();
                    }else{
                      echo "Sin opciones";
-                     $arrSubMenu = array();
+                     $arrMenu = array();
                    }
                 ?>
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end">
               <?php 
-                foreach ($arrSubMenu as $subMenu) {
-                  if($subMenu->getMedeshabilitado() == "0000-00-00 00:00:00"){
-                    if($subMenu->getMedescripcion() != ""){
-                      $enlace = $subMenu->getMedescripcion().".php";
+                foreach ($arrMenu as $menu) {
+                  if($menu->getObjMenu()->getMedeshabilitado() == "0000-00-00 00:00:00"){
+                    if(($menu->getObjMenu()->getMedescripcion() != "") && ($menu->getObjMenu()->getObjMenu()!=null)){
+                      $enlace = $menu->getObjMenu()->getMedescripcion().".php";
                       $idrol=$rolActivo->getIdrol();
-                      echo "<li><button class='dropdown-item text-center' type='button'><a href='".$enlace."?idrol=".$rolActivo->getIdrol()."' class='enlaceSinEstiloYPadding'>".$subMenu->getMenombre()."</a></button></li>";
+                      echo "<li><button class='dropdown-item text-center' type='button'><a href='".$enlace."?idrol=".$rolActivo->getIdrol()."' class='enlaceSinEstiloYPadding'>".$menu->getObjMenu()->getMenombre()."</a></button></li>";
                     }
                     
                   }
