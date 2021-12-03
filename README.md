@@ -1,6 +1,7 @@
 # Programación Web Dinámica 2021
 
 ### Trabajo Práctico Final: Tienda On-line
+### TEMA: Venta de componentes para PC
 El trabajo final consiste en la implementación de una tienda On-Line con 2 vistas: una vista “pública” y otra
 “privada”.
 
